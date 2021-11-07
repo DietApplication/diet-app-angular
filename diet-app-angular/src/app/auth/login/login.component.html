@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="col col-lg-9 mx-auto">
+            <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
+            <h1>Log In</h1>
+            <form [formGroup]="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" name="email" #email formControlName="email">
+                    <span class="form-text" *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched">the email is not provided or invalid</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" name="password" formControlName="password" />
+                    <span class="form-text" *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">the password is not provided or invalid (must be at least 8 symbols)</span>
+                </div>
+
+                <div class="button-login">
+                    <button class="btn" type="submit" [disabled]="!loginForm.valid">
+              Log in
+            </button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

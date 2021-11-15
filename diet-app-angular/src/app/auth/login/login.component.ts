@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService, LoginModel } from './login.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { TokenService } from 'src/app/core/services/token.service';
+
 
 @Component({
   selector: 'app-login',
@@ -8,8 +12,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  constructor() { }
+  constructor(private router: Router,
+    private loginService: LoginService, private tokenService: TokenService) { }
   error: string = null;
+
   ngOnInit(): void {
     this.initForm();
   }
@@ -31,4 +37,34 @@ export class LoginComponent implements OnInit {
   onHandleError() {
     this.error = null;
   }
+  onSubmit() {
+    if (!this.loginForm.valid) {
+      return;
+    }
+    const email = this.loginForm.value.email;
+    const password = this.loginForm.value.password;
+    let loginModel: LoginModel = {
+      email: email,
+      password: password,
+    };
+
+    this.loginService.login(loginModel).subscribe(
+      (response) => {
+
+        this.tokenService.storeToken(response);
+        this.tokenService.saveRefreshToken(response);
+        if (this.tokenService.getRole() === 'DOCTOR') {
+          console.log("doctor");
+          this.router.navigate(['/doctor/pendingList'])
+        }
+      },
+      (error) => {
+        this.error = error.error;
+        console.log(error)
+        this.loginForm.get('password').reset();
+      }
+    );
+  }
+
 }
+

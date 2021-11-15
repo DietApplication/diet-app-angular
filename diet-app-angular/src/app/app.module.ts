@@ -5,6 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './core/core.module';
+import { DoctorComponent } from './doctor/doctor.component';
+import { PendingListComponent } from './doctor/pending-list/pending-list.component';
+import { DoctorHeaderComponent } from './doctor/doctor-header/doctor-header.component';
 @NgModule({
   declarations: [
     AppComponent
@@ -14,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

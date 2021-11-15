@@ -11,14 +11,14 @@ import { SurveyStorageService } from './survey-storage.service';
 })
 export class SurveyLoginComponent implements OnInit {
   surveyLoginForm: FormGroup;
-
+  error: string = null;
   constructor(
     private surveyLoginService: SurveyLoginService,
     private router: Router,
     private storageService: SurveyStorageService
   ) { }
 
-  error: string = null;
+
   ngOnInit(): void {
     this.initForm();
   }

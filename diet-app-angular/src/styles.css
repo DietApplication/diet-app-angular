@@ -3,6 +3,10 @@
         display: flex;
     }
     
+    .container-fluid {
+        padding-left: 0;
+    }
+    
     .sticky-left-background {
         background-color: #0A7B79;
         width: 44%;
@@ -12,8 +16,8 @@
         background-size: contain;
         background-repeat: no-repeat;
         height: 100vh;
-        background-position-x: 15%;
         position: fixed;
+        background-attachment: fixed;
     }
     
     .sticky-right {
@@ -260,4 +264,8 @@
     textarea.ng-invalid.ng-touched {
         border: 1px solid red;
         color: red;
+    }
+    
+    .container-w-background.container-w-background {
+        padding-left: 0;
     }

@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-xl navbar-custom">
+    <div class="logo">
+        <a class="nav-item">SOME LOGO</a>
+    </div>
+    <div class="container-fluid header-custom">
+        <ul class="nav nav-pills  list-doctor-header">
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" aria-current="page" routerLink="/doctor/pendingList">Pending List</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="/doctor">Create Diet</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="/doctor">Patients</a>
+            </li>
+            <li class="nav-item dropdown" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <button class="nav-link drop-down-toggle" data-bs-toggle="dropdown" aria-expanded="false">Knowledge Bases</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Product Base</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Meal Base</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Supplement Base</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Disease Base</a></li>
+                </ul>
+            </li>
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="/doctor">Notes</a>
+            </li>
+        </ul>
+    </div>
+</nav>

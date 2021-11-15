@@ -16,4 +16,7 @@ export class SurveyStorageService {
   getEmail() {
     return localStorage.getItem('access_email');
   }
+  removeEmail() {
+    localStorage.removeItem('access_email');
+  }
 }

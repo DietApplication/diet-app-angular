@@ -3,7 +3,7 @@
         <div class="col col-lg-9 mx-auto">
             <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
             <h1>Log In</h1>
-            <form [formGroup]="loginForm">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" class="form-control" name="email" #email formControlName="email">

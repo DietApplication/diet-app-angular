@@ -4,6 +4,8 @@
     <div class="content">
         <h1>Survey</h1>
         <form class="surveyForm" [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
+            <app-alert-survey [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert-survey>
+            <app-success-survey [message]="surveyCompletedOk" (close)="onHandleError()" *ngIf="surveyCompletedOk"></app-success-survey>
             <div class="getting-started">
                 <h2>Getting Started</h2>
                 <div class="names">
@@ -29,7 +31,9 @@
                 <div class="dob">
                     <label for="dob" class="form-label">Date of Birth</label>
                     <input type="date" class="form-control" id="dob" formControlName="dob">
-                    <span class="form-text" *ngIf="!surveyForm.get('dob').valid && surveyForm.get('dob').touched">the date of birth is not provided or invalid</span>
+                    <span class="form-text" *ngIf="!surveyForm.get('dob').valid && surveyForm.get('dob').touched">the date of birth is not provided</span>
+                    <span class="form-text" *ngIf="surveyForm.get('dob').dirty && surveyForm.errors?.dobInvalid">Date of Birth is later than today!</span>
+
                 </div>
                 <div class="email">
                     <label for="email" class="form-label">Email</label>
@@ -38,9 +42,8 @@
                 </div>
                 <div class="password">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" formControlName="password">
-                    <span class="form-text" *ngIf="!surveyForm.get('password').valid && surveyForm.get('password').touched">password is not provided or invalid (min length is 8)</span>
-                    <button type="button">   
+                    <input type="password" [type]="showP ? 'text' : 'password'" class="form-control password" id="password" formControlName="password">
+                    <button type="button" (click)="password()" class="showPassword">   
                       <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <mask id="path-1-inside-1_257:8" fill="white">
                               <path d="M24.0416 7.02092C20.7277 10.3348 16.3434 13.9945 12 14.0001C7.64202 14.0057 3.32503 10.3459 0 7.02092C3.29719 3.72373 7.67855 0.0222196 12 0.00010132C16.3798 -0.0223157 20.6999 3.67919 24.0416 7.02092Z"/>
@@ -52,10 +55,12 @@
                       </svg>
                     </button>
                 </div>
+                <span class="form-text" *ngIf="!surveyForm.get('password').valid && surveyForm.get('password').touched">password is not provided or invalid (min length is 8)</span>
                 <div class="password">
                     <label for="confPassword" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" id="confPassword" formControlName="conf_password">
-                    <button type="button">   
+                    <input type="password" [type]="showCP ? 'text' : 'password'" class="form-control password" id="confPassword" formControlName="conf_password">
+
+                    <button type="button" (click)="confPassword()" class="showPassword">   
                       <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <mask id="path-1-inside-1_257:8" fill="white">
                               <path d="M24.0416 7.02092C20.7277 10.3348 16.3434 13.9945 12 14.0001C7.64202 14.0057 3.32503 10.3459 0 7.02092C3.29719 3.72373 7.67855 0.0222196 12 0.00010132C16.3798 -0.0223157 20.6999 3.67919 24.0416 7.02092Z"/>
@@ -67,6 +72,8 @@
                       </svg>
                     </button>
                 </div>
+                <span class="form-text" *ngIf="!surveyForm.get('conf_password').valid && surveyForm.get('conf_password').touched">confirm password is not provided or invalid </span>
+                <span class="form-text" *ngIf="surveyForm.get('conf_password').dirty && surveyForm.errors?.passwordNotMatch">Passwords must match</span>
             </div>
             <div class="contact-info">
                 <h2>Contact Information</h2>
@@ -108,7 +115,7 @@
                 <h2>Employment / Education</h2>
                 <div class="edu">
                     <label for="education" class="form-label">Education</label>
-                    <input type="text" class="form-control" id="education" placeholder="PJAIT" formControlName="education">
+                    <input type="text" class="form-control" id="education" placeholder="School/University" formControlName="education">
                     <span class="form-text" *ngIf="!surveyForm.get('education').valid && surveyForm.get('education').touched">the education is not provided or invalid</span>
 
                 </div>
@@ -123,7 +130,7 @@
             <div class="measurements">
                 <h2>Initial Measurements</h2>
                 <div class="weight">
-                    <label for="weight" class="form-label">Weight (cm)</label>
+                    <label for="weight" class="form-label">Weight (kg)</label>
                     <input type="number" class="form-control" id="weight" formControlName="weight">
                     <span class="form-text" *ngIf="!surveyForm.get('weight').valid && surveyForm.get('weight').touched">weight is not provided or invalid</span>
 
@@ -225,7 +232,7 @@
                 </div>
                 <div class="avgSleep">
                     <label for="avgSleep" class="form-label">I usually sleep on average (hour / day):</label>
-                    <input type="text" class="form-control" id="avgSleep" placeholder="7" formControlName="avgSleep">
+                    <input type="number" class="form-control" id="avgSleep" placeholder="7" formControlName="avgSleep">
                     <span class="form-text" *ngIf="!surveyForm.get('avgSleep').valid && surveyForm.get('avgSleep').touched">average sleep is not provided or invalid</span>
 
                 </div>

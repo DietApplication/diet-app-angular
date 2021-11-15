@@ -16,7 +16,7 @@ export class SurveyLoginService {
   constructor(private http: HttpClient, private router: Router) { }
 
   accessSurvey(surveyLoginModel: SurveyLoginModel) {
-    return this.http.post<SurveyLoginResponse>('http://localhost:7000/survey/access', {
+    return this.http.post<SurveyLoginResponse>('https://dietappeu.azurewebsites.net/api/survey/access', {
       email: surveyLoginModel.email,
       uniqueKey: surveyLoginModel.uniqueKey
     })

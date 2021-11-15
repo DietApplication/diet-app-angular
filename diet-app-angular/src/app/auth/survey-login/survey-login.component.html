@@ -4,20 +4,20 @@
             <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
             <h1>Access to Survey</h1>
             <form [formGroup]="surveyLoginForm" (ngSubmit)="onSubmit()">
-                <div class=" form-group ">
-                    <label for="email ">Email</label>
-                    <input type="email " id="email" class="form-control" name="email" #email formControlName="email">
+                <div class=" form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" name="email" #email formControlName="email">
                     <span class="form-text " *ngIf="!surveyLoginForm.get('email').valid && surveyLoginForm.get('email').touched ">the email is not provided or invalid</span>
                 </div>
 
-                <div class="form-group ">
-                    <label for="password ">Unique Key</label>
+                <div class="form-group">
+                    <label for="password">Unique Key</label>
                     <input type="password" id="password" class="form-control" name="password" formControlName="uniqueKey" />
-                    <span class="form-text " *ngIf="!surveyLoginForm.get('uniqueKey').valid && surveyLoginForm.get('uniqueKey').touched ">the unique key is not provided or invalid (must be at least 8 symbols)</span>
+                    <span class="form-text " *ngIf="!surveyLoginForm.get('uniqueKey').valid && surveyLoginForm.get('uniqueKey').touched">the unique key is not provided or invalid (must be at least 8 symbols)</span>
                 </div>
 
-                <div class="button-login ">
-                    <button class="btn " type="submit " [disabled]="!surveyLoginForm.valid ">
+                <div class="button-login">
+                    <button class="btn" type="submit" [disabled]="!surveyLoginForm.valid ">
               Open Survey
             </button>
 

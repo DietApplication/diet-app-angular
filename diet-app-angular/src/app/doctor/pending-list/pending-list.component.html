@@ -1,0 +1,317 @@
+<div class="container-w-background container-fluid">
+    <div class="sticky-left-background">
+        <div class="content-left">
+            <h4 id="myHeader">Pending List</h4>
+            <app-pending-list-item class="list-group" *ngFor="let pendingUser of pendingUsers; let i = index;" [index]="i" [pendingUser]="pendingUser"></app-pending-list-item>
+        </div>
+
+    </div>
+    <div class="sticky-right">
+        <div class="content">
+            <div class="container">
+                <div class="row report">
+                    <h1>Dietitian Report</h1>
+                    <div class="getting-started-table">
+                        <h6>Personal Data and body measurements </h6>
+
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>First Name:</th>
+                                    <td>To be filled from db</td>
+                                </tr>
+                                <tr>
+                                    <th>Last Name:</th>
+                                    <td>To be filled from db</td>
+                                </tr>
+                                <tr>
+                                    <th>Email:</th>
+                                    <td>To be filled from db</td>
+                                </tr>
+                                <tr>
+                                    <th>Pesel:</th>
+                                    <td>To be filled from db</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Address: </th>
+                                    <td>To be filled from db</td>
+                                </tr>
+                                <tr>
+                                    <th>Phone Number: </th>
+                                    <td>To be filled from db</td>
+
+                                </tr>
+                                <tr>
+                                    <th>Gender: </th>
+                                    <td>To be filled from db</td>
+
+                                </tr>
+                                <tr>
+                                    <th>Age:</th>
+                                    <td>To be filled from db</td>
+
+                                </tr>
+                                <tr>
+                                    <th>Weight:</th>
+                                    <td>To be filled from db</td>
+
+                                </tr>
+                                <tr>
+                                    <th>Height:</th>
+                                    <td>To be filled from db</td>
+
+                                </tr>
+                                <tr>
+                                    <th class="calculated">MC (ideal body weight)</th>
+                                    <td>To be filled from db</td>
+                                </tr>
+                                <tr>
+                                    <th class="calculated">MC (modified formula):</th>
+                                    <td>To be filled from db</td>
+
+                                </tr>
+                                <tr>
+                                    <th>BMR (basic metabolism):</th>
+                                    <td>To be filled from db</td>
+
+                                </tr>
+                                <tr>
+                                    <th>Waist Circumference</th>
+                                    <td>To be filled from db</td>
+                                </tr>
+                                <tr>
+                                    <th>Hip Circumference</th>
+                                    <td>To be filled from db</td>
+
+                                </tr>
+                                <tr>
+                                    <th class="calculated">WHR (waist-hip ratio):</th>
+                                    <td>To be filled from db</td>
+
+                                </tr>
+                                <tr>
+                                    <th class="filledByDoc">Corrected value:</th>
+                                    <td><input type="number" placeholder="Filled By Doctor" class="form-control"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="problems">
+                        <label for="goal" class="form-label">Consultation goal, Main problems</label>
+                        <textarea disabled id="goal" cols="30" rows="10" class="form-control" placeholder="To be filled from db"></textarea>
+                    </div>
+                </div>
+                <div class="chronic-diseases-table">
+                    <h6>Chronic Diseases</h6>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>Diabetes</th>
+                                <th>Hypertension</th>
+                                <th>Insulin Resistance</th>
+                                <th>Hypothyroidism</th>
+                                <th>Intestinal Diseases</th>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td></td>
+                                <td>+</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="other-diseases">
+                    <label for="otherD" class="form-label">Other Diseases</label>
+                    <textarea disabled id="otherD" cols="30" rows="2" class="form-control" placeholder="To be filled from db"></textarea>
+                </div>
+                <div class="medics">
+                    <label for="meds" class="form-label">Medications</label>
+                    <textarea disabled id="meds" cols="30" rows="2" class="form-control" placeholder="To be filled from db"></textarea>
+                </div>
+                <div class="suppls">
+                    <label for="suppl" class="form-label">Are you currently taking diet supplements? Please list type and dose:</label>
+                    <textarea disabled id="suppl" cols="30" rows="2" class="form-control" placeholder="To be filled from db" formControlName="supplements"></textarea>
+                </div>
+                <div class="getUpAt">
+                    <label for="getUpAt" class="form-label">Get Up Interval:</label>
+                    <input disabled type="text" class="form-control" id="getUpAt" placeholder="6:00-8:00" formControlName="usuallyWakeUp">
+
+
+                </div>
+                <div class="sleepAt">
+                    <label for="sleepAt" class="form-label">Goes to Sleep at Interval:</label>
+                    <input disabled type="text" class="form-control" id="sleepAt" placeholder="23:00-01:00" formControlName="usuallyGoToSleep">
+
+
+                </div>
+                <div class="avgSleep">
+                    <label for="avgSleep" class="form-label">Average Sleep Hours:</label>
+                    <input disabled type="number" class="form-control" id="avgSleep" placeholder="7" formControlName="avgSleep">
+
+
+                </div>
+                <div class="sportPerDay">
+                    <label for="sportPerDay" class="form-label">Sport per day (minutes):</label>
+                    <input disabled type="number" class="form-control" id="sportPerDay" placeholder="0" formControlName="avgSportTime">
+                </div>
+                <div class="sportPerWeek">
+                    <label for="sportPerWeek" class="form-label">Sport per week for (minutes):</label>
+                    <input disabled type="number" class="form-control" id="sportPerWeek" placeholder="0" formControlName="excercisesPerWeek">
+
+                </div>
+                <div class="regularWalk">
+                    <label for="regularWalk" class="form-label">Regular Walk</label>
+                    <label class="check"> 
+                            <input disabled type="checkbox" class="checkb" id="regularWalk" autocomplete="off" formControlName="regularWalk">
+                            <span></span>
+                        </label>
+                </div>
+                <div class="sportText">
+                    <label for="sport" class="form-label">Sport Types:</label>
+                    <textarea disabled id="sport" cols="30" rows="3" class="form-control" placeholder="To be filled from db" formControlName="supplements"></textarea>
+                </div>
+                <div class="drinks-table">
+                    <h6>Drinks:</h6>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>Water</th>
+                                <th>Coffee</th>
+                                <th>Tea</th>
+                                <th>Juice</th>
+                                <th>Soda / Energy</th>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>0</td>
+                                <td>2</td>
+                                <td>1</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="alco">
+                    <label for="alco" class="form-label">Alcohol:</label>
+                    <textarea disabled id="alco" cols="30" rows="2" class="form-control" placeholder="To be filled from db"></textarea>
+                </div>
+                <div class="cigs">
+                    <label for="cigs" class="form-label">Cigarettes per day:</label>
+                    <input disabled type="number" class="form-control" id="sigs" placeholder="7" formControlName="avgSleep">
+                </div>
+                <div class="meals-table">
+                    <h6>Meal Takes:</h6>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>Breakfast</th>
+                                <th>Second Breakfast</th>
+                                <th>Lunch</th>
+                                <th>Afternoon Snack</th>
+                                <th>Dinner</th>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>0</td>
+                                <td>2</td>
+                                <td>1</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="fav-food">
+                    <label for="fav" class="form-label">Favourite food:</label>
+                    <textarea disabled id="fav" cols="30" rows="4" class="form-control" placeholder="To be filled from db"></textarea>
+                </div>
+                <div class="disliked-food">
+                    <label for="unfav" class="form-label">Disliked food:</label>
+                    <textarea disabled id="unfav" cols="30" rows="4" class="form-control" placeholder="To be filled from db"></textarea>
+                </div>
+                <div class="foodSens">
+                    <h6>Food Allergies and Hypersensetivity</h6>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>Allergies</th>
+                                <td>To be filled from db</td>
+                            </tr>
+                            <tr>
+                                <th>Hypersensetivities</th>
+                                <td>To be filled from db</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="meals-desc-table">
+                    <h6>Daily Meals Description</h6>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>Meal №:</th>
+                                <th>Time</th>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td>Meal 1:</td>
+                                <td>hh::mm</td>
+                                <td>To be filled from db</td>
+                            </tr>
+                            <tr>
+                                <td>Meal 2:</td>
+                                <td>hh::mm</td>
+                                <td>To be filled from db</td>
+                            </tr>
+                            <tr>
+                                <td>Meal 3:</td>
+                                <td>hh::mm</td>
+                                <td>To be filled from db</td>
+                            </tr>
+                            <tr>
+                                <td>Meal 4:</td>
+                                <td>hh::mm</td>
+                                <td>To be filled from db</td>
+                            </tr>
+
+                            <tr>
+                                <td>Meal 5: </td>
+                                <td>hh::mm</td>
+                                <td>To be filled from db</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="betweenMealsFood">
+                    <label for="bmf" class="form-label">Food between meals:</label>
+                    <textarea disabled id="bmf" cols="30" rows="3" class="form-control" placeholder="To be filled from db"></textarea>
+                </div>
+                <div class="cpm">
+                    <h6>Physical activity and CPM</h6>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th class="filledByDoc ">Physical activity k (PAL):</th>
+                                <td><input type="number" placeholder="Filled By Doctor" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <th class="calculated">CPM</th>
+                                <td>to be calculated</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-primary">Geerate PDF report</button>
+                    <button class="btn btn-danger">Reject</button>
+                    <button class="btn btn-success">Submit</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

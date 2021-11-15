@@ -54,7 +54,7 @@ export class Survey {
   meals:
     {
       mealNumber: number,
-      time: string,
+      atTime: string,
       foodToEat: string
     }[]
 

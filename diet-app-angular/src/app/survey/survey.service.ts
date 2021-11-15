@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { element } from 'protractor';
+import { throwError } from 'rxjs';
 import { Survey } from './survey.model';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -66,20 +67,14 @@ export class SurveyService {
     meals:
       {
         mealNumber: number,
-        time: string,
+        atTime: string,
         foodToEat: string,
       }[]
 
 
   ) {
-    let filteredMeals = meals.forEach(element => {
-      for (var key in element) {
-        if (element[key] === null) {
-          delete element[key];
-        }
-      }
-    });
-    return this.http.post<Survey>('http://localhost:7000/survey/signup', {
+
+    return this.http.post<Survey>('https://dietappeu.azurewebsites.net/api/survey/signup', {
       accessEmail: accessEmail,
       firstName: firstName,
       lastName: lastName,
@@ -132,9 +127,15 @@ export class SurveyService {
       hypersensitivityProducts: hypersensitivityProducts,
       alergieProducts: alergieProducts,
       foodBetweenMeals: foodBetweenMeals,
-      meals: filteredMeals
+      meals: meals
     })
+      .pipe(catchError(this.handleError));
+  }
+  handleError(error: HttpErrorResponse) {
+    console.log(error);
+    return throwError(error);
   }
 }
+
 
 

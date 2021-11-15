@@ -1,0 +1,24 @@
+.pendingUser div {
+    display: flex;
+    background-color: white;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 80%;
+}
+
+.pendingUser {
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.pendingUser p {
+    color: black;
+    margin-bottom: 0;
+}
+
+.pendingUser p:first-child {
+    margin-right: 10px;
+}

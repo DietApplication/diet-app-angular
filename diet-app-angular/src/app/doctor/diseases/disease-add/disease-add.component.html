@@ -1,0 +1,28 @@
+<div class="container">
+    <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-doctor-alert>
+
+    <form [formGroup]="addDiseaseForm" (ngSubmit)="onSubmit()">
+        <div class="dis-container">
+            <div class="dis-name">
+                <label for="name">Name</label>
+                <textarea rows=4 id="name" type="text" class="form-control" placeholder="Enter disease name here" formControlName="name"></textarea>
+                <span class="form-text" *ngIf="!addDiseaseForm.get('name').valid && addDiseaseForm.get('name').touched"></span>
+            </div>
+            <div class="dis-desc">
+                <label for="desc">Description</label>
+                <textarea id="desc" type="text" class="form-control" placeholder="Enter disease description here" formControlName="description" rows=4></textarea>
+                <span class="form-text" *ngIf="!addDiseaseForm.get('description').valid && addDiseaseForm.get('description').touched"></span>
+            </div>
+            <div class="dis-rec">
+                <label for="rec">Recommendations</label>
+                <textarea rows=4 id="rec" type="text" class="form-control" placeholder="Enter disease recommendation here" formControlName="recommendations"></textarea>
+                <span class="form-text" *ngIf="!addDiseaseForm.get('recommendations').valid && addDiseaseForm.get('recommendations').touched"></span>
+            </div>
+            <div>
+                <button class="btn" [disabled]="!addDiseaseForm.valid">+</button>
+            </div>
+        </div>
+
+
+    </form>
+</div>

@@ -1,0 +1,38 @@
+.sup-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+input {
+    border-color: #0A7B79;
+    height: 40px;
+}
+
+.sup-name {
+    width: 25%;
+}
+
+.sup-desc {
+    width: 65%;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #0A7B79;
+}
+
+.btn {
+    color: #D3F2E9;
+    background-color: #0A7B79;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 4.5px 16px;
+}
+
+.sup-error {
+    margin-top: 50px;
+    text-align: center;
+}

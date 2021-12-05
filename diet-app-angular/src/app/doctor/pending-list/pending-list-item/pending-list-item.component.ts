@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { PendingListService } from '../pending-list.service';
 import { PendingUser } from '../pending-user.model';
 
 @Component({
@@ -10,15 +11,18 @@ export class PendingListItemComponent implements OnInit {
 
   @Input() index: number;
   @Input() pendingUser: PendingUser;
+  @Output() oldUser = new EventEmitter<PendingUser>();
+
   firstName: string;
   lastName: string;
   userId: number;
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.userId);
     this.firstName = this.pendingUser.firstName;
     this.lastName = this.pendingUser.lastName;
-    this.userId = this.pendingUser.userId;
+    this.userId = this.pendingUser.idUser;
   }
+
+
 }

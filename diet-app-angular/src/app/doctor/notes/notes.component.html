@@ -1,0 +1,37 @@
+<div class="container-w-background container-fluid">
+    <div class="sticky-left-background">
+        <div id="content-left" class="content-left">
+            <h4 id="myHeader">Patients</h4>
+            <form [formGroup]="searchUsersForm" class="search" (ngSubmit)="onSearch()">
+                <input type="text" class="form-control" formControlName="name" placeholder="Search">
+                <button class="btn" [disabled]="!searchUsersForm.valid">
+                  <img src="../../../assets/searchGreen.svg" alt="search">
+                </button>
+            </form>
+            <app-patients-item [ngClass]="clicked=== i ? 'active-user': not-active-user" *ngFor="let patient of patients; let i = index;" [index]="i" [patient]="patient" (click)="setIdUser(i)"></app-patients-item>
+            <div class="pag">
+                <nav aria-label="...">
+                    <ul class="pagination pagination-xs">
+                        <li class="page-item" *ngFor="let p of pages; let i = index;">
+                            <a class="page-link" [class.page-a]="currentPage === i+1" tabindex="-1" (click)="onGetPatients(i+1)">{{i+1}}</a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+    <div class="sticky-right">
+        <div class="content">
+            <h1>NOTES</h1>
+            <div class="notes" #notesCont>
+                <app-notes-item *ngFor="let note of notes; let i = index;" [index]="i" [note]="note"></app-notes-item>
+            </div>
+            <form [formGroup]="sendNoteForm" class="note-text" (ngSubmit)="onPostNote()">
+                <textarea formControlName="note" type="text" class="form-control" placeholder="write your note..." autosize></textarea>
+                <button class="btn" [disabled]="!sendNoteForm.valid || !userSelected"><img src="../../../assets/send-button.svg" alt="send note"></button>
+            </form>
+        </div>
+    </div>
+</div>

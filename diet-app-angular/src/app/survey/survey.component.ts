@@ -25,30 +25,30 @@ export class SurveyComponent implements OnInit {
 
   private initSurveyForm() {
     this.surveyForm = new FormGroup({
-      education: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(40)]),
-      profession: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(40)]),
-      goal: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(3000)]),
+      education: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
+      profession: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
+      goal: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(150)]),
       hypertension: new FormControl(false),
       insulinResistance: new FormControl(false),
       diabetes: new FormControl(false),
       hypothyroidism: new FormControl(false),
       intestionalDiseases: new FormControl(false),
-      otherDiseases: new FormControl(null, [Validators.minLength(5), Validators.maxLength(3000)]),
-      medications: new FormControl(null, [Validators.minLength(2), Validators.maxLength(3000)]),
-      supplements: new FormControl(null, [Validators.minLength(2), Validators.maxLength(3000)]),
-      avgSleep: new FormControl(null, [Validators.required, Validators.min(1), Validators.maxLength(3000)]),
+      otherDiseases: new FormControl(null, [Validators.minLength(2), Validators.maxLength(150)]),
+      medications: new FormControl(null, [Validators.minLength(2), Validators.maxLength(150)]),
+      supplements: new FormControl(null, [Validators.minLength(2), Validators.maxLength(150)]),
+      avgSleep: new FormControl(null, [Validators.required, Validators.min(1), Validators.maxLength(150)]),
       usuallyWakeUp: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(20)]),
       usuallyGoToSleep: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(20)]),
       regularWalk: new FormControl(false),
       avgSportTime: new FormControl(null, [Validators.required, Validators.min(0)]),
-      sportTypes: new FormControl(null, [Validators.minLength(5), Validators.maxLength(3000)]),
+      sportTypes: new FormControl(null, [Validators.minLength(2), Validators.maxLength(150)]),
       excercisesPerWeek: new FormControl(null, [Validators.required, Validators.min(0)]),
       waterGlasses: new FormControl(null, [Validators.required, Validators.min(0)]),
       coffeeGlasses: new FormControl(null, [Validators.required, Validators.min(0)]),
       teaGlasses: new FormControl(null, [Validators.required, Validators.min(0)]),
       juiceGlasses: new FormControl(null, [Validators.required, Validators.min(0)]),
       energyDrinkGlasses: new FormControl(null, [Validators.required, Validators.min(0)]),
-      alcoholInfo: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(150)]),
+      alcoholInfo: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(150)]),
       cigsPerDay: new FormControl(null, [Validators.required, Validators.min(0)]),
       breakfast: new FormControl(false),
       secondBreakfast: new FormControl(false),
@@ -56,20 +56,20 @@ export class SurveyComponent implements OnInit {
       afternoonSnack: new FormControl(false),
       dinner: new FormControl(false),
       favFoodItems: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
-      notFavFoodItems: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(150)]),
-      hypersenetivityProducts: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(150)]),
-      allergieProducts: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(150)]),
-      betweenMealsFood: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(150)]),
+      notFavFoodItems: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(150)]),
+      hypersenetivityProducts: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(150)]),
+      allergieProducts: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(150)]),
+      betweenMealsFood: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(150)]),
       timeOne: new FormControl(),
-      foodToEatOne: new FormControl(null, [Validators.minLength(5), Validators.maxLength(150)]),
+      foodToEatOne: new FormControl(null, [Validators.minLength(2), Validators.maxLength(150)]),
       timeTwo: new FormControl(),
-      foodToEatTwo: new FormControl(null, [Validators.minLength(5), Validators.maxLength(150)]),
+      foodToEatTwo: new FormControl(null, [Validators.minLength(2), Validators.maxLength(150)]),
       timeThree: new FormControl(),
-      foodToEatThree: new FormControl(null, [Validators.minLength(5), Validators.maxLength(150)]),
+      foodToEatThree: new FormControl(null, [Validators.minLength(2), Validators.maxLength(150)]),
       timeFour: new FormControl(),
-      foodToEatFour: new FormControl(null, [Validators.minLength(5), Validators.maxLength(150)]),
+      foodToEatFour: new FormControl(null, [Validators.minLength(2), Validators.maxLength(150)]),
       timeFive: new FormControl(),
-      foodToEatFive: new FormControl(null, [Validators.minLength(5), Validators.maxLength(150)]),
+      foodToEatFive: new FormControl(null, [Validators.minLength(2), Validators.maxLength(150)]),
       firstName: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
       lastName: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
       email: new FormControl(null, [Validators.required, Validators.email]),
@@ -113,7 +113,7 @@ export class SurveyComponent implements OnInit {
       { mealNumber: 1, atTime: this.surveyForm.value.timeOne, foodToEat: this.surveyForm.value.foodToEatOne },
       { mealNumber: 2, atTime: this.surveyForm.value.timeTwo, foodToEat: this.surveyForm.value.foodToEatTwo },
       { mealNumber: 3, atTime: this.surveyForm.value.timeThree, foodToEat: this.surveyForm.value.foodToEatThree },
-      { mealNumber: 4, atTime: this.surveyForm.value.timeFour, foodToEat: this.surveyForm.value.foodToFour },
+      { mealNumber: 4, atTime: this.surveyForm.value.timeFour, foodToEat: this.surveyForm.value.foodToEatFour },
       { mealNumber: 5, atTime: this.surveyForm.value.timeFive, foodToEat: this.surveyForm.value.foodToEatFive }
     ]
     // meals.forEach(element => {
@@ -124,9 +124,14 @@ export class SurveyComponent implements OnInit {
     //     console.log(meals);
     //   }
     // });
-    let filtered = meals.filter(element => {
-      return element.atTime !== null && element.foodToEat !== null
-    });
+    let filtered = meals.filter(function (element) {
+      if (element.atTime === null || element.foodToEat === null) {
+        return false;
+      }
+      return true;
+    }
+    );
+    //fix meals
     console.log(filtered);
 
     this.surveyService.storeSurvey(
@@ -204,4 +209,5 @@ export class SurveyComponent implements OnInit {
   confPassword() {
     this.showCP = !this.showCP;
   }
+
 }

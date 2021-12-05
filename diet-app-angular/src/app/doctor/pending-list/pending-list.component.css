@@ -26,6 +26,11 @@ app-pending-list-item {
     margin-bottom: 10px;
     width: 55%;
     align-self: center;
+    cursor: pointer;
+}
+
+app-pending-list-item:hover {
+    transform: scale(1.1) perspective(1px);
 }
 
 h4 {
@@ -83,15 +88,9 @@ label {
     margin-left: 2%;
 }
 
-table {
-    border: 1px solid lightgrey;
-    border-collapse: collapse;
-}
-
 .getting-started-table th {
     width: 33%;
     padding-left: 3%;
-    border: 1px solid lightgrey;
 }
 
 td {
@@ -164,15 +163,64 @@ input {
     padding-left: 2%;
 }
 
+.cpm td,
+.cpm th {
+    padding-left: 2%;
+}
+
 .meals-desc-table td:nth-child(2) {
     width: 12%;
 }
 
-.meals-desc-table td:first-child,
-.foodSens th {
+.meals-desc-table td:first-child {
     width: 20%;
 }
 
+.foodSens th {
+    width: 24%;
+}
+
 .cpm th {
-    width: 28%;
+    width: 30%;
+}
+
+.generate-pdf,
+.submit-patient,
+.reject-patient {
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    padding: 10px 40px;
+}
+
+.generate-pdf {
+    background-color: #FEAD54;
+}
+
+.reject-patient {
+    background-color: #FF6A56;
+}
+
+.reject-patient:hover,
+.submit-patient:hover,
+.generate-pdf:hover {
+    transform: scale(1.1) perspective(1px);
+}
+
+.submit-patient {
+    background-color: #0A7B79;
+}
+
+.foodSens th,
+.foodSens td {
+    padding-left: 2%;
+}
+
+.active-user {
+    border-radius: 50px;
+    border: 10px solid #FEAD54;
+}
+
+.not-active-user {
+    border: none;
 }

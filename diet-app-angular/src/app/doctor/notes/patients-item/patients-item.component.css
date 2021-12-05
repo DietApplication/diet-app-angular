@@ -1,0 +1,25 @@
+.patient div {
+    display: flex;
+    background-color: white;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 80%;
+}
+
+.patient {
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.patient p {
+    font-weight: 600;
+    color: black;
+    margin-bottom: 0;
+}
+
+.patient p:first-child {
+    margin-right: 8px;
+}

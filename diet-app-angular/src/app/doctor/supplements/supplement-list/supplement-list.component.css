@@ -1,0 +1,30 @@
+th {
+    color: #0A7B79;
+}
+
+.supps {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.supps tr {
+    border-bottom: 1px solid lightgrey;
+}
+
+.pag {
+    margin-top: 1%;
+}
+
+.page-link.page-a {
+    border: none;
+    background-color: #FEAD54;
+    color: white;
+}
+
+.page-link {
+    border: none;
+    background-color: #D3F2E9;
+    color: #0A7B79;
+}

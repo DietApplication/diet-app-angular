@@ -1,6 +1,6 @@
 
 export class PendingUser {
-  userId: number;
+  idUser: number;
   firstName: string;
   lastName: string;
   constructor(obj) {

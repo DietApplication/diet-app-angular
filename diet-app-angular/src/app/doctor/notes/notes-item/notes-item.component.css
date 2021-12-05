@@ -1,0 +1,12 @@
+.note {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #0A7B79;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.date {
+    align-self: flex-end;
+    font-size: 12px;
+}

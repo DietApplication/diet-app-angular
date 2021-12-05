@@ -1,0 +1,41 @@
+.dis-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+textarea {
+    border-color: #0A7B79;
+}
+
+.dis-name {
+    width: 18%;
+}
+
+.dis-desc {
+    width: 30%;
+}
+
+.dis-rec {
+    width: 30%;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #0A7B79;
+}
+
+.btn {
+    color: #D3F2E9;
+    background-color: #0A7B79;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 4.5px 16px;
+}
+
+.sup-error {
+    margin-top: 50px;
+    text-align: center;
+}

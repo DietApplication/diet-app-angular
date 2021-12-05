@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { DietitianReport } from './dietitian-report.model';
+import { PatinetChange } from './patient-change.model';
 import { PendingUser } from './pending-user.model';
 
 @Injectable({
@@ -11,6 +13,20 @@ export class PendingListService {
   }
 
   getPendiingUsers() {
-    return this.http.get<PendingUser[]>('https://dietappeu.azurewebsites.net/api/doctor/pending/users');
+    return this.http.get<PendingUser[]>('https://dietappeu.azurewebsites.net/api/doctor/pending/patients');
+  }
+  getDietitianReport(userId: number) {
+    return this.http.get<DietitianReport>('https://dietappeu.azurewebsites.net/api/doctor/pending/patient?idpatient=' + userId);
+  }
+  deletePatient(userId: number) {
+    return this.http.delete<PendingUser>('https://dietappeu.azurewebsites.net/api/doctor/pending?idpatient=' + userId);
+  }
+  submitPatient(idPatient: number, cpm: number, pal: number, correctedValue: string) {
+    return this.http.patch<PatinetChange>('https://dietappeu.azurewebsites.net/api/doctor/pending/patient', {
+      idPatient: idPatient,
+      cpm: cpm,
+      pal: pal,
+      correctedValue: correctedValue
+    })
   }
 }

@@ -15,10 +15,11 @@
 }
 
 .pendingUser p {
+    font-weight: 600;
     color: black;
     margin-bottom: 0;
 }
 
 .pendingUser p:first-child {
-    margin-right: 10px;
+    margin-right: 8px;
 }

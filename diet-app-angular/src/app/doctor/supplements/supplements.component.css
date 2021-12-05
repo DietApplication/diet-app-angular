@@ -1,0 +1,27 @@
+h1 {
+    margin-top: 50px;
+}
+
+.search input {
+    width: 94%;
+    height: 42px;
+}
+
+.search button {
+    background-color: #D3F2E9;
+}
+
+.search button:hover {
+    background-color: #FEAD54;
+}
+
+.search img {
+    padding-bottom: 2px;
+}
+
+.search {
+    margin-top: 30px;
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: space-between;
+}

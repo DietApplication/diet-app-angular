@@ -77,8 +77,8 @@
 
                                     </tr>
                                     <tr>
-                                        <th>BMR (basic metabolism):</th>
-                                        <td name="basicMetabolism" ngDefaultControl [ngModelOptions]="{standalone: true}" [(ngModel)]="basicMetabolism">{{basicMetabolism}}</td>
+                                        <th class="calculated">BMR (basic metabolism):</th>
+                                        <td *ngIf="submitUserForm.value.correctedValue && gender" name="basicMetabolism" ngDefaultControl [ngModelOptions]="{standalone: true}" [(ngModel)]="basicMetabolism">{{bmr}}</td>
 
                                     </tr>
                                     <tr>
@@ -360,9 +360,9 @@
                         </table>
                     </div>
                     <div class="buttons">
-                        <button class="btn generate-pdf" type="button" (click)="generatePDF()" [disabled]="!submitUserForm.valid">Generate PDF report</button>
+                        <button class="btn generate-pdf" type="button" (click)="generatePDF()" [disabled]="!submitUserForm.valid || !userSelected">Generate PDF report</button>
                         <button class="btn reject-patient" (click)="onDelete()" [disabled]="!userSelected">Reject</button>
-                        <button class="btn submit-patient" (click)="onSubmit()" [disabled]="!submitUserForm.valid">Submit</button>
+                        <button class="btn submit-patient" (click)="onSubmit()" [disabled]="!submitUserForm.valid || !userSelected">Submit</button>
 
                     </div>
                 </form>

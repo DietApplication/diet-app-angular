@@ -9,6 +9,7 @@ import { DiseasesComponent } from './diseases/diseases.component';
 import { NotesComponent } from './notes/notes.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductAddComponent } from './products/product-add/product-add.component';
+import { PatientsComponent } from './patients/patients.component';
 const doctorRoutes: Routes = [
   {
     path: '',
@@ -20,7 +21,8 @@ const doctorRoutes: Routes = [
       { path: 'products', component: ProductsComponent },
       { path: 'add-product', component: ProductAddComponent },
       { path: 'diseases', component: DiseasesComponent },
-      { path: 'notes', component: NotesComponent }
+      { path: 'notes', component: NotesComponent },
+      { path: 'patients', component: PatientsComponent }
     ]
   },
 ]

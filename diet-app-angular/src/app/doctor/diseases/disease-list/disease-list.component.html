@@ -1,4 +1,11 @@
 <div class="diseases">
+    <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-doctor-alert>
+    <form [formGroup]="searchDisForm" class="search" (ngSubmit)="onSearch()">
+        <input type="text" class="form-control" formControlName="name" placeholder="Search">
+        <button class="btn" [disabled]="!searchDisForm.valid">
+                  <img src="../../../assets/searchGreen.svg" alt="search">
+                </button>
+    </form>
     <table class="table table-borderless">
         <thead>
             <tr>

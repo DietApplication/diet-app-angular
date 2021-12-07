@@ -24,8 +24,13 @@ import { DiseaseItemComponent } from './diseases/disease-list/disease-item/disea
 import { ProductsComponent } from './products/products.component';
 import { ProductAddComponent } from './products/product-add/product-add.component';
 import { ProductItemComponent } from './products/product-item/product-item.component';
+import { PatientsComponent } from './patients/patients.component';
+import { PatientItemComponent } from './patients/patient-item/patient-item.component';
+import { RecommendationsComponent } from './diseases/disease-list/recommendations/recommendations.component';
+
+
 @NgModule({
-  declarations: [DropdownDirective, DoctorComponent, DoctorHeaderComponent, PendingListComponent, PendingListItemComponent, SupplementsComponent, SupplementAddComponent, SupplementListComponent, DiseasesComponent, DiseaseListComponent, DiseaseAddComponent, NotesComponent, PatientsItemComponent, NotesItemComponent, SupplementItemComponent, DoctorAlertComponent, DiseaseItemComponent, ProductsComponent, ProductAddComponent, ProductItemComponent],
+  declarations: [DropdownDirective, DoctorComponent, DoctorHeaderComponent, PendingListComponent, PendingListItemComponent, SupplementsComponent, SupplementAddComponent, SupplementListComponent, DiseasesComponent, DiseaseListComponent, DiseaseAddComponent, NotesComponent, PatientsItemComponent, NotesItemComponent, SupplementItemComponent, DoctorAlertComponent, DiseaseItemComponent, ProductsComponent, ProductAddComponent, ProductItemComponent, PatientsComponent, PatientItemComponent, RecommendationsComponent],
   imports: [
     RouterModule,
     CommonModule,

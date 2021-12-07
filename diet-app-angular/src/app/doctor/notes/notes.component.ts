@@ -5,7 +5,8 @@ import { TokenService } from 'src/app/core/services/token.service';
 import { NoteContent } from './note-content.model';
 import { Note } from './note.model';
 import { NotesService } from './notes.service';
-import { Patient } from './patient.model';
+import { Patient } from '../patient.model';
+import { PatientsService } from '../patients.service';
 
 @Component({
   selector: 'app-notes',
@@ -14,7 +15,7 @@ import { Patient } from './patient.model';
 })
 export class NotesComponent implements OnInit, AfterViewChecked {
   @ViewChild('notesCont', { static: true }) myScrollContainer: ElementRef;
-
+  error: string;
   clicked: number;
   idPatient: number;
   currentPage: number = 1;
@@ -26,7 +27,7 @@ export class NotesComponent implements OnInit, AfterViewChecked {
   @Input() patients: Patient[];
   searchUsersForm: FormGroup;
   sendNoteForm: FormGroup;
-  constructor(private notesService: NotesService, private tokenService: TokenService) { }
+  constructor(private notesService: NotesService, private tokenService: TokenService, private patientsService: PatientsService) { }
 
   ngOnInit(): void {
     this.onGetPatients(this.currentPage);
@@ -45,13 +46,13 @@ export class NotesComponent implements OnInit, AfterViewChecked {
   }
   onGetPatients(page?: number) {
     this.currentPage = page;
-    this.notesService.getPatients(page).subscribe((response) => {
+    this.patientsService.getPatients(page).subscribe((response) => {
       this.data = response;
       console.log(this.data);
       this.patients = this.data.patients;
       console.log(this.patients);
       this.pages.length = Math.ceil(this.data.totalRows / this.data.pageSize);
-      this.scrollToBottomNotes();
+
 
     })
   }
@@ -77,17 +78,20 @@ export class NotesComponent implements OnInit, AfterViewChecked {
       firstName = result[0];
       lastName = result[1];
     }
-    this.notesService.searchPatients(firstName, lastName).subscribe((res) => {
+    this.patientsService.searchPatients(firstName, lastName).subscribe((res) => {
       this.data = res;
       this.patients = this.data;
-    });
+      console.log(this.patients);
+    },
+      (error) => {
+        this.error = error.error;
+      });
   }
   onPostNote() {
     let doctorId = parseInt(this.tokenService.getUserId());
     this.notesService.postNote(this.idPatient, doctorId, this.sendNoteForm.value.note).subscribe((res) => {
       console.log("notes res ", res);
       this.onGetNotes();
-
     });
     this.sendNoteForm.reset();
   }
@@ -99,14 +103,16 @@ export class NotesComponent implements OnInit, AfterViewChecked {
       console.log("note ", res);
       this.dataNotes = res;
       this.notes = this.dataNotes;
+      this.scrollToBottomNotes();
     })
-
   }
 
   scrollToBottomNotes(): void {
-    console.log("scrolling");
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
     } catch (err) { }
+  }
+  onHandleError() {
+    this.error = null;
   }
 }

@@ -1,18 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Patient } from '../../patient.model';
 
 @Component({
-  selector: 'app-patients-item',
-  templateUrl: './patients-item.component.html',
-  styleUrls: ['./patients-item.component.css']
+  selector: 'app-patient-item',
+  templateUrl: './patient-item.component.html',
+  styleUrls: ['./patient-item.component.css']
 })
-export class PatientsItemComponent implements OnInit {
+export class PatientItemComponent implements OnInit {
 
   @Input() index: number;
   @Input() patient: Patient;
 
   firstName: string;
   lastName: string;
+  dateOfBirth: string;
   patientId: number;
   constructor() { }
 
@@ -20,6 +21,8 @@ export class PatientsItemComponent implements OnInit {
     this.firstName = this.patient.firstName;
     this.lastName = this.patient.lastName;
     this.patientId = this.patient.idPatient;
+    this.dateOfBirth = new Date(this.patient.dateOfBirth).toLocaleDateString().split("T")[0];
   }
+
 
 }

@@ -2,6 +2,7 @@
     background: #D3F2E9;
     height: 60px;
     box-shadow: 0px 2px 6px 0px grey;
+    z-index: 3;
 }
 
 .header-custom {

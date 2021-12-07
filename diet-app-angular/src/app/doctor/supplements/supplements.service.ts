@@ -26,4 +26,8 @@ export class SupplementsService {
   getSupplements(page?: number) {
     return this.http.get<Supplement[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/supplements?page=' + page);
   }
+  searchSupplements(name: string) {
+    return this.http.get<Supplement[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/supplement/search?supplementName=' + name)
+      .pipe(catchError(this.handleError));;
+  }
 }

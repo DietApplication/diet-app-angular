@@ -1,0 +1,17 @@
+<div class="patient list-group-item">
+    <img src="../../../../assets/user-icon.svg" alt="user icon">
+    <div class="info">
+        <div class="name-info">
+            <p name="firstName" ngDefaultControl [(ngModel)]="firstName">{{firstName}}</p>
+            <p name="lastName" ngDefaultControl [(ngModel)]="lastName">{{lastName}}</p>
+        </div>
+        <p name="dateOfBirth" ngDefaultControl [(ngModel)]="dateOfBirth">{{dateOfBirth}}</p>
+    </div>
+    <div class="button-links">
+        <button class="btn"><a>Personal Info</a></button>
+        <button class="btn"><a>Weekly Report</a></button>
+        <button class="btn"><a>Measurements</a></button>
+        <button class="btn"><a>Diet History</a></button>
+        <button class="btn"><a>Disease History</a></button>
+    </div>
+</div>

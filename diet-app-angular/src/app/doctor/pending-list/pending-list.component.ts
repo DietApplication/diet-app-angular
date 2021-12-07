@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, ElementRef, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DietitianReport } from './dietitian-report.model';
 import { PendingListService } from './pending-list.service';
@@ -9,7 +9,7 @@ import { jsPDF } from 'jspdf';
   templateUrl: './pending-list.component.html',
   styleUrls: ['./pending-list.component.css']
 })
-export class PendingListComponent implements OnInit {
+export class PendingListComponent implements OnInit, AfterContentChecked {
   @ViewChild('contentReport') content: ElementRef;
   clicked: number;
   submitUserForm: FormGroup;
@@ -19,7 +19,7 @@ export class PendingListComponent implements OnInit {
   idPatient: number;
   index: number;
   firstName: string;
-  dateOfSurvey: Date;
+  dateOfSurvey: string;
   lastName: string;
   email: string;
   pesel: string;
@@ -78,7 +78,7 @@ export class PendingListComponent implements OnInit {
   foodToEat4: string;
   foodToEat5: string;
   foodBetweenMeals: string;
-  constructor(private pendingService: PendingListService) { }
+  constructor(private pendingService: PendingListService, private cdref: ChangeDetectorRef) { }
 
 
   ngOnInit(): void {
@@ -105,7 +105,21 @@ export class PendingListComponent implements OnInit {
 
   }
   private fillReport(response: DietitianReport) {
-    this.dateOfSurvey = response.dateOfSurvey;
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ]
+    this.dateOfSurvey = new Date(response.dateOfSurvey).toDateString();
     this.firstName = response.firstName;
     this.lastName = response.lastName;
     this.email = response.email;
@@ -118,7 +132,6 @@ export class PendingListComponent implements OnInit {
     this.height = response.height;
     this.idealBodyWeight = response.idealBodyWeight;
     this.modifiedFormula = response.modifiedFormula;
-    this.basicMetabolism = response.basicMetabolism;
     this.waistCircumference = response.waistCircumference;
     this.hipCircumference = response.hipCircumference;
     this.waistHipRatio = response.waistHipRatio;
@@ -213,6 +226,18 @@ export class PendingListComponent implements OnInit {
     });
     window.location.reload();
   }
+  get bmr() {
+    let result;
+    if (this.gender === "Male") {
+      result = 66.47 + (13.75 * this.submitUserForm.value.correctedValue) + (5 * this.height) - (6.75 * this.age);
+    }
+    else if (this.gender === "Female") {
+      result = 665.09 + (9.56 * this.submitUserForm.value.correctedValue) + (1.85 * this.height) - (4.67 * this.age);
+    }
+
+    this.basicMetabolism = Math.round(result * 100) / 100;
+    return this.basicMetabolism;
+  }
   get cpm() {
     return this.basicMetabolism * this.submitUserForm.value.pal;
   }
@@ -283,14 +308,12 @@ export class PendingListComponent implements OnInit {
     doc.text("Food between Meals: " + this.foodBetweenMeals, 10, 20);
     doc.text("PAL: " + this.submitUserForm.value.pal, 10, 30);
     doc.text("CPM: " + this.cpm, 10, 40);
-
-
-
     doc.save('dietitianReport.pdf');
   }
   get userSelected() {
     return !!this.idPatient;
   }
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
+  }
 }
-
-

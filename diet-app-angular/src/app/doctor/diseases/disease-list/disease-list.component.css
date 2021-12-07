@@ -28,3 +28,28 @@ th {
     background-color: #D3F2E9;
     color: #0A7B79;
 }
+
+.search input {
+    width: 94%;
+    height: 42px;
+}
+
+.search button {
+    background-color: #D3F2E9;
+}
+
+.search button:hover {
+    background-color: #FEAD54;
+}
+
+.search img {
+    padding-bottom: 2px;
+}
+
+.search {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: space-between;
+}

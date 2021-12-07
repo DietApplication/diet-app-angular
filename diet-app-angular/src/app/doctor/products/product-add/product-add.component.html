@@ -1,26 +1,80 @@
 <div class="container-w-background container-fluid">
     <div class="sticky-left-background">
+        <div id="content-left" class="content-left">
+            <h4>Add New Parameter</h4>
+            <form [formGroup]="addParameterForm" (ngSubmit)="onAddParameter()">
+                <div class="def-parameter">
+                    <label for="param" class="form-label">Parameter Name</label>
+                    <input type="text" class="form-control" id="param" formControlName="parameterName">
+                    <span class="form-text" *ngIf="!addParameterForm.get('parameterName').valid && addParameterForm.get('parameterName').touched">Parameter name is not provided or invalid</span>
+
+                </div>
+                <div class="def-parameter">
+                    <label for="mUnit" class="form-label">Measure Unit</label>
+                    <input type="text" class="form-control" id="mUnit" formControlName="measureUnit">
+                    <span class="form-text" *ngIf="!addParameterForm.get('measureUnit').valid && addParameterForm.get('measureUnit').touched">Measure unit is not provided or invalid</span>
+                </div>
+                <button class="btn" [disabled]="!addParameterForm.valid">Add</button>
+                <span class="error" *ngIf="addParameterError">{{addParameterError}}</span>
+            </form>
+        </div>
     </div>
     <div class="sticky-right">
         <div class="content">
             <div class="container">
                 <h1>ADD NEW PRODUCT</h1>
-                <form class="parameters-form">
+                <form class="parameters-form" [formGroup]="addProductForm" (ngSubmit)="onAddProduct()">
                     <div class="def-parameter">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" formControlName="name">
                     </div>
-                    <div class="def-parameter">
-                        <label for="weight" class="form-label">Weight</label>
-                        <input type="number" class="form-control" id="weight" formControlName="weight">
+                    <div class="desc-group">
+                        <div class="def-parameter">
+                            <label for="weightUnit" class="form-label">Weight Unit</label>
+                            <input type="number" class="form-control" id="weightUnit" formControlName="weightUnit">
+                        </div>
+                        <div class="def-parameter">
+                            <label for="weight" class="form-label">Weight</label>
+                            <input type="number" class="form-control" id="weight" formControlName="weight">
+                        </div>
                     </div>
-                    <div class="def-parameter">
-                        <label for="homeM" class="form-label">Home measure</label>
-                        <input type="text" class="form-control" id="homeM" formControlName="homeMeasure">
+                    <div class="desc-group">
+                        <div class="def-parameter">
+                            <label for="homeM" class="form-label">Home measure</label>
+                            <input type="text" class="form-control" id="homeM" formControlName="homeMeasure">
+                        </div>
+                        <div class="def-parameter">
+                            <label for="homeValue" class="form-label">Size</label>
+                            <input type="number" class="form-control" id="homeValue" formControlName="homeMeasureValue">
+                        </div>
                     </div>
-                    <div class="def-parameter">
-                        <label for="homeValue" class="form-label">Home measure value</label>
-                        <input type="number" class="form-control" id="homeValue" formControlName="homeMeasureValue">
+                    <div class="def-group">
+                        <div class="def-parameter">
+                            <label for="proteins" class="form-label">Proteins</label>
+                            <input type="number" class="form-control" id="proteins">
+                        </div>
+                        <div class="def-parameter">
+                            <label for="calories" class="form-label">Calories</label>
+                            <input type="number" class="form-control" id="calories">
+                        </div>
+                    </div>
+                </form>
+
+                <button class="button btn add" type="button" (click)="onAdd()" [disabled]="!filled">Add Parameter</button>
+                <div class="showParams"></div>
+                <form [formGroup]="selectParamForm">
+                    <div class="parameters-select" *ngFor="let i of openParamsCount">
+                        <div class="def-parameter">
+                            <label for="params" class="form-label">Existing Parameters</label>
+                            <input class="form-control" list="parameters" name="parameters" id="params" placeholder="Type to search..." formControlName="param">
+                            <datalist id="parameters">
+                         <option *ngFor="let p of parameters" style="width:100%">{{p.name}} </option>
+                    </datalist>
+                        </div>
+                        <div class="def-parameter">
+                            <label for="size" class="form-label">Size</label>
+                            <input type="number" class="form-control" id="homeValue" formControlName="size">
+                        </div>
                     </div>
                 </form>
 

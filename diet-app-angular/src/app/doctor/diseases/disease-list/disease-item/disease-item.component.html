@@ -1,4 +1,5 @@
 <td name="name" ngDefaultControl [(ngModel)]="name">
     {{name}}</td>
 <td name="description" ngDefaultControl [(ngModel)]="description">{{description}}</td>
-<td name="recommendation" ngDefaultControl [(ngModel)]="recommendation">{{recommendation}}</td>
+<td name="recommendation"><button class="btn" (click)="onOpenRecs()">Show Recommendations</button></td>
+<app-recommendations [recommendation]="recommendation" (close)="onHandleRec()" *ngIf="isDisplayed"></app-recommendations>

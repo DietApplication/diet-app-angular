@@ -1,0 +1,62 @@
+.list-group-item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid #0A7B79;
+}
+
+img {
+    margin-right: 20px;
+    height: 54px;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 0;
+    margin-right: 10px;
+}
+
+.name-info {
+    margin-top: 6px;
+    display: flex;
+}
+
+p[name="dateOfBirth"] {
+    font-size: 14px;
+    color: #FEAD54;
+    font-size: 400;
+}
+
+.patient {
+    display: flex;
+    align-items: center;
+}
+
+.button-links {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.button-links button {
+    margin-right: 20px;
+    background-color: #D3F2E9;
+    padding: 20px 16px;
+    border-radius: 16px;
+}
+
+.button-links button:hover {
+    transform: scale(1.1) perspective(1px);
+    background-color: #FEAD54;
+}
+
+.button-links button:last-child {
+    margin-right: 0;
+}
+
+.button-links a {
+    font-weight: 600;
+    text-decoration: none;
+    color: #0A7B79;
+}

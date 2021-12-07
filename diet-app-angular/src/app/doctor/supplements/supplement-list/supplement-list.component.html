@@ -1,4 +1,11 @@
 <div class="supps">
+    <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-doctor-alert>
+    <form [formGroup]="searchSupForm" class="search" (ngSubmit)="onSearch()">
+        <input type="text" class="form-control" formControlName="name" placeholder="Search">
+        <button class="btn" [disabled]="!searchSupForm.valid">
+                  <img src="../../../assets/searchGreen.svg" alt="search">
+                </button>
+    </form>
     <table class="table table-borderless">
         <thead>
             <tr>

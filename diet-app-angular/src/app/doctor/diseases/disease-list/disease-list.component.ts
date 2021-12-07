@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Disease } from '../disease.model';
 import { DiseasesService } from '../diseases.service';
 
@@ -9,12 +10,15 @@ import { DiseasesService } from '../diseases.service';
 })
 export class DiseaseListComponent implements OnInit {
   @Input() diseases: Disease[];
+  searchDisForm: FormGroup;
+  error: string;
   data;
   pages: number[] = [];
   currentPage: number = 1;
   constructor(private diseasesService: DiseasesService) { }
 
   ngOnInit(): void {
+    this.initSearchForm();
     this.onGetDiseases(this.currentPage);
   }
   onGetDiseases(page?: number) {
@@ -25,5 +29,24 @@ export class DiseaseListComponent implements OnInit {
       console.log(res);
       this.pages.length = Math.ceil(this.data.totalRows / this.data.pageSize);
     })
+  }
+  onSearch() {
+    let name: string = this.searchDisForm.value.name;
+    this.diseasesService.searchDiseases(name).subscribe((res) => {
+      this.data = res;
+      this.diseases = this.data;
+      console.log(this.diseases);
+    },
+      (error) => {
+        this.error = error.error;
+      });
+  }
+  private initSearchForm() {
+    this.searchDisForm = new FormGroup({
+      name: new FormControl(null, Validators.required)
+    })
+  }
+  onHandleError() {
+    this.error = null;
   }
 }

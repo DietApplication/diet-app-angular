@@ -6,4 +6,22 @@ td {
     border-bottom: 1px solid lightgrey;
     padding-top: 12px;
     padding-bottom: 12px;
+    vertical-align: middle;
+}
+
+.btn {
+    color: #0A7B79;
+    background-color: #D3F2E9;
+    font-weight: 600;
+    padding: 10px 10px;
+    border-radius: 20px;
+}
+
+.btn:hover {
+    background-color: #0A7B79;
+    color: #F4A363;
+}
+
+td[name="recommendation"] {
+    width: 20%;
 }

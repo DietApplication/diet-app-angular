@@ -43,6 +43,15 @@
     h1 {
         margin-top: 50px;
     }
-    /* .items {
-        display: flex;
-    } */
+    
+    .items {
+        display: grid;
+        grid-template-columns: repeat( auto-fill, minmax(28%, 1fr));
+        grid-column-gap: 8%;
+        grid-row-gap: 5%;
+    }
+    
+    app-product-item {
+        margin-top: 26%;
+        width: 100%;
+    }

@@ -1,4 +1,6 @@
 <div class="container-w-background container-fluid">
+    <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-doctor-alert>
+
     <div class="sticky-left-background">
         <div id="content-left" class="content-left">
             <h4 id="myHeader">Patients</h4>

@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { Disease } from '../../disease.model';
 
@@ -11,6 +12,7 @@ export class DiseaseItemComponent implements OnInit {
   description: string;
   name: string;
   recommendation: string;
+  isDisplayed: boolean = false;
   @Input() disease: Disease;
   constructor() { }
 
@@ -18,5 +20,12 @@ export class DiseaseItemComponent implements OnInit {
     this.name = this.disease.name;
     this.description = this.disease.description;
     this.recommendation = this.disease.recomendation;
+  }
+  onHandleRec() {
+    this.isDisplayed = false;
+  }
+  onOpenRecs() {
+    this.isDisplayed = true;
+    console.log(this.recommendation);
   }
 }

@@ -1,4 +1,5 @@
 export class Supplement {
+  idSupplement: number;
   supplementName: string;
   description: string;
   constructor(obj) {

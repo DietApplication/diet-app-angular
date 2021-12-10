@@ -1,10 +1,16 @@
 export interface Parameter {
   idParameter: number;
   name: string;
+  measureUnit: string;
+}
+export interface ParameterAdd {
+  idParameter: number;
+  amount: number;
 }
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ProductAdd } from './product-add.model';
+import { Product } from './product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +19,7 @@ export class ProductsService {
 
   constructor(private http: HttpClient) { }
 
-  addProduct(name: string, unit: string, size: number, homeMeasure: string, homeMeasureSize: string, parameters: {
-    idParameter: number,
-    amount: number
-  }[]
-  ) {
+  addProduct(name: string, unit: string, size: number, homeMeasure: string, homeMeasureSize: string, parameters: ParameterAdd[]) {
     return this.http.post<ProductAdd>('https://dietappeu.azurewebsites.net/api/knowledgebase/product', {
       name: name,
       unit: unit,
@@ -34,7 +36,9 @@ export class ProductsService {
     })
   }
   getParameters() {
-    return this.http.get<Parameter[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/parameters');
+    return this.http.get<Parameter[]>('sshttps://dietappeu.azurewebsites.net/api/knowledgebase/parameters');
   }
-
+  getProducts() {
+    return this.http.get<Product[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/products');
+  }
 }

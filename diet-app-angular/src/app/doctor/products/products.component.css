@@ -45,10 +45,11 @@
     }
     
     .items {
+        margin-top: 2%;
         display: grid;
         grid-template-columns: repeat( auto-fill, minmax(28%, 1fr));
-        grid-column-gap: 8%;
-        grid-row-gap: 5%;
+        grid-column-gap: 4%;
+        grid-row-gap: 2%;
     }
     
     app-product-item {

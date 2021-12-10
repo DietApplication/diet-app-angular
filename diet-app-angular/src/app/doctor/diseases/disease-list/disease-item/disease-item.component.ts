@@ -1,6 +1,7 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { Disease } from '../../disease.model';
+import { DiseasesService } from '../../diseases.service';
 
 @Component({
   selector: '[app-disease-item]',
@@ -8,15 +9,16 @@ import { Disease } from '../../disease.model';
   styleUrls: ['./disease-item.component.css']
 })
 export class DiseaseItemComponent implements OnInit {
-
+  idDisease: number;
   description: string;
   name: string;
   recommendation: string;
   isDisplayed: boolean = false;
   @Input() disease: Disease;
-  constructor() { }
+  constructor(private diseaseService: DiseasesService) { }
 
   ngOnInit(): void {
+    this.idDisease = this.disease.idDisease;
     this.name = this.disease.name;
     this.description = this.disease.description;
     this.recommendation = this.disease.recomendation;
@@ -27,5 +29,11 @@ export class DiseaseItemComponent implements OnInit {
   onOpenRecs() {
     this.isDisplayed = true;
     console.log(this.recommendation);
+  }
+  onEdit() {
+    this.diseaseService.editDisease(this.idDisease, this.name, this.description, this.recommendation).subscribe((res) => {
+      console.log(res);
+      window.location.reload();
+    })
   }
 }

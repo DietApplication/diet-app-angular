@@ -14,7 +14,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let supplement of supplements;" [supplement]="supplement" app-supplement-item>
+            <tr *ngFor="let supplement of supplements; let i = index;" [supplement]="supplement" app-supplement-item>
             </tr>
         </tbody>
     </table>

@@ -9,19 +9,39 @@ td {
     vertical-align: middle;
 }
 
-.btn {
+.recs {
     color: #0A7B79;
     background-color: #D3F2E9;
     font-weight: 600;
-    padding: 10px 10px;
+    padding: 10px 16px;
     border-radius: 20px;
 }
 
-.btn:hover {
+.recs:hover {
     background-color: #0A7B79;
     color: #F4A363;
 }
 
-td[name="recommendation"] {
+td:nth-child(3) {
     width: 20%;
+}
+
+td:first-child {
+    width: 20%;
+}
+
+.form-control {
+    border: none;
+}
+
+.btn-warning {
+    border-radius: 10px;
+}
+
+td:last-child {
+    width: 6%;
+}
+
+input {
+    padding-left: 0;
 }

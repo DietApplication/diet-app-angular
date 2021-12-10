@@ -10,10 +10,7 @@
         <button class="btn add-product"><a  routerLink="/doctor/add-product">Add New Product</a></button>
     </div>
     <div class="items">
-        <app-product-item></app-product-item>
-        <app-product-item></app-product-item>
-        <app-product-item></app-product-item>
-        <app-product-item></app-product-item>
+        <app-product-item *ngFor="let product of products; let i = index;" [index]="i" [product]="product"></app-product-item>
     </div>
 
 

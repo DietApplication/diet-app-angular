@@ -1,3 +1,6 @@
-<td name="name" ngDefaultControl [(ngModel)]="name">
-    {{name}}</td>
-<td name="description" ngDefaultControl [(ngModel)]="description">{{description}}</td>
+<td> <input class="form-control" name="name" ngDefaultControl [(ngModel)]="name">
+</td>
+<td> <input class="form-control" name="description" ngDefaultControl [(ngModel)]="description"></td>
+<td>
+    <button class="btn btn-warning" type="button" (click)="onEdit()">Edit</button>
+</td>

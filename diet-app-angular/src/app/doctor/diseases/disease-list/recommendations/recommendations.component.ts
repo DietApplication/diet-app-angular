@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DiseasesService } from '../../diseases.service';
 
 @Component({
   selector: 'app-recommendations',
@@ -7,11 +8,17 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class RecommendationsComponent implements OnInit {
   @Input() recommendation: string;
+  @Input() id: number;
   @Output() close = new EventEmitter<void>();
-  constructor() { }
+  constructor(private diseaseService: DiseasesService) { }
 
   ngOnInit(): void { }
   onClose() {
     this.close.emit();
+  }
+  onEdit(i: number) {
+    this.diseaseService.editDisease(i, null, null, this.recommendation).subscribe((res) => {
+      console.log(res);
+    })
   }
 }

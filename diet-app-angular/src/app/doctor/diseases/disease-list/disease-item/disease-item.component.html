@@ -1,5 +1,6 @@
-<td name="name" ngDefaultControl [(ngModel)]="name">
-    {{name}}</td>
-<td name="description" ngDefaultControl [(ngModel)]="description">{{description}}</td>
-<td name="recommendation"><button class="btn" (click)="onOpenRecs()">Show Recommendations</button></td>
-<app-recommendations [recommendation]="recommendation" (close)="onHandleRec()" *ngIf="isDisplayed"></app-recommendations>
+<td> <input type="text" class="form-control" name="name" ngDefaultControl [(ngModel)]="name">
+</td>
+<td> <input type="text" class="form-control" name="description" ngDefaultControl [(ngModel)]="description"></td>
+<td name="recommendation"><button class="btn recs" (click)="onOpenRecs()">Show Recommendations</button></td>
+<td><button class="btn btn-warning" (click)="onEdit()">Edit</button></td>
+<app-recommendations [recommendation]="recommendation" (close)="onHandleRec()" *ngIf="isDisplayed" [id]="idDisease"></app-recommendations>

@@ -25,9 +25,10 @@ tr {
 }
 
 td {
-    padding: 8px 0px;
+    padding: 18px 0px;
     color: #0A7B79;
     font-weight: 600;
+    text-align: center;
 }
 
 button {
@@ -46,7 +47,20 @@ button {
 
 img {
     width: 80%;
-    bottom: 80%;
-    right: 20.6%;
+    bottom: 84%;
+    right: 18.5%;
     position: absolute;
+}
+
+.double-info {
+    display: flex;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+p:first-child {
+    margin-right: 2px;
 }

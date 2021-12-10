@@ -1,21 +1,17 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, ElementRef, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DietitianReport } from './dietitian-report.model';
-import { PendingListService } from './pending-list.service';
-import { PendingUser } from './pending-user.model';
-import { jsPDF } from 'jspdf';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import jsPDF from 'jspdf';
+import { Subscription } from 'rxjs';
+import { PersonalInfo } from './personal-info.model';
+import { PersonalInfoService } from './personal-info.service';
+
 @Component({
-  selector: 'app-pending-list',
-  templateUrl: './pending-list.component.html',
-  styleUrls: ['./pending-list.component.css']
+  selector: 'app-personal-info',
+  templateUrl: './personal-info.component.html',
+  styleUrls: ['./personal-info.component.css']
 })
-export class PendingListComponent implements OnInit, AfterContentChecked {
-  @ViewChild('contentReport') content: ElementRef;
-  clicked: number;
-  submitUserForm: FormGroup;
-  isActive: boolean = false;
-  @Input() pendingUsers: PendingUser[];
-  dietitianReport: DietitianReport;
+export class PersonalInfoComponent implements OnInit {
+  private routeSub: Subscription;
   idPatient: number;
   index: number;
   firstName: string;
@@ -78,47 +74,26 @@ export class PendingListComponent implements OnInit, AfterContentChecked {
   foodToEat4: string;
   foodToEat5: string;
   foodBetweenMeals: string;
-  constructor(private pendingService: PendingListService, private cdref: ChangeDetectorRef) { }
-
+  pal: number;
+  cpm: number;
+  correctedValue: number;
+  constructor(private route: ActivatedRoute, private infoService: PersonalInfoService) { }
 
   ngOnInit(): void {
-    this.onGetUsers();
-    this.initForm();
+    this.routeSub = this.route.params.subscribe((params) => {
+      this.idPatient = params['idPatient'];
+    });
+    this.onGetInfo();
   }
 
-  onGetUsers() {
-    this.pendingService.getPendiingUsers().subscribe((users) => {
-      console.log(users);
-      this.pendingUsers = users;
-    })
+  onGetInfo() {
+    this.infoService.getPersonalInfo(this.idPatient).subscribe((info) => {
+      console.log(info);
+      this.fillReport(info);
+    });
   }
-  setIdUser(i: number) {
-    this.clicked = i;
-    this.idPatient = this.pendingUsers[i].idUser;
-    console.log("patientId ", this.idPatient);
-    console.log("patient ", this.pendingUsers[i]);
-    this.pendingService.getDietitianReport(this.idPatient)
-      .subscribe((response) => {
-        console.log(response);
-        this.fillReport(response);
-      });
+  private fillReport(response: PersonalInfo) {
 
-  }
-  private fillReport(response: DietitianReport) {
-    const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
-    ]
     this.dateOfSurvey = new Date(response.dateOfSurvey).toDateString();
     this.firstName = response.firstName;
     this.lastName = response.lastName;
@@ -179,7 +154,9 @@ export class PendingListComponent implements OnInit, AfterContentChecked {
     this.foodToEat4 = newMeals[3].foodToEat;
     this.foodToEat5 = newMeals[4].foodToEat;
     this.foodBetweenMeals = response.foodBetweenMeals;
-
+    this.cpm = response.cpm;
+    this.pal = response.pal;
+    this.correctedValue = response.correctedValue;
   }
   private handleNullMeals(meals) {
     let newMeals:
@@ -198,54 +175,20 @@ export class PendingListComponent implements OnInit, AfterContentChecked {
     }
     return newMeals;
   }
-  private initForm() {
-    this.submitUserForm = new FormGroup({
-      correctedValue: new FormControl(null, [Validators.required, Validators.minLength(0), Validators.maxLength(1000)]),
-      pal: new FormControl(null, [Validators.required, Validators.min(1.2), Validators.max(2.4)])
-    })
-  }
-  deletePendingUser(pUser: PendingUser) {
-    this.pendingUsers.splice(this.pendingUsers.indexOf(pUser), 1);
-  }
-
-  onDelete() {
-    if (confirm('Are you sure you want to reject this pending user from the list? All survey data will be lost.')) {
-      this.pendingService.deletePatient(this.idPatient).subscribe((response) => {
-        console.log(response);
-      });
-      window.location.reload();
-      console.log('rejected');
-    } else {
-      console.log('not rejected');
-    }
-  }
-  onSubmit() {
-    let pal = this.submitUserForm.value.pal
-    console.log("pal ", pal);
-    this.pendingService.submitPatient(this.idPatient, this.cpm, pal, this.submitUserForm.value.correctedValue).subscribe((response) => {
-
-      console.log("response ", response);
-
-    });
-    window.location.reload();
-  }
   get bmr() {
     let result;
     if (this.gender === "Male") {
-      result = 66.47 + (13.75 * this.submitUserForm.value.correctedValue) + (5 * this.height) - (6.75 * this.age);
+      result = 66.47 + (13.75 * this.correctedValue) + (5 * this.height) - (6.75 * this.age);
     }
     else if (this.gender === "Female") {
-      result = 665.09 + (9.56 * this.submitUserForm.value.correctedValue) + (1.85 * this.height) - (4.67 * this.age);
+      result = 665.09 + (9.56 * this.correctedValue) + (1.85 * this.height) - (4.67 * this.age);
     }
 
     this.basicMetabolism = Math.round(result * 100) / 100;
     return this.basicMetabolism;
   }
-  get cpm() {
-    return this.basicMetabolism * this.submitUserForm.value.pal;
-  }
   generatePDF() {
-    let content = this.content.nativeElement;
+
     let doc = new jsPDF();
     doc.text("Date of Survey: " + this.dateOfSurvey, 10, 10);
     doc.text("First Name: " + this.firstName, 10, 20);
@@ -264,7 +207,7 @@ export class PendingListComponent implements OnInit, AfterContentChecked {
     doc.text("Waist Circumference: " + this.waistCircumference, 10, 150);
     doc.text("Waist Circumference: " + this.hipCircumference, 10, 160);
     doc.text("WHR: " + this.waistHipRatio, 10, 170);
-    doc.text("Corrected Value: " + this.submitUserForm.value.correctedValue, 10, 180);
+    doc.text("Corrected Value: " + this.correctedValue, 10, 180);
     doc.text("Consultation Goal: " + this.consultationGoal, 10, 190);
     doc.text("Consultation Goal: " + this.consultationGoal, 10, 200);
     doc.text("Chronic Diseases:", 10, 210);
@@ -309,14 +252,8 @@ export class PendingListComponent implements OnInit, AfterContentChecked {
     doc.addPage();
     doc.text("Meal 5: " + this.atTime5 + ", " + this.foodToEat5, 10, 10);
     doc.text("Food between Meals: " + this.foodBetweenMeals, 10, 20);
-    doc.text("PAL: " + this.submitUserForm.value.pal, 10, 30);
+    doc.text("PAL: " + this.pal, 10, 30);
     doc.text("CPM: " + this.cpm, 10, 40);
-    doc.save('dietitianReport.pdf');
-  }
-  get userSelected() {
-    return !!this.idPatient;
-  }
-  ngAfterContentChecked() {
-    this.cdref.detectChanges();
+    doc.save('personalInfo.pdf');
   }
 }

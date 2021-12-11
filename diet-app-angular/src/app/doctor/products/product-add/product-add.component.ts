@@ -121,7 +121,7 @@ export class ProductAddComponent implements OnInit {
       this.chosenParameters)
       .subscribe((res) => {
         console.log(res);
-        alert("Survey successfully sent!")
+        alert("Product was successfully added!")
         window.location.reload();
       },
         (error) => {

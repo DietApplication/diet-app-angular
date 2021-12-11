@@ -56,3 +56,24 @@
         margin-top: 26%;
         width: 100%;
     }
+    
+    .pag {
+        text-align: center;
+        margin-top: 18%;
+    }
+    
+    .page-link.page-a {
+        border: none;
+        background-color: #FEAD54;
+        color: white;
+    }
+    
+    .page-link {
+        border: none;
+        background-color: #D3F2E9;
+        color: #0A7B79;
+    }
+    
+    .pagination {
+        justify-content: center;
+    }

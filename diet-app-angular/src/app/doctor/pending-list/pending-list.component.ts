@@ -105,20 +105,6 @@ export class PendingListComponent implements OnInit, AfterContentChecked {
 
   }
   private fillReport(response: DietitianReport) {
-    const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
-    ]
     this.dateOfSurvey = new Date(response.dateOfSurvey).toDateString();
     this.firstName = response.firstName;
     this.lastName = response.lastName;
@@ -200,7 +186,7 @@ export class PendingListComponent implements OnInit, AfterContentChecked {
   }
   private initForm() {
     this.submitUserForm = new FormGroup({
-      correctedValue: new FormControl(null, [Validators.required, Validators.minLength(0), Validators.maxLength(1000)]),
+      correctedValue: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(1000)]),
       pal: new FormControl(null, [Validators.required, Validators.min(1.2), Validators.max(2.4)])
     })
   }
@@ -223,11 +209,10 @@ export class PendingListComponent implements OnInit, AfterContentChecked {
     let pal = this.submitUserForm.value.pal
     console.log("pal ", pal);
     this.pendingService.submitPatient(this.idPatient, this.cpm, pal, this.submitUserForm.value.correctedValue).subscribe((response) => {
-
       console.log("response ", response);
-
+      this.onGetUsers();
     });
-    window.location.reload();
+
   }
   get bmr() {
     let result;

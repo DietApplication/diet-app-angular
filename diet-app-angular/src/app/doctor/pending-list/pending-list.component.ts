@@ -199,7 +199,7 @@ export class PendingListComponent implements OnInit, AfterContentChecked {
       this.pendingService.deletePatient(this.idPatient).subscribe((response) => {
         console.log(response);
       });
-      window.location.reload();
+      this.onGetUsers();
       console.log('rejected');
     } else {
       console.log('not rejected');

@@ -175,20 +175,6 @@ input {
     background-color: #FEAD54;
 }
 
-.reject-patient {
-    background-color: #FF6A56;
-}
-
-.reject-patient:hover,
-.submit-patient:hover,
-.generate-pdf:hover {
-    transform: scale(1.1) perspective(1px);
-}
-
-.submit-patient {
-    background-color: #0A7B79;
-}
-
 .foodSens th,
 .foodSens td {
     padding-left: 2%;

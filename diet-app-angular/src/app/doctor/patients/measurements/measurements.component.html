@@ -1,0 +1,111 @@
+<div class="container-w-background container-fluid">
+    <div class="sticky-left-background">
+    </div>
+    <div class="sticky-right">
+        <div class="content">
+            <div class="container">
+                <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-doctor-alert>
+                <div class="row report">
+                    <h1>Measurements History</h1>
+                    <h4>Find Measurements</h4>
+                    <form class="measure-filter" [formGroup]="filterMeasurementForm" (ngSubmit)="onGetMeasurementByRequest()">
+
+                        <div class="dates">
+                            <label for="dates" class="form-label">Measurement Date</label>
+                            <input class="form-control" list="mDates" name="mDates" id="dates" autocomplete="off" placeholder="Type to search..." formControlName="date">
+                            <datalist id="mDates">
+                         <option *ngFor="let d of dates" style="width:100%">{{d.date}}</option>
+                    </datalist>
+                        </div>
+                        <div class="whoMeasured">
+                            <label for="role" class="form-label">Who Measured</label>
+                            <select id="role" class="form-select" formControlName="role"> 
+                              <option value="Doctor">Doctor</option>
+                              <option value="Patient">Patient</option>
+                           </select>
+                        </div>
+                        <button class="btn filter" [disabled]="!filterMeasurementForm.valid">Find</button>
+                    </form>
+                    <span class="form-text" *ngIf="!filterMeasurementForm.get('date').valid && filterMeasurementForm.get('date').touched">Parameter is not provided or invalid </span>
+                    <span class="form-text" *ngIf="filterMeasurementForm.get('date').dirty && filterMeasurementForm.errors?.dateDoNotMatch">No measurements on this date yet.</span>
+                    <div class="getting-started-table">
+                        <h4>Results {{currentDate}}</h4>
+                        <form [formGroup]="addMeasurementForm" (ngSubmit)="onAddMeasurements()">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Weight:</th>
+                                        <td> <input type="number" class="form-control" formControlName="weight"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Height:</th>
+                                        <td><input type="number" class="form-control" formControlName="height"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Waist Circumference</th>
+                                        <td><input type="number" class="form-control" formControlName="waistcircumference"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Waist Lower Circumference</th>
+                                        <td><input type="number" class="form-control" formControlName="waistlowercircumference"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Hip Circumference</th>
+                                        <td><input type="number" class="form-control" formControlName="hipcircumference"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Biceps Circumference</th>
+                                        <td><input type="number" class="form-control" formControlName="bicepscircumference"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Calfcircum Circumference</th>
+                                        <td><input type="number" class="form-control" formControlName="calfcircumference"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Chest Circumference</th>
+                                        <td><input type="number" class="form-control" formControlName="chestcircumference"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Thigh Circumference</th>
+                                        <td><input type="number" class="form-control" formControlName="thighcircumference"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="calculated">MC (ideal body weight)</th>
+                                        <td *ngIf="!isReset">{{mc}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="calculated">BMR (basic metabolism):</th>
+                                        <td *ngIf="!isReset">{{bmr}}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th class="calculated">WHR (waist-hip ratio):</th>
+                                        <td *ngIf="!isReset">{{whr}}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th class="calculated">BMI (body maass index)</th>
+                                        <td *ngIf="!isReset">{{bmi}}</td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="final">
+                                <div class="roleShow">
+                                    <p>Measured by: {{whoMeasured}}</p>
+                                </div>
+                                <div class="buttons">
+                                    <button type="button" class="btn reset" (click)="onReset()"><img src="../../../../assets/Vector.svg" alt="resetFormIcon"></button>
+                                    <button [disabled]="!addMeasurementForm.valid" class="btn add">Add New Measurements</button>
+                                </div>
+
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>

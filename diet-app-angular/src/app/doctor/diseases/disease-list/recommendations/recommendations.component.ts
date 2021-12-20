@@ -9,6 +9,7 @@ import { DiseasesService } from '../../diseases.service';
 export class RecommendationsComponent implements OnInit {
   @Input() recommendation: string;
   @Input() id: number;
+  data;
   @Output() close = new EventEmitter<void>();
   constructor(private diseaseService: DiseasesService) { }
 
@@ -20,5 +21,6 @@ export class RecommendationsComponent implements OnInit {
     this.diseaseService.editDisease(i, null, null, this.recommendation).subscribe((res) => {
       console.log(res);
     })
+    window.location.reload();
   }
 }

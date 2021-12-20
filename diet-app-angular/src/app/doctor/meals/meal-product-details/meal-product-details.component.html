@@ -1,0 +1,27 @@
+<div class="backdrop" (click)="onClose()"></div>
+<div class="alert-box">
+    <table>
+        <div class="header-detail">
+            <h2>{{product.name}}</h2>
+            <div class="alert-box-actions">
+                <button class="btn btn-danger" (click)="onClose()">X</button></div>
+
+        </div>
+        <tbody>
+            <tr>
+                <th>Weight: </th>
+                <td>{{product.size}} {{product.unit}}</td>
+            </tr>
+            <tr>
+                <th>Home Measure: </th>
+                <td>{{product.homeMeasureSize}} {{product.homeMeasure}}</td>
+            </tr>
+            <tr class="params" *ngFor="let parameter of parameters">
+                <th>{{parameter.name}}:</th>
+                <td>{{parameter.amount}} {{parameter.measureUnit}}</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>

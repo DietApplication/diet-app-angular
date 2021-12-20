@@ -53,3 +53,9 @@ th {
     justify-content: space-between;
     width: 100%;
 }
+
+app-supplement-add {
+    margin-top: 1%;
+    margin-bottom: 3%;
+    width: 100%;
+}

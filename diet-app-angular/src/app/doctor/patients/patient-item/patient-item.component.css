@@ -40,6 +40,8 @@ p[name="dateOfBirth"] {
 }
 
 .button-links button {
+    color: #0A7B79;
+    font-weight: 600;
     margin-right: 20px;
     background-color: #D3F2E9;
     padding: 20px 16px;
@@ -53,10 +55,4 @@ p[name="dateOfBirth"] {
 
 .button-links button:last-child {
     margin-right: 0;
-}
-
-.button-links a {
-    font-weight: 600;
-    text-decoration: none;
-    color: #0A7B79;
 }

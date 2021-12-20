@@ -31,7 +31,7 @@ export class DiseasesService {
       .pipe(catchError(this.handleError));;
   }
   editDisease(idDisease: number, name: string, description: string, rec: string) {
-    return this.http.patch('https://dietappeu.azurewebsites.net/api/knowledgebase/disease', {
+    return this.http.put('https://dietappeu.azurewebsites.net/api/knowledgebase/disease', {
       idDisease: idDisease,
       name: name,
       description: description,

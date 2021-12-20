@@ -1,0 +1,51 @@
+<div class="container-w-background container-fluid">
+    <div class="sticky-left-background">
+        <div id="content-left" class="content-left"></div>
+    </div>
+    <div class="sticky-right">
+        <div class="content">
+            <div class="container">
+                <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-doctor-alert>
+
+                <h1>ADD NEW MEAL</h1>
+                <form class="meal-form" [formGroup]="addMealForm" (ngSubmit)="onAddMeal()">
+                    <div class="def-parameter">
+                        <label for="prName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="prName" formControlName="productName">
+                    </div>
+                    <h6>Ingredients</h6>
+                    <form class="search" [formGroup]="searchProductForm" class="search" (ngSubmit)="onSearch()">
+                        <input type="text" class="form-control" placeholder="Search to add ingredient" formControlName="name">
+                        <button class="btn" [disabled]="!searchProductForm.valid">
+                            +
+                           </button>
+
+                    </form>
+                    <div *ngFor="let p of products" class="ingredients">
+                        <app-meal-product-details [product]="p" (close)="onHandleDetails()" *ngIf="isDisplayed" [id]="idProduct"></app-meal-product-details>
+                        <div class="ingr">
+                            <div class="new-pr">
+                                <p>{{p.name}}</p>
+                                <input type="number" min=0.05 max=3000 class="form-control amount" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="p.size">
+                                <p style="margin-left: 2%;">({{p.unit}})</p>
+                            </div>
+                            <div class="buttons"> <button class="btn details" type="button" (click)="onOpenDetails()">Details</button>
+                                <button class="btn btn-danger" (click)="onDelete(p)">-</button></div>
+                        </div>
+
+                    </div>
+                    <div class="def-parameter desc">
+                        <label for="description" class="form-label">Description/Directions</label>
+                        <textarea autosize class="form-control" id="description" formControlName="desc"></textarea>
+                    </div>
+                    <div class="def-parameter">
+                        <label for="url" class="form-label">Cooking URL</label>
+                        <input type="text" class="form-control" for="url" formControlName="url">
+                    </div>
+                    <button class="btn btn-success" [disabled]="!addMealForm.valid">Add New Meal</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

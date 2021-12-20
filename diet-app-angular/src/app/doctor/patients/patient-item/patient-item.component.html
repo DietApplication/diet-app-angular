@@ -8,10 +8,10 @@
         <p name="dateOfBirth" ngDefaultControl [(ngModel)]="dateOfBirth">{{dateOfBirth}}</p>
     </div>
     <div class="button-links">
-        <button class="btn"><a routerLink="/doctor/patients/{{patientId}}/personal-info">Personal Info</a></button>
-        <button class="btn"><a>Weekly Report</a></button>
-        <button class="btn"><a>Measurements</a></button>
-        <button class="btn"><a>Diet History</a></button>
-        <button class="btn"><a>Disease History</a></button>
+        <button class="btn" routerLink="/doctor/patients/{{patientId}}/personal-info">Personal Info</button>
+        <button class="btn">Weekly Report</button>
+        <button class="btn" routerLink="/doctor/patients/{{patientId}}/measurements"> Measurements</button>
+        <button class="btn">Diet History</button>
+        <button class="btn">Disease History</button>
     </div>
 </div>

@@ -11,7 +11,7 @@
 .alert-box {
     border-radius: 40px;
     position: fixed;
-    top: 30vh;
+    top: 10vh;
     left: 25vw;
     width: 50%;
     padding: 36px;
@@ -69,4 +69,96 @@ tr {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid lightgrey;
+}
+
+.params td {
+    display: flex;
+    justify-content: flex-end;
+    width: 70%;
+    align-items: center;
+}
+
+.params p {
+    font-size: 22px;
+    margin-right: 8%;
+    margin-bottom: 0;
+}
+
+.edit-close {
+    width: 98%;
+    float: right;
+}
+
+.edit-close button {
+    float: right;
+}
+
+.desc-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.desc-group .def-parameter:first-child {
+    width: 70%;
+}
+
+.desc-group .def-parameter:last-child {
+    width: 16%;
+}
+
+.def-parameter label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #0A7B79;
+}
+
+.def-parameter {
+    margin-top: 2%;
+}
+
+.parameters-form {
+    width: 98%;
+}
+
+.nondef-params {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.nondef-params .def-parameter {
+    width: 90%;
+}
+
+.btn-success {
+    margin-left: 5%;
+    margin-top: 30px;
+    border: none;
+    width: 90%;
+    background-color: #D3F2E9;
+    border-radius: 10px;
+    padding-top: 9px;
+    color: #0A7B79;
+    padding-bottom: 9px;
+}
+
+.parameters-select {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+.add {
+    background-color: #0A7B79;
+    border-radius: 10px;
+    padding-top: 9px;
+    color: #FEAD54;
+    padding-bottom: 9px;
+}
+
+.edit-alert {
+    top: 10vh;
+    overflow-y: scroll;
+    height: 80vh;
 }

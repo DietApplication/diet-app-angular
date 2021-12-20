@@ -31,7 +31,7 @@ export class SupplementsService {
       .pipe(catchError(this.handleError));;
   }
   editSupplement(idSupplement: number, name: string, description: string) {
-    return this.http.patch('https://dietappeu.azurewebsites.net/api/knowledgebase/supplement', {
+    return this.http.put('https://dietappeu.azurewebsites.net/api/knowledgebase/supplement', {
       idSupplement: idSupplement,
       name: name,
       description: description

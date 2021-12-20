@@ -1,4 +1,4 @@
-<div class="container">
+<div>
     <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-doctor-alert>
     <form [formGroup]="addSupplForm" (ngSubmit)="onSubmit()">
         <div class="sup-container">

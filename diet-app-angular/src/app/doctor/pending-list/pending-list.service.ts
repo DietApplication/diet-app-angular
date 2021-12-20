@@ -19,7 +19,7 @@ export class PendingListService {
     return this.http.get<DietitianReport>('https://dietappeu.azurewebsites.net/api/doctor/pending/patient?idpatient=' + userId);
   }
   deletePatient(userId: number) {
-    return this.http.delete<PendingUser>('https://dietappeu.azurewebsites.net/api/doctor/pending?idpatient=' + userId);
+    return this.http.delete<PendingUser>('https://dietappeu.azurewebsites.net/api/doctor/pending?idPatient=' + userId);
   }
   submitPatient(idPatient: number, cpm: number, pal: number, correctedValue: string) {
     return this.http.patch<PatinetChange>('https://dietappeu.azurewebsites.net/api/doctor/pending/patient', {

@@ -29,10 +29,14 @@ import { PatientItemComponent } from './patients/patient-item/patient-item.compo
 import { RecommendationsComponent } from './diseases/disease-list/recommendations/recommendations.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { PersonalInfoComponent } from './patients/personal-info/personal-info.component';
+import { MeasurementsComponent } from './patients/measurements/measurements.component';
+import { MealsComponent } from './meals/meals.component';
+import { MealAddComponent } from './meals/meal-add/meal-add.component';
+import { MealProductDetailsComponent } from './meals/meal-product-details/meal-product-details.component';
 
 
 @NgModule({
-  declarations: [DropdownDirective, DoctorComponent, DoctorHeaderComponent, PendingListComponent, PendingListItemComponent, SupplementsComponent, SupplementAddComponent, SupplementListComponent, DiseasesComponent, DiseaseListComponent, DiseaseAddComponent, NotesComponent, PatientsItemComponent, NotesItemComponent, SupplementItemComponent, DoctorAlertComponent, DiseaseItemComponent, ProductsComponent, ProductAddComponent, ProductItemComponent, PatientsComponent, PatientItemComponent, RecommendationsComponent, ProductDetailsComponent, PersonalInfoComponent],
+  declarations: [DropdownDirective, DoctorComponent, DoctorHeaderComponent, PendingListComponent, PendingListItemComponent, SupplementsComponent, SupplementAddComponent, SupplementListComponent, DiseasesComponent, DiseaseListComponent, DiseaseAddComponent, NotesComponent, PatientsItemComponent, NotesItemComponent, SupplementItemComponent, DoctorAlertComponent, DiseaseItemComponent, ProductsComponent, ProductAddComponent, ProductItemComponent, PatientsComponent, PatientItemComponent, RecommendationsComponent, ProductDetailsComponent, PersonalInfoComponent, MeasurementsComponent, MealsComponent, MealAddComponent, MealProductDetailsComponent],
   imports: [
     RouterModule,
     CommonModule,

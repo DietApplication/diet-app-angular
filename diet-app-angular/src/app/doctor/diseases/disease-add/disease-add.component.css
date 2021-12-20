@@ -1,7 +1,7 @@
 .dis-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
 }
 
 textarea {
@@ -17,7 +17,7 @@ textarea {
 }
 
 .dis-rec {
-    width: 30%;
+    width: 41%;
 }
 
 label {

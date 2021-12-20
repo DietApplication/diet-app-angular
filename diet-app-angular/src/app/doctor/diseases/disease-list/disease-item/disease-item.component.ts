@@ -33,7 +33,10 @@ export class DiseaseItemComponent implements OnInit {
   onEdit() {
     this.diseaseService.editDisease(this.idDisease, this.name, this.description, this.recommendation).subscribe((res) => {
       console.log(res);
+    });
+    setTimeout(() => {
       window.location.reload();
-    })
+    }, 1000);
+
   }
 }

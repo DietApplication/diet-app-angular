@@ -11,6 +11,8 @@ import { ProductsComponent } from './products/products.component';
 import { ProductAddComponent } from './products/product-add/product-add.component';
 import { PatientsComponent } from './patients/patients.component';
 import { PersonalInfoComponent } from './patients/personal-info/personal-info.component';
+import { MeasurementsComponent } from './patients/measurements/measurements.component';
+import { MealsComponent } from './meals/meals.component';
 const doctorRoutes: Routes = [
   {
     path: '',
@@ -21,10 +23,12 @@ const doctorRoutes: Routes = [
       { path: 'supplements', component: SupplementsComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'add-product', component: ProductAddComponent },
+      { path: 'meals', component: MealsComponent },
       { path: 'diseases', component: DiseasesComponent },
       { path: 'notes', component: NotesComponent },
       { path: 'patients', component: PatientsComponent },
-      { path: 'patients/:idPatient/personal-info', component: PersonalInfoComponent }
+      { path: 'patients/:idPatient/personal-info', component: PersonalInfoComponent },
+      { path: 'patients/:idPatient/measurements', component: MeasurementsComponent }
     ]
   },
 ]

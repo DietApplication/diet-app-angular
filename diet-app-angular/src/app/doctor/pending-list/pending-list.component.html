@@ -361,7 +361,7 @@
                     </div>
                     <div class="buttons">
                         <button class="btn generate-pdf" type="button" (click)="generatePDF()" [disabled]="!submitUserForm.valid || !userSelected">Generate PDF report</button>
-                        <button class="btn reject-patient" (click)="onDelete()" [disabled]="!userSelected">Reject</button>
+                        <button class="btn reject-patient" type="button" (click)="onDelete()" [disabled]="!userSelected">Reject</button>
                         <button class="btn submit-patient" [disabled]="!submitUserForm.valid || !userSelected">Submit</button>
 
                     </div>

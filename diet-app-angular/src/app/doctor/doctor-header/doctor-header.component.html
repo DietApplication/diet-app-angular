@@ -15,11 +15,11 @@
             </li>
             <li class="nav-item main-item dropdown" appDropdown #r="appDropdown" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Kwowledge Bases
+                  Knowledge Bases
                 </a>
                 <ul [ngClass]="{'show':r.isOpen}" class="dropdown-menu sub-menu" aria-labelledby="navbarDropdown">
-                    <li class="sub-item"><a class="dropdown-item sub-a" href="/doctor/products">Product Base</a></li>
-                    <li class="sub-item"><a class="dropdown-item sub-a" href="#">Meal Base</a></li>
+                    <li class="sub-item"><a class="dropdown-item sub-a" routerLink="/doctor/products">Product Base</a></li>
+                    <li class="sub-item"><a class="dropdown-item sub-a" routerLink="/doctor/meals">Meal Base</a></li>
                     <li class="sub-item"><a class="dropdown-item sub-a" routerLink="/doctor/supplements">Supplement Base</a></li>
                     <li class="sub-item"><a class="dropdown-item sub-a" routerLink="/doctor/diseases">Disease Base</a></li>
                 </ul>

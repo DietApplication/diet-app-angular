@@ -1,0 +1,18 @@
+<div class=" meal">
+    <img src="../../../../assets/meal-icon.svg" alt="meal">
+    <div class="meal-desc">
+        <h5 name="name" ngDefaultControl [(ngModel)]="nameOfMeal">{{nameOfMeal}}</h5>
+        <table>
+            <tbody>
+                <tr>
+                    <td>URL:</td>
+                    <td class="double-info">
+                        <p name="homeMeasureSize" ngDefaultControl [(ngModel)]="cookingURL">{{cookingURL}}</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn" routerLink="/doctor/meals/{{nameOfMeal}}/details">Details</button>
+
+    </div>
+</div>

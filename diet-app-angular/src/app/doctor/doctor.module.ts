@@ -15,7 +15,7 @@ import { DiseasesComponent } from './diseases/diseases.component';
 import { DiseaseListComponent } from './diseases/disease-list/disease-list.component';
 import { DiseaseAddComponent } from './diseases/disease-add/disease-add.component';
 import { NotesComponent } from './notes/notes.component';
-import { PatientsItemComponent } from './notes/patients-item/patients-item.component';
+import { PatientsItemComponent } from './patients-item/patients-item.component';
 import { NotesItemComponent } from './notes/notes-item/notes-item.component';
 import { AutosizeModule } from '@techiediaries/ngx-textarea-autosize';
 import { SupplementItemComponent } from './supplements/supplement-list/supplement-item/supplement-item.component';
@@ -33,10 +33,15 @@ import { MeasurementsComponent } from './patients/measurements/measurements.comp
 import { MealsComponent } from './meals/meals.component';
 import { MealAddComponent } from './meals/meal-add/meal-add.component';
 import { MealProductDetailsComponent } from './meals/meal-product-details/meal-product-details.component';
+import { MealItemComponent } from './meals/meal-item/meal-item.component';
+import { MealDetailsComponent, RoundNumberPipe } from './meals/meal-details/meal-details.component';
+import { DietComponent } from './diet/diet.component';
+import { DietCreateComponent } from './diet/diet-create/diet-create.component';
+
 
 
 @NgModule({
-  declarations: [DropdownDirective, DoctorComponent, DoctorHeaderComponent, PendingListComponent, PendingListItemComponent, SupplementsComponent, SupplementAddComponent, SupplementListComponent, DiseasesComponent, DiseaseListComponent, DiseaseAddComponent, NotesComponent, PatientsItemComponent, NotesItemComponent, SupplementItemComponent, DoctorAlertComponent, DiseaseItemComponent, ProductsComponent, ProductAddComponent, ProductItemComponent, PatientsComponent, PatientItemComponent, RecommendationsComponent, ProductDetailsComponent, PersonalInfoComponent, MeasurementsComponent, MealsComponent, MealAddComponent, MealProductDetailsComponent],
+  declarations: [RoundNumberPipe,DropdownDirective, DoctorComponent, DoctorHeaderComponent, PendingListComponent, PendingListItemComponent, SupplementsComponent, SupplementAddComponent, SupplementListComponent, DiseasesComponent, DiseaseListComponent, DiseaseAddComponent, NotesComponent, PatientsItemComponent, NotesItemComponent, SupplementItemComponent, DoctorAlertComponent, DiseaseItemComponent, ProductsComponent, ProductAddComponent, ProductItemComponent, PatientsComponent, PatientItemComponent, RecommendationsComponent, ProductDetailsComponent, PersonalInfoComponent, MeasurementsComponent, MealsComponent, MealAddComponent, MealProductDetailsComponent, MealItemComponent, MealDetailsComponent, DietComponent, DietCreateComponent],
   imports: [
     RouterModule,
     CommonModule,

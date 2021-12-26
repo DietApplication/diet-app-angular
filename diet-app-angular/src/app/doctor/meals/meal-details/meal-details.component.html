@@ -1,0 +1,31 @@
+<div class="container-w-background container-fluid">
+    <div class="sticky-left-background">
+        <div id="content-left" class="content-left"></div>
+    </div>
+    <div class="sticky-right">
+        <div class="content">
+            <div class="container">
+                <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-doctor-alert>
+
+                <h1>{{nameOfMeal}}</h1>
+                <h6>Ingredients</h6>
+                <ul *ngFor="let p of products; let i = index" class="ingredients">
+                    <li>{{p.name}}: {{p.amount}} {{p.unit}}
+                        <ul>
+                            <li *ngFor="let finalParam of allParams[i]">{{finalParam.name}}: {{finalParam.amount * p.amount/p.size | roundNumber}} {{finalParam.measureUnit}}</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="def-parameter desc">
+                    <label for="description" class="form-label">Description/Directions</label>
+                    <textarea disabled autosize class="form-control" id="description">{{description}}</textarea>
+                </div>
+                <div class="def-parameter">
+                    <label for="url" class="form-label">Cooking URL</label>
+                    <input disabled type="text" class="form-control" for="url" value="{{cookingURL}}">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

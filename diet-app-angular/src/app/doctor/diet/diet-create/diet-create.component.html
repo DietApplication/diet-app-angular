@@ -1,0 +1,84 @@
+<div class="container-w-background container-fluid">
+    <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-doctor-alert>
+    <div class="sticky-left-background">
+        <div id="content-left" class="content-left">
+            <h4 id="myHeader">Patients</h4>
+            <form [formGroup]="searchUsersForm" class="search" (ngSubmit)="onSearch()">
+                <input type="text" class="form-control" formControlName="name" placeholder="Search">
+                <button class="btn" [disabled]="!searchUsersForm.valid">
+                  <img src="../../../assets/searchGreen.svg" alt="search">
+                </button>
+            </form>
+            <app-patients-item [ngClass]="clicked=== i ? 'active-user': not-active-user" *ngFor="let patient of patients; let i = index;" [index]="i" [patient]="patient" (click)="setIdUser(i)"></app-patients-item>
+            <div class="pag">
+                <nav aria-label="...">
+                    <ul class="pagination pagination-xs">
+                        <li class="page-item" *ngFor="let p of pages; let i = index;">
+                            <a class="page-link" [class.page-a]="currentPage === i+1" tabindex="-1" (click)="onGetPatients(i+1)">{{i+1}}</a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="sticky-right">
+        <div class="content">
+            <h1>CREATE DIET</h1>
+            <form class="createDietForm" [formGroup]="createDietForm" (ngSubmit)="onCreateDiet()">
+                <div class="diet-input">
+                    <label for="prName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="prName" formControlName="dietName">
+                </div>
+                <div class="flex-diet">
+                    <div>
+                        <label for="date1" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="date1" formControlName="startDate">
+                    </div>
+                    <div>
+                        <label for="date2" class="form-label">Finish Date</label>
+                        <input type="date" class="form-control" id="date2" formControlName="finishDate">
+                    </div>
+                </div>
+                <div class="flex-diet">
+                    <div>
+                        <label for="meals" class="form-label">Number of Meals</label>
+                        <input type="number" class="form-control" id="meals" formControlName="numberOfMeals">
+                    </div>
+                    <div>
+                        <label for="proteins" class="form-label">Proteins per Meal</label>
+                        <input type="number" class="form-control" id="proteins" formControlName="proteins">
+                    </div>
+                </div>
+                <div class="diet-input">
+                    <label for="desc" class="form-label">Description</label>
+                    <textarea name="desc" id="desc" class="form-control" autosize placeholder="Diet description..." formControlName="desc"></textarea>
+                </div>
+
+                <form class="search-sup" [formGroup]="searchSupForm" (ngSubmit)="onSearchSup()">
+                    <label for="desc" class="form-label">Supplements</label>
+                    <div> <input type="text" class="form-control" placeholder="Search to add supplement" formControlName="supName">
+                        <button class="btn">
+                            +
+                           </button>
+                    </div>
+
+                </form>
+                <div *ngFor="let s of supplements" class="supps">
+                    <div class="sup-full">
+                        <div class="new-sup">
+                            <p> <label>Name: </label> {{s.supplementName}}</p>
+                            <p><label>Description: </label> {{s.description}}</p>
+                            <label for="instructions">Instructions:</label>
+                            <textarea class="form-control" id="instructions" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="supInstructions"></textarea>
+                        </div>
+                        <button class="btn btn-danger" (click)="onDelete(s)">x</button>
+                    </div>
+
+                </div>
+
+                <button class="btn btn-primary">Create Diet</button>
+            </form>
+        </div>
+    </div>
+</div>

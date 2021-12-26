@@ -58,4 +58,7 @@ export class ProductsService {
       parameters: parameters
     })
   }
+    getParametersByProduct(idProduct:number) {
+    return this.http.get('https://dietappeu.azurewebsites.net/api/knowledgebase/product/parameters?IdProduct='+idProduct);
+  }
 }

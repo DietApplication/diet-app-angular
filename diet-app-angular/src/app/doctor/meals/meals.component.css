@@ -1,0 +1,71 @@
+ .pag {
+     text-align: center;
+     margin-top: 18%;
+ }
+ 
+ .page-link.page-a {
+     border: none;
+     background-color: #FEAD54;
+     color: white;
+ }
+ 
+ .page-link {
+     border: none;
+     background-color: #D3F2E9;
+     color: #0A7B79;
+ }
+ 
+ .pagination {
+     justify-content: center;
+ }
+ 
+ .search {
+     display: flex;
+     width: 80%;
+     justify-content: space-between;
+ }
+ 
+ .search input {
+     width: 94%;
+     height: 42px;
+ }
+ 
+ .search button {
+     background-color: #D3F2E9;
+ }
+ 
+ .search button:hover {
+     background-color: #FEAD54;
+ }
+ 
+ .add-meal {
+     color: #FEAD54;
+     background-color: #0A7B79;
+     border-radius: 10px;
+     padding-top: 9px;
+     padding-bottom: 9px;
+ }
+ 
+ .meal-header {
+     display: flex;
+     margin-top: 4%;
+     justify-content: space-between;
+     align-items: center;
+ }
+ 
+ .items {
+     margin-top: 2%;
+     display: grid;
+     grid-template-columns: repeat( auto-fill, minmax(28%, 1fr));
+     grid-column-gap: 4%;
+     grid-row-gap: 2%;
+ }
+ 
+ app-meal-item {
+     margin-top: 26%;
+     width: 100%;
+ }
+ 
+ h1 {
+     margin-top: 3%;
+ }

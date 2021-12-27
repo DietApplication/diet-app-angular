@@ -55,7 +55,7 @@ export class MealAddComponent implements OnInit {
     this.addMealForm = new FormGroup({
       productName: new FormControl(null, [Validators.required, Validators.maxLength(50), Validators.minLength(2)]),
       desc: new FormControl(null, [Validators.required, Validators.maxLength(15000), Validators.minLength(2)]),
-      url: new FormControl(null, [Validators.required, Validators.maxLength(200), Validators.minLength(5)]),
+      url: new FormControl(null, [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]),
 
     })
   }
@@ -81,6 +81,7 @@ export class MealAddComponent implements OnInit {
     this.mealsService.addMeal(this.addMealForm.value.productName, this.addMealForm.value.desc, this.addMealForm.value.url, this.productsToAdd).subscribe((res) => {
       console.log(res);
     })
+    window.location.reload();
     }
   }
   onHandleError() {

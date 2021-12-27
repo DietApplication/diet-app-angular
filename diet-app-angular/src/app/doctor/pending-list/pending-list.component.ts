@@ -211,6 +211,7 @@ export class PendingListComponent implements OnInit, AfterContentChecked {
     this.pendingService.submitPatient(this.idPatient, this.cpm, pal, this.submitUserForm.value.correctedValue).subscribe((response) => {
       console.log("response ", response);
       this.onGetUsers();
+      this.submitUserForm.reset();
     });
 
   }

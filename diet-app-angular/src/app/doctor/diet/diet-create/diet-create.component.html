@@ -40,6 +40,12 @@
                         <input type="date" class="form-control" id="date2" formControlName="finishDate">
                     </div>
                 </div>
+                <span class="form-text" *ngIf="!createDietForm.get('startDate').valid && createDietForm.get('startDate').touched">the start date is not provided</span>
+                <span class="form-text" *ngIf="createDietForm.get('startDate').dirty && createDietForm.errors?.startDateInvalid">Start date is earlier than today!</span>
+                <span class="form-text" *ngIf="!createDietForm.get('finishDate').valid && createDietForm.get('finishDate').touched">the finish date is not provided</span>
+                <span class="form-text" *ngIf="(createDietForm.get('startDate').touched && createDietForm.get('finishDate').touched)&&createDietForm.errors?.dateRangeInvalid">Specified date range is incorrect!</span>
+
+
                 <div class="flex-diet">
                     <div>
                         <label for="meals" class="form-label">Number of Meals</label>
@@ -57,27 +63,29 @@
 
                 <form class="search-sup" [formGroup]="searchSupForm" (ngSubmit)="onSearchSup()">
                     <label for="desc" class="form-label">Supplements</label>
-                    <div> <input type="text" class="form-control" placeholder="Search to add supplement" formControlName="supName">
-                        <button class="btn">
+                    <div class="search-sup-post"> <input type="text" class="form-control" placeholder="Search to add supplement" formControlName="supName">
+                        <button [disabled]="!isAllowed" class="btn">
                             +
                            </button>
                     </div>
-
+                    <div *ngIf="isToAdd" [formGroup]="instrForm" class="instr">
+                        <label>Instructions:</label>
+                        <textarea class="form-control" name="'instructions'+i" formControlName="instr"></textarea>
+                    </div>
                 </form>
-                <div *ngFor="let s of supplements" class="supps">
+
+                <div *ngFor="let s of supplements; let i = index;" class="supps">
                     <div class="sup-full">
                         <div class="new-sup">
-                            <p> <label>Name: </label> {{s.supplementName}}</p>
-                            <p><label>Description: </label> {{s.description}}</p>
-                            <label for="instructions">Instructions:</label>
-                            <textarea class="form-control" id="instructions" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="supInstructions"></textarea>
+                            <p> <label>Name: </label> {{supplements[supplements.length-1-i].supplementName}}</p>
+                            <p><label>Description: </label> {{supplements[supplements.length-1-i].description}}</p>
+                            <p *ngIf="supInstructions[supplements.length-1-i]"><label>Instructions: </label> {{supInstructions[supplements.length-1-i]}}</p>
+                            <button *ngIf="!supInstructions[supplements.length-1-i]" [disabled]="!instrForm.valid" class="btn" type="button" (click)="addSupplement(s)">Add Supplement</button>
                         </div>
-                        <button class="btn btn-danger" (click)="onDelete(s)">x</button>
+                        <button type="button" class="btn btn-danger" (click)="onDelete(supplements.length-1-i)">x</button>
                     </div>
-
                 </div>
-
-                <button class="btn btn-primary">Create Diet</button>
+                <button class="btn add-diet" [disabled]="!createDietForm.valid || !userSelected">Create Diet</button>
             </form>
         </div>
     </div>

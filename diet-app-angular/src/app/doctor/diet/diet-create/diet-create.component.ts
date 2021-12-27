@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Patient } from '../../patient.model';
 import { PatientsService } from '../../patients.service';
@@ -12,7 +12,7 @@ import { SupplementDiet } from './supplement-diet.model';
   templateUrl: './diet-create.component.html',
   styleUrls: ['./diet-create.component.css']
 })
-export class DietCreateComponent implements OnInit {
+export class DietCreateComponent implements OnInit{
   currentPage: number = 1;
   error: string;
   clicked: number;
@@ -23,17 +23,22 @@ export class DietCreateComponent implements OnInit {
   supplements: Supplement[]=[];
   supplementDiet: SupplementDiet[]=[];
   supplement: Supplement[];
-  supInstructions: string ="";
   searchUsersForm:FormGroup;
   createDietForm:FormGroup;
   searchSupForm: FormGroup;
+  supInstructions:string[]=[];
+  instrForm: FormGroup;
+  isToAdd:boolean = false;
+  isAllowed:boolean = true;
   @Input() patients: Patient[];
   constructor(private patientsService: PatientsService, private dietService: DietService, private supplService: SupplementsService) { }
+
 
   ngOnInit(): void {
   this.initSearchForm();
   this.initCreateDietForm();
   this.initSearchSupForm();
+  this.initInstrForm();
   this.onGetPatients(this.currentPage);
   }
 setIdUser(i: number) {
@@ -58,7 +63,13 @@ setIdUser(i: number) {
     this.searchUsersForm = new FormGroup({
       name: new FormControl(null, Validators.required)
     })
+  }   
+  private initInstrForm() {
+    this.instrForm = new FormGroup({
+      instr: new FormControl(null, [Validators.required,Validators.minLength(10), Validators.maxLength(150)])
+    })
   }
+
    onSearch() {
     let name: string = this.searchUsersForm.value.name;
     let result = name.split(" ");
@@ -91,14 +102,16 @@ setIdUser(i: number) {
       console.log(this.supplement);
       if(this.supplements.filter((e=>e.idSupplement===this.supplement[0].idSupplement)).length===0){
       this.supplements.push(this.supplement[0]);
-      this.supplementDiet.push({idSupplement: this.supplement[0].idSupplement, dietSupplDescription: this.supInstructions});
+      this.isToAdd = true;
+      this.isAllowed = false;
       }
+      
       else{
         this.error="You have already added such supplement!"
         console.log(this.error);
       }
         this.searchSupForm.reset();
-        this.supInstructions = null;
+
     },
       (error) => {
         this.error = error.error;
@@ -116,16 +129,40 @@ setIdUser(i: number) {
       finishDate: new FormControl(null, [Validators.required]),
       numberOfMeals: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(10)]),
       proteins: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(500)]),
-      desc: new FormControl(null, [Validators.required, Validators.minLength(1), Validators.maxLength(15000)]),
-    })
+      desc: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(15000)]),
+    }, 
+    { validators: [this.confirmStartDate.bind(this), this.confirmDates.bind(this)] },
+
+    )
   }
-   onDelete(supplement: Supplement) {
-    this.supplements.splice(this.supplements.indexOf(supplement), 1);
-    this.supplementDiet.splice(this.supplements.indexOf(supplement), 1);
-    this.supInstructions = null;
+
+  confirmStartDate(formGroup: FormGroup) {
+    const { value: date } = formGroup.get('startDate');
+    const now = new Date();
+    console.log("now ", now);
+    const actual = new Date(date);
+    actual.setHours(now.getHours());
+    actual.setMinutes(now.getMinutes());
+    actual.setSeconds(now.getSeconds());
+    console.log("actual ",actual);
+    return actual >= now ? null : { startDateInvalid: true };
+  } 
+ private confirmDates(formGroup: FormGroup) {
+  const { value: f } = formGroup.get('startDate');
+  const { value: t } = formGroup.get('finishDate');
+    return f < t ? null : {dateRangeInvalid: true}
+  }
+
+   onDelete(index: number) {
+  console.log(this.supplements[index]);
+    this.supplements.splice(index, 1);
+    this.supplementDiet.splice(index, 1);
+    this.supInstructions.splice(index,1);
     console.log("new sups " + this.supplements);
+  
   }
   onCreateDiet(){
+ 
     this.dietService.createDiet(this.idPatient, 
     this.createDietForm.value.dietName,
     this.createDietForm.value.desc, 
@@ -134,6 +171,25 @@ setIdUser(i: number) {
     this.createDietForm.value.numberOfMeals,
     this.createDietForm.value.proteins,
     this.supplementDiet
-    ).subscribe((res)=>{console.log(res)})
+    ).subscribe((res)=>{
+      console.log(res);
+      alert("Diet was successfully created");
+       window.location.reload();
+      }, 
+      (error)=>{
+        this.error = error;
+      });
+     
+  }
+    get userSelected() {
+    return !!this.idPatient;
+  }
+  addSupplement(supplement: Supplement){
+    this.supplementDiet.push({idSupplement: supplement.idSupplement, dietSupplDescription: this.instrForm.value.instr});
+    this.supInstructions.push(this.instrForm.value.instr);
+    this.instrForm.reset();
+    console.log(this.supplementDiet);
+    this.isToAdd = false;
+    this.isAllowed = true;
   }
 }

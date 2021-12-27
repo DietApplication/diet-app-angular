@@ -18,6 +18,8 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
   isReset: boolean = false;
   gender: string;
   basicMetabolism: number;
+  bodyIndexMass: string;
+  waistHipRatio: number;
   idealWeight: number;
   age: number;
   currentDate: string;
@@ -132,15 +134,14 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
     this.gender = response[0].gender;
   }
   onReset() {
-    this.isReset = true;
     this.addMeasurementForm.reset();
     this.whoMeasured = null;
     this.currentDate = null;
 
-
   }
+ 
   onAddMeasurements() {
-    this.measurementService.addMeasurements(this.idPatient,
+      this.measurementService.addMeasurements(this.idPatient,
       this.addMeasurementForm.value.height,
       this.addMeasurementForm.value.weight,
       this.addMeasurementForm.value.hipcircumference,
@@ -162,11 +163,14 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
   }
   get bmr() {
     let result;
+    if(this.mc===null){
+      return null;
+    }
     if (this.gender === "Male") {
       result = 66.47 + (13.75 * this.mc) + (5 * this.addMeasurementForm.value.height) - (6.75 * this.age);
     }
     else if (this.gender === "Female") {
-      result = 665.09 + (9.56 * this.idealWeight) + (1.85 * this.addMeasurementForm.value.height) - (4.67 * this.age);
+      result = 665.09 + (9.56 * this.mc) + (1.85 * this.addMeasurementForm.value.height) - (4.67 * this.age);
     }
 
     this.basicMetabolism = Math.round(result * 100) / 100;
@@ -174,6 +178,9 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
   }
   get mc() {
     let result;
+    if(this.addMeasurementForm.get('height').value === null){
+      return null;
+    }
     if (this.gender == "Female") {
       result = this.addMeasurementForm.value.height - 100 - (this.addMeasurementForm.value.height - 100) * 10 / 100;
     }
@@ -184,10 +191,34 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
     return this.idealWeight;
   }
   get whr() {
-    return Math.round(this.addMeasurementForm.value.weight / this.addMeasurementForm.value.height * 100) / 100;
+    if(this.addMeasurementForm.get('hipcircumference').value === null|| this.addMeasurementForm.get('waistcircumference').value===null){
+      return null;
+    }
+   this.waistHipRatio = Math.round((this.addMeasurementForm.value.waistcircumference / this.addMeasurementForm.value.hipcircumference)* 100) / 100;
+   return this.waistHipRatio;
   }
   get bmi() {
-    return (this.addMeasurementForm.value.weight / ((this.addMeasurementForm.value.height * this.addMeasurementForm.value.height) / 10000)).toFixed(2);
+    if(this.addMeasurementForm.get('height').value === null || this.addMeasurementForm.get('weight').value === null){
+      return null;
+    }
+    this.bodyIndexMass = (this.addMeasurementForm.value.weight / ((this.addMeasurementForm.value.height * this.addMeasurementForm.value.height) / 10000)).toFixed(2);
+    return this.bodyIndexMass;
+  }
+
+  set mc(mc: number){
+    this.idealWeight = mc;
+  }
+
+  set whr(whr:number){
+    this.waistHipRatio = whr;
+  }
+
+  set bmi(bmi:string){
+    this.bodyIndexMass = bmi;
+  }
+
+  set bmr(bmr:number){
+    this.basicMetabolism = bmr;
   }
   ngAfterContentChecked() {
 

@@ -143,7 +143,7 @@ setIdUser(i: number) {
     const actual = new Date(date);
     actual.setHours(now.getHours());
     actual.setMinutes(now.getMinutes());
-    actual.setSeconds(now.getSeconds());
+    actual.setSeconds(now.getSeconds()+1);
     console.log("actual ",actual);
     return actual >= now ? null : { startDateInvalid: true };
   } 

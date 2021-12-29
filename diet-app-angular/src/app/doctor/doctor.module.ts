@@ -37,11 +37,14 @@ import { MealItemComponent } from './meals/meal-item/meal-item.component';
 import { MealDetailsComponent, RoundNumberPipe } from './meals/meal-details/meal-details.component';
 import { DietComponent } from './diet/diet.component';
 import { DietCreateComponent } from './diet/diet-create/diet-create.component';
+import { DiseaseHistoryComponent } from './patients/disease-history/disease-history.component';
+import { DietMealsComponent } from './diet/diet-create/diet-meals/diet-meals.component';
+
 
 
 
 @NgModule({
-  declarations: [RoundNumberPipe,DropdownDirective, DoctorComponent, DoctorHeaderComponent, PendingListComponent, PendingListItemComponent, SupplementsComponent, SupplementAddComponent, SupplementListComponent, DiseasesComponent, DiseaseListComponent, DiseaseAddComponent, NotesComponent, PatientsItemComponent, NotesItemComponent, SupplementItemComponent, DoctorAlertComponent, DiseaseItemComponent, ProductsComponent, ProductAddComponent, ProductItemComponent, PatientsComponent, PatientItemComponent, RecommendationsComponent, ProductDetailsComponent, PersonalInfoComponent, MeasurementsComponent, MealsComponent, MealAddComponent, MealProductDetailsComponent, MealItemComponent, MealDetailsComponent, DietComponent, DietCreateComponent],
+  declarations: [RoundNumberPipe,DropdownDirective, DoctorComponent, DoctorHeaderComponent, PendingListComponent, PendingListItemComponent, SupplementsComponent, SupplementAddComponent, SupplementListComponent, DiseasesComponent, DiseaseListComponent, DiseaseAddComponent, NotesComponent, PatientsItemComponent, NotesItemComponent, SupplementItemComponent, DoctorAlertComponent, DiseaseItemComponent, ProductsComponent, ProductAddComponent, ProductItemComponent, PatientsComponent, PatientItemComponent, RecommendationsComponent, ProductDetailsComponent, PersonalInfoComponent, MeasurementsComponent, MealsComponent, MealAddComponent, MealProductDetailsComponent, MealItemComponent, MealDetailsComponent, DietComponent, DietCreateComponent, DiseaseHistoryComponent, DietMealsComponent],
   imports: [
     RouterModule,
     CommonModule,

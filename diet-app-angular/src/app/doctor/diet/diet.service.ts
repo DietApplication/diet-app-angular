@@ -13,6 +13,12 @@ export interface DietCreate{
     }[]
   
 }
+export interface DietInfo{
+proteins: number;
+totalMeals: number;
+days:number;
+  
+}
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -45,5 +51,9 @@ export class DietService {
   supplements:supplements
   }
   );
+
 }
+  getNumberOfDaysAndMeals(idDiet: number){
+    return this.http.get<DietInfo>('https://dietappeu.azurewebsites.net/api/doctor/diet/days?idDiet=' + idDiet);
+  }
 }

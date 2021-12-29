@@ -38,4 +38,6 @@ export class DiseasesService {
       recomendation: rec
     })
   }
+  
+
 }

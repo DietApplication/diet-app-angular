@@ -1,0 +1,48 @@
+<div class="container-w-background container-fluid">
+    <div class="sticky-left-background">
+    </div>
+    <div class="sticky-right">
+        <div class="content">
+            <div class="container">
+                <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-doctor-alert>
+                <div class="row report">
+                    <h1>Diseases History</h1>
+                    <form [formGroup]="searchDisForm" class="search" (ngSubmit)="onSearch()">
+                        <input type="text" class="form-control" formControlName="name" placeholder="Search disease to add">
+                        <button class="btn" [disabled]="!searchDisForm.valid">+ </button>
+                    </form>
+                    <div class="result-disease" *ngIf="isToAdd">
+                        <h2 for="name">{{disease.name}}</h2>
+                        <div class="area">
+                            <label for="desc" class="form-label">Description</label>
+                            <textarea id="desc" class="form-control" autosize disabled>{{disease.description}}</textarea>
+                        </div>
+                        <div class="area"> <label for="desc" class="form-label">Recommendations</label>
+                            <textarea id="desc" class="form-control" autosize disabled>{{disease.recommendation}}</textarea>
+                        </div>
+                        <form [formGroup]="assignDiseaseForm" (ngSubmit)="onAssignDisease()">
+                            <label for="date" class="form-label">Date of Diagnosis</label>
+                            <input type="date" id="date" class="form-control" formControlName="date">
+                            <span class="form-text" *ngIf="!assignDiseaseForm.get('date').valid && assignDiseaseForm.get('date').touched">the date of diagnosis is not provided</span>
+                            <span class="form-text" *ngIf="assignDiseaseForm.get('date').dirty && assignDiseaseForm.errors?.dateInvalid">Date of Diagnosis is later than today!</span>
+                            <div class="buttons">
+                                <button type="button" class="btn btn-danger" (click)="removeDisease()">Remove</button>
+                                <button class="btn assign-button" [disabled]="!assignDiseaseForm.valid">Assign Disease</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="history" *ngFor="let d of diseases">
+                        <p style="color: #FEAD54;">{{d.name}}</p>
+                        <p><span style="color: #0A7B79;">Date range:</span> {{d.dateOfDiagnosis.split("T")[0]}}
+                            <span *ngIf="d.dateOfCure">{{d.dateOfCure.split("T")[0]}}</span>
+                            <span *ngIf="!d.dateOfCure"> - Present</span>
+                        </p>
+                        <p><span style="color: #0A7B79;">Description: </span> {{d.description}}</p>
+                        <p><span style="color: #0A7B79;">Recommendations: </span> {{d.recommendation}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

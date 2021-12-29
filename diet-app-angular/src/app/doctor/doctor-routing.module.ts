@@ -17,6 +17,8 @@ import { MealAddComponent } from './meals/meal-add/meal-add.component';
 import { MealDetailsComponent } from './meals/meal-details/meal-details.component';
 import { DietComponent } from './diet/diet.component';
 import { DietCreateComponent } from './diet/diet-create/diet-create.component';
+import { DiseaseHistoryComponent } from './patients/disease-history/disease-history.component';
+import { DietMealsComponent } from './diet/diet-create/diet-meals/diet-meals.component';
 const doctorRoutes: Routes = [
   {
     path: '',
@@ -34,8 +36,10 @@ const doctorRoutes: Routes = [
       { path: 'notes', component: NotesComponent },
       { path: 'patients', component: PatientsComponent },
       { path: 'diet/create-diet', component: DietCreateComponent },
+      { path: 'diet/:idDiet/assign-meals', component: DietMealsComponent },
       { path: 'patients/:idPatient/personal-info', component: PersonalInfoComponent },
-      { path: 'patients/:idPatient/measurements', component: MeasurementsComponent }
+      { path: 'patients/:idPatient/measurements', component: MeasurementsComponent },
+      { path: 'patients/:idPatient/disease-history', component: DiseaseHistoryComponent },
     ]
   },
 ]

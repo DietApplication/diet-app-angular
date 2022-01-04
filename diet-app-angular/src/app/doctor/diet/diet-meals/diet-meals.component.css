@@ -1,0 +1,145 @@
+.page-link.page-a {
+    border: none;
+    background-color: #FEAD54;
+    color: white;
+    border-radius: 8px;
+    height: 38px;
+}
+
+.meals button.meal-b {
+    background-color: #0A7B79;
+    color: #FEAD54;
+}
+
+.page-link {
+    border: none;
+    border-radius: 8px;
+    color: #0A7B79
+}
+
+.days {
+    display: flex;
+}
+
+.sticky-left-background,
+.sticky-right {
+    border-radius: 0;
+}
+
+.sticky-left-background {
+    background-attachment: fixed;
+    z-index: 1;
+    overflow: scroll;
+    background-size: 40%;
+    background-position: 0;
+}
+
+.content {
+    margin-top: 3%;
+    width: 86%;
+}
+
+.days-container {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+h4 {
+    margin-bottom: 0;
+    color: grey;
+}
+
+img {
+    padding-bottom: 3px;
+}
+
+.meals button {
+    font-weight: 600;
+    font-size: 16px;
+    background-color: #D3F2E9;
+    color: #0A7B79;
+    padding: 22px 40px;
+    border-radius: 20px;
+}
+
+.meals {
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.days-container button {
+    border: none;
+}
+
+.meal-details {
+    margin-top: 4%;
+}
+
+.search-form,
+.ingredients {
+    margin-top: 4%;
+}
+
+.search {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.search input {
+    width: 92%;
+    height: 42px;
+}
+
+label {
+    color: #0A7B79;
+}
+
+.search button {
+    background-color: #D3F2E9;
+}
+
+.time {
+    width: 30%;
+}
+
+.search button:hover {
+    background-color: #FEAD54;
+}
+
+.sticky-right {
+    overflow-y: scroll;
+    padding-bottom: 8%;
+}
+
+.buttons {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-meal,
+.add-day,
+.btn-danger {
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.add-meal {
+    background-color: #0A7B79;
+    color: #D3F2E9;
+}
+
+.add-day {
+    background-color: #FEAD54;
+    color: #0A7B79;
+    margin-left: 2%;
+}
+
+.add-meal:hover,
+.add-day:hover {
+    transform: scale(1.1) perspective(1px);
+}

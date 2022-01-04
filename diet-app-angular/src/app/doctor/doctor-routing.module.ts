@@ -18,7 +18,8 @@ import { MealDetailsComponent } from './meals/meal-details/meal-details.componen
 import { DietComponent } from './diet/diet.component';
 import { DietCreateComponent } from './diet/diet-create/diet-create.component';
 import { DiseaseHistoryComponent } from './patients/disease-history/disease-history.component';
-import { DietMealsComponent } from './diet/diet-create/diet-meals/diet-meals.component';
+import { DietMealsComponent } from './diet/diet-meals/diet-meals.component';
+
 const doctorRoutes: Routes = [
   {
     path: '',

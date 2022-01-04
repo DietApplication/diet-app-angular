@@ -21,10 +21,10 @@ export class MealsService {
       recipes: recipes,
     })
   }
-  getMeals(page: number){
-  return this.http.get<Meal[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/meals?page='+page);
+  getMeals(page: number) {
+    return this.http.get<Meal[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/meals?page=' + page);
   }
-   searchMeals(param: string) {
+  searchMeals(param: string) {
     return this.http.get<Meal[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/meal/search?mealName=' + param);
   }
 }

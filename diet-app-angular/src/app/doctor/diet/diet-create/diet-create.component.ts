@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Patient } from '../../patient.model';
 import { PatientsService } from '../../patients.service';
 import { Supplement } from '../../supplements/supplement.model';
@@ -31,7 +32,7 @@ export class DietCreateComponent implements OnInit{
   isToAdd:boolean = false;
   isAllowed:boolean = true;
   @Input() patients: Patient[];
-  constructor(private patientsService: PatientsService, private dietService: DietService, private supplService: SupplementsService) { }
+  constructor(private patientsService: PatientsService, private dietService: DietService, private supplService: SupplementsService, private router:Router) { }
 
 
   ngOnInit(): void {
@@ -139,12 +140,10 @@ setIdUser(i: number) {
   confirmStartDate(formGroup: FormGroup) {
     const { value: date } = formGroup.get('startDate');
     const now = new Date();
-    console.log("now ", now);
     const actual = new Date(date);
     actual.setHours(now.getHours());
     actual.setMinutes(now.getMinutes());
     actual.setSeconds(now.getSeconds()+1);
-    console.log("actual ",actual);
     return actual >= now ? null : { startDateInvalid: true };
   } 
  private confirmDates(formGroup: FormGroup) {
@@ -174,7 +173,7 @@ setIdUser(i: number) {
     ).subscribe((res)=>{
       console.log(res);
       alert("Diet was successfully created");
-       window.location.reload();
+       this.router.navigate(['doctor/diet/' + res.idDiet + '/assign-meals'])
       }, 
       (error)=>{
         this.error = error;

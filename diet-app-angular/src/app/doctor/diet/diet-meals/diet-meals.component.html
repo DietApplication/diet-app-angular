@@ -1,0 +1,84 @@
+<div class="container-w-background container-fluid">
+    <div class="sticky-left-background"></div>
+    <div class="sticky-right">
+        <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-doctor-alert>
+        <h1 style="color: rgb(240, 84, 37); margin-left:20%; margin-top:10%" *ngIf="errorDiet">{{errorDiet}}</h1>
+        <div *ngIf="!errorDiet" class="content">
+            <h1>DIET DETAILS</h1>
+            <div class="days-container">
+                <h3>Day {{currentDay}}</h3>
+                <ul class="pagination pagination-xs">
+                    <li><button class="btn" type="button" (click)="goBack()"><img src="../../../../assets/chevron-left.svg" alt="left-arrow"></button></li>
+                    <li *ngFor="let d of daysPerStep; let i = index;" class="days">
+                        <a class="page-link" [class.page-a]="currentDay === d" tabindex="-1" (click)="setDay(d)">{{d}}</a>
+                    </li>
+                    <li><button (click)="goForward()" class="btn" type="button"><img src="../../../../assets/chevron-right.svg" alt="left-arrow"></button></li>
+
+                </ul>
+
+                <h3 style="color: #FEAD54;">Day {{daysLeft}}</h3>
+            </div>
+            <div class="meal-container">
+                <div class="meals">
+                    <button *ngFor="let meal of totalMeals; let i = index" [class.meal-b]="currentMeal === i+1" tabindex="-1" type="button" class="btn">Meal {{i+1}}</button>
+                </div>
+                <div class="meal-details">
+                    <form [formGroup]="addDayForm">
+                        <label for="time" class="form-label">Time</label>
+                        <input type="time" class="form-control time" id="time" formControlName="time">
+                    </form>
+                    <form class="search-form" [formGroup]="searchMealForm" (ngSubmit)="onSearch()">
+                        <label class="form-label">Meal</label>
+                        <div class="search">
+                            <input type="text" class="form-control" placeholder="Search" formControlName="name">
+                            <button class="btn" [disabled]="!searchMealForm.valid || !searchEnabled">+</button>
+                        </div>
+                    </form>
+                    <div *ngIf="meal" style="margin-top: 4%;">
+                        <label for="desc" class="form-label">Description</label>
+                        <input type="text" class="form-control" disabled value="{{meal.description}}">
+                    </div>
+                    <div *ngIf="meal" style="margin-top: 4%;">
+                        <h4><a class="link-success" href="{{meal.cookingURL}}">Cooking URL</a></h4>
+                    </div>
+                    <div *ngIf="products.length>0" class="ingredients">
+                        <div *ngIf="isLoading" style="text-align: center;">
+                            <app-loading-spinner></app-loading-spinner>
+                        </div>
+                        <label class="form-label">Ingredients</label>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Ingredient</th>
+                                    <th scope="col">Weight</th>
+                                    <th scope="col">Home Measure</th>
+                                    <th scope="col">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr *ngFor="let p of products; let i = index">
+                                    <td>{{i+1}}</td>
+                                    <td>{{p.name}}</td>
+                                    <td>{{p.amount}} {{p.unit}}</td>
+                                    <td>{{p.homeMeasureSize}} {{p.homeMeasure}}</td>
+                                    <td>
+                                        <p *ngFor="let param of recipeParamsByProduct[i]?.parameters;">{{param.name}}: {{param.amount}} {{param.measureUnit}}</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="buttons">
+                        <button *ngIf="mealAdded" class="btn btn-danger" type="button" (click)="onRemoveMeal()">Remove Meal</button>
+                        <div class="buttons-right">
+                            <button class="add-meal btn" (click)="onAddMeal()" [disabled]="!addDayForm.valid || !mealAdded" type="button">Add Meal</button>
+                            <button class="add-day btn" *ngIf="isAddDay" (click)="onAssignMeals()">Fill Day</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>

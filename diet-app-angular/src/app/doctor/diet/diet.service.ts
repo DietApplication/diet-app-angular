@@ -32,6 +32,7 @@ export interface DietInfo {
   totalMeals: number;
   days: number;
   daysFilled: number;
+  daysNumberFilled: number[];
 }
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

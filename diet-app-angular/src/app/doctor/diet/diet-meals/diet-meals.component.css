@@ -120,23 +120,34 @@ label {
     justify-content: space-between;
 }
 
+.buttons-right {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    float: right;
+    align-items: flex-end;
+}
+
 .add-meal,
 .add-day,
 .btn-danger {
     font-weight: 500;
-    padding: 10px 20px;
     border-radius: 10px;
+    width: 20%;
 }
 
 .add-meal {
     background-color: #0A7B79;
     color: #D3F2E9;
+    padding: 10px 20px;
 }
 
 .add-day {
+    margin-top: 4%;
     background-color: #FEAD54;
     color: #0A7B79;
     margin-left: 2%;
+    padding: 10px 20px
 }
 
 .add-meal:hover,

@@ -25,7 +25,8 @@ export class DietMealsComponent implements OnInit {
   errorDiet: string;
   step: number = 7;
   daysPerStep: number[] = [];
-  currentDay: number = 1;
+  daysNumberFilled: number[] = [];
+  currentDay: number;
   searchMealForm: FormGroup;
   addDayForm: FormGroup;
   currentMeal: number = 1;
@@ -40,9 +41,12 @@ export class DietMealsComponent implements OnInit {
   totalProteins: number = 0;
   proteinProporion: number = 0;
   parameters: any[] = [];
+  daysToShow: number[] = [];
   recipeParameters: any[] = [];
   isLoading: boolean = false;
   searchEnabled: boolean = true;
+  isFinished: boolean = false;
+  daysDisabled: boolean = false;
   recipeParamsByProduct: { idProduct: number, parameters: any[] }[] = [];
   constructor(private dietService: DietService, private route: ActivatedRoute, private cdref: ChangeDetectorRef, private mealsService: MealsService, private productService: ProductsService) {
 
@@ -67,6 +71,10 @@ export class DietMealsComponent implements OnInit {
       this.proteins = res.proteins;
       this.daysFilled = res.daysFilled;
       this.daysLeft = this.days - this.daysFilled;
+      this.daysNumberFilled = res.daysNumberFilled;
+      if (this.days === this.daysFilled) {
+        this.isFinished = true;
+      }
       this.fillDaysPerStep(1);
       console.log(res);
     }, (error) => {
@@ -93,23 +101,44 @@ export class DietMealsComponent implements OnInit {
   }
 
   goForward() {
-    if (this.daysPerStep[0] <= this.daysLeft - this.step) {
+    if (this.daysPerStep[0] <= this.days - this.step) {
       this.fillDaysPerStep(this.daysPerStep[0] + this.step);
       console.log("forward " + this.daysPerStep);
     }
   }
   private fillDaysPerStep(start: number) {
+    console.log("days ", this.days)
     this.daysPerStep = [];
+    this.daysToShow = [];
     this.daysPerStep.length = this.step;
-    if (this.daysLeft - start < this.step) {
-      this.daysPerStep.length = this.daysLeft - start;
+    if (this.days - start < this.step) {
+      this.daysPerStep.length = this.days - start;
     }
+
     for (let i = 0; i < this.step; i++) {
-      if (start > this.daysLeft) {
-        return;
+      if (start > this.days) {
+        console.log("vot etot if ")
+        continue;
       }
+
       this.daysPerStep[i] = start++;
+      if (!this.daysNumberFilled.includes(this.daysPerStep[i])) {
+        this.daysToShow.push(this.daysPerStep[i])
+      }
+
+
+      // if (this.daysNumberFilled.includes(this.daysPerStep[i])) {
+      //   this.daysPerStep.splice(this.daysPerStep.indexOf(i), 1);
+      // }
     }
+    if (this.daysToShow.length === 0) {
+      console.log("in if")
+      this.goForward();
+    }
+    this.currentDay = this.daysToShow[0];
+    console.log("init day: " + this.currentDay)
+
+
   }
   private initSearchForm() {
     this.searchMealForm = new FormGroup({
@@ -180,6 +209,9 @@ export class DietMealsComponent implements OnInit {
       this.daysPerStep.splice(this.currentDay, 1);
       this.isAddDay = false;
       console.log("added ", res);
+      alert("Meals for day " + this.currentDay + " were assigned")
+      this.onGetDaysAndMeals();
+      this.currentMeal = 1;
     });
   }
   onAddMeal() {
@@ -196,6 +228,7 @@ export class DietMealsComponent implements OnInit {
     this.addDayForm.reset();
     this.searchMealForm.reset();
     console.log(this.meals);
+
   }
   onRemoveMeal() {
     this.products = [];

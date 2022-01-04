@@ -3,20 +3,24 @@
     <div class="sticky-right">
         <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-doctor-alert>
         <h1 style="color: rgb(240, 84, 37); margin-left:20%; margin-top:10%" *ngIf="errorDiet">{{errorDiet}}</h1>
-        <div *ngIf="!errorDiet" class="content">
+        <h1 style="color:#FEAD54; margin-left:20%; margin-top:10%" *ngIf="isFinished">Diet is fully filled!
+            <a style="color: #0A7B79;" href="/doctor/patients">Return to Patients</a>
+        </h1>
+
+        <div *ngIf="!errorDiet && !isFinished" class="content">
             <h1>DIET DETAILS</h1>
             <div class="days-container">
                 <h3>Day {{currentDay}}</h3>
                 <ul class="pagination pagination-xs">
                     <li><button class="btn" type="button" (click)="goBack()"><img src="../../../../assets/chevron-left.svg" alt="left-arrow"></button></li>
-                    <li *ngFor="let d of daysPerStep; let i = index;" class="days">
+                    <li *ngFor="let d of daysToShow; let i = index;" class="days">
                         <a class="page-link" [class.page-a]="currentDay === d" tabindex="-1" (click)="setDay(d)">{{d}}</a>
                     </li>
                     <li><button (click)="goForward()" class="btn" type="button"><img src="../../../../assets/chevron-right.svg" alt="left-arrow"></button></li>
 
                 </ul>
 
-                <h3 style="color: #FEAD54;">Day {{daysLeft}}</h3>
+                <h3 style="color: #FEAD54;">Days: {{daysLeft}}</h3>
             </div>
             <div class="meal-container">
                 <div class="meals">
@@ -74,7 +78,7 @@
                         <button *ngIf="mealAdded" class="btn btn-danger" type="button" (click)="onRemoveMeal()">Remove Meal</button>
                         <div class="buttons-right">
                             <button class="add-meal btn" (click)="onAddMeal()" [disabled]="!addDayForm.valid || !mealAdded" type="button">Add Meal</button>
-                            <button class="add-day btn" *ngIf="isAddDay" (click)="onAssignMeals()">Fill Day</button>
+                            <button class="add-day btn" *ngIf="isAddDay" (click)="onAssignMeals()" [disabled]="!currentDay">Fill Day</button>
                         </div>
                     </div>
                 </div>

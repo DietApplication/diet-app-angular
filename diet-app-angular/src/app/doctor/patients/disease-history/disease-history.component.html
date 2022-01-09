@@ -25,6 +25,10 @@
                             <input type="date" id="date" class="form-control" formControlName="date">
                             <span class="form-text" *ngIf="!assignDiseaseForm.get('date').valid && assignDiseaseForm.get('date').touched">the date of diagnosis is not provided</span>
                             <span class="form-text" *ngIf="assignDiseaseForm.get('date').dirty && assignDiseaseForm.errors?.dateInvalid">Date of Diagnosis is later than today!</span>
+                            <label for="date" class="form-label">Date of Cure</label>
+                            <input type="date" id="date" class="form-control" formControlName="dateOfCure">
+                            <span class="form-text" *ngIf="assignDiseaseForm.get('dateOfCure').dirty && assignDiseaseForm.errors?.cureDateInvalid">Date of Cure is earlier than Date of Diagnosis!</span>
+                            <span class="form-text" *ngIf="assignDiseaseForm.get('dateOfCure').dirty && assignDiseaseForm.errors?.date2Invalid">Date of Cure is later than today!</span>
                             <div class="buttons">
                                 <button type="button" class="btn btn-danger" (click)="removeDisease()">Remove</button>
                                 <button class="btn assign-button" [disabled]="!assignDiseaseForm.valid">Assign Disease</button>
@@ -32,10 +36,17 @@
                         </form>
                     </div>
                     <div class="history" *ngFor="let d of diseases">
-                        <p style="color: #FEAD54;">{{d.name}}</p>
-                        <p><span style="color: #0A7B79;">Period:</span> {{d.dateOfDiagnosis.split("T")[0]}}
-                            <span *ngIf="d.dateOfCure"> - {{d.dateOfCure.split("T")[0]}}</span>
-                            <span *ngIf="!d.dateOfCure"> - Present</span>
+                        <div class="disease-header">
+                            <p style="color: #FEAD54; font-size: 20px; font-weight:600;">{{d.name}}</p>
+                            <div class="manage-buttons">
+                                <button class="btn btn-warning" type="button">Edit</button>
+                                <button class="btn btn-danger" (click)="onDeleteDisease(d)">Delete</button>
+                            </div>
+                        </div>
+
+                        <p><span style="color: #0A7B79;">Period:</span> {{d.dateOfDiagnosis.split("T")[0]}}-
+                            <span *ngIf="d.dateOfCure" style="color: rgb(50, 207, 50);">{{d.dateOfCure.split("T")[0]}}</span>
+                            <span *ngIf="!d.dateOfCure" style="color: red;">Present</span>
                         </p>
                         <p><span style="color: #0A7B79;">Description: </span> {{d.description}}</p>
                         <p><span style="color: #0A7B79;">Recommendations: </span> {{d.recommendation}}</p>

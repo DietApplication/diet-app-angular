@@ -27,7 +27,7 @@ export class SupplementsService {
     return this.http.get<Supplement[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/supplements?page=' + page);
   }
   searchSupplements(name: string) {
-    return this.http.get<Supplement[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/supplement/search?supplementName=' + name)
+    return this.http.get<Supplement[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/supplement/search/' + name)
       .pipe(catchError(this.handleError));;
   }
   editSupplement(idSupplement: number, name: string, description: string) {

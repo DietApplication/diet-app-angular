@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-xl navbar-custom">
+    <div class="logo">
+        <a class="nav-item">SOME LOGO</a>
+    </div>
+    <div class="container-fluid header-custom">
+        <ul class="nav nav-pills  list-doctor-header">
+            <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" aria-current="page" routerLink="/patient/notes">Notes</a>
+            </li>
+            <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link">Diet</a>
+            </li>
+
+            <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="/patient/measurements">Measurements</a>
+            </li>
+            <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link">Appointments</a>
+            </li>
+        </ul>
+    </div>
+</nav>

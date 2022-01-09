@@ -88,3 +88,17 @@ textarea[disabled] {
     padding-top: 2%;
     border-bottom: 1px solid lightgrey;
 }
+
+.manage-buttons {
+    float: right;
+    width: 19%;
+}
+
+.disease-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn.btn-warning {
+    margin-right: 3%;
+}

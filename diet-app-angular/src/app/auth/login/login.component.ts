@@ -57,6 +57,10 @@ export class LoginComponent implements OnInit {
           console.log("doctor");
           this.router.navigate(['/doctor/pendingList'])
         }
+        if (this.tokenService.getRole() === 'PATIENT') {
+          console.log("patient");
+          this.router.navigate(['/patient/notes'])
+        }
       },
       (error) => {
         this.error = error.error;

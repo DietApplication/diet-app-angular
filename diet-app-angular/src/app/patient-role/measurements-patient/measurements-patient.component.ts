@@ -1,17 +1,17 @@
-import { AfterContentChecked, AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterContentChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TokenService } from 'src/app/core/services/token.service';
-import { MeasureDate, MeasurementService } from './measurement.service';
-import { Measurements } from './measurements.model';
+import { MeasurementService } from 'src/app/doctor/patients/measurements/measurement.service';
+import { Measurements } from 'src/app/doctor/patients/measurements/measurements.model';
 
 @Component({
-  selector: 'app-measurements',
-  templateUrl: './measurements.component.html',
-  styleUrls: ['./measurements.component.css']
+  selector: 'app-measurements-patient',
+  templateUrl: './measurements-patient.component.html',
+  styleUrls: ['./measurements-patient.component.css']
 })
-export class MeasurementsComponent implements OnInit, AfterContentChecked {
+export class MeasurementsPatientComponent implements OnInit {
   idPatient: number;
   dates = [];
   error: string;
@@ -36,13 +36,10 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
   private routeSub: Subscription;
   filterMeasurementForm: FormGroup;
   addMeasurementForm: FormGroup;
-  constructor(private route: ActivatedRoute, private measurementService: MeasurementService, private cdref: ChangeDetectorRef) { }
-
+  constructor(private measurementService: MeasurementService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
-    this.routeSub = this.route.params.subscribe((params) => {
-      this.idPatient = params['idPatient'];
-    });
+    this.idPatient = parseInt(this.tokenService.getUserId());
     this.onGetDates();
     this.initFilterForm();
     this.onGetNewestMeasurement();
@@ -57,28 +54,30 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
         });
         this.dates = [...new Map(res.map(item =>
           [item['date'], item])).values()];
-        //   console.log(this.dates);
+        console.log(this.dates);
       }
     )
 
   }
   onGetNewestMeasurement() {
+    console.log("on get newest measurements method");
     this.measurementService.getNewestMeasurements(this.idPatient).subscribe(
       (res) => {
-        console.log(res);
+        console.log("on get newest measurements " + res);
         this.initMeasurements(res);
         this.setAddFormDefaultValues(res);
       }
     );
   }
   onGetMeasurementByRequest() {
+    console.log("on get measurements by request method");
     let reqDate: string = this.filterMeasurementForm.value.date;
     let reqRole: string = this.filterMeasurementForm.value.role;
     this.measurementService.getMeasurementByDateAndRole(this.idPatient, reqDate.toUpperCase(), reqRole.toUpperCase()).subscribe(
       (res) => {
         this.initMeasurements(res);
         this.setAddFormDefaultValues(res);
-        console.log(res);
+        console.log("on get measurements by request ", res);
       },
       (error) => {
         this.error = 'Please, choose different role for this date';
@@ -219,10 +218,6 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
 
   set bmr(bmr: number) {
     this.basicMetabolism = bmr;
-  }
-  ngAfterContentChecked() {
-
-    this.cdref.detectChanges();
   }
   onHandleError() {
     this.error = null;

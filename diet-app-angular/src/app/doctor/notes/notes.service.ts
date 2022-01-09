@@ -13,13 +13,13 @@ export class NotesService {
   constructor(private http: HttpClient, private router: Router) { }
 
   postNote(idPatient: number, idDoctor: number, note: string) {
-    return this.http.post<Note>('https://dietappeu.azurewebsites.net/api/doctor/notes', {
+    return this.http.post<Note>('https://dietappeu.azurewebsites.net/api/notes', {
       idPatient: idPatient,
       idDoctor: idDoctor,
       note: note
     })
   }
   getNotes(idPatient: number) {
-    return this.http.get<NoteContent>('https://dietappeu.azurewebsites.net/api/doctor/notes?idPatient=' + idPatient);
+    return this.http.get<NoteContent>('https://dietappeu.azurewebsites.net/api/notes/' + idPatient);
   }
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { DoctorComponent } from './doctor.component';
 import { PendingListComponent } from './pending-list/pending-list.component';
 import { AuthGuard } from '../auth/auth.guard';
@@ -19,6 +18,7 @@ import { DietComponent } from './diet/diet.component';
 import { DietCreateComponent } from './diet/diet-create/diet-create.component';
 import { DiseaseHistoryComponent } from './patients/disease-history/disease-history.component';
 import { DietMealsComponent } from './diet/diet-meals/diet-meals.component';
+import { DietHistoryComponent } from './patients/diet-history/diet-history.component';
 
 const doctorRoutes: Routes = [
   {
@@ -31,7 +31,7 @@ const doctorRoutes: Routes = [
       { path: 'products', component: ProductsComponent },
       { path: 'add-product', component: ProductAddComponent },
       { path: 'meals', component: MealsComponent },
-      { path: 'meals/:nameOfMeal/details', component: MealDetailsComponent},
+      { path: 'meals/:nameOfMeal/details', component: MealDetailsComponent },
       { path: 'add-meals', component: MealAddComponent },
       { path: 'diseases', component: DiseasesComponent },
       { path: 'notes', component: NotesComponent },
@@ -41,6 +41,7 @@ const doctorRoutes: Routes = [
       { path: 'patients/:idPatient/personal-info', component: PersonalInfoComponent },
       { path: 'patients/:idPatient/measurements', component: MeasurementsComponent },
       { path: 'patients/:idPatient/disease-history', component: DiseaseHistoryComponent },
+      { path: 'patients/:idPatient/diet-history', component: DietHistoryComponent },
     ]
   },
 ]

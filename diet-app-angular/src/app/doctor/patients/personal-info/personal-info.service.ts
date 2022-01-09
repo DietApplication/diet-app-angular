@@ -9,6 +9,6 @@ export class PersonalInfoService {
 
   constructor(private http: HttpClient) { }
   getPersonalInfo(idPatient: number) {
-    return this.http.get<PersonalInfo>('https://dietappeu.azurewebsites.net/api/doctor/patient/info?idpatient=' + idPatient);
+    return this.http.get<PersonalInfo>('https://dietappeu.azurewebsites.net/api/doctor/patient/info/' + idPatient);
   }
 }

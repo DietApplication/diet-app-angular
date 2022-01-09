@@ -16,7 +16,7 @@ export class PendingListService {
     return this.http.get<PendingUser[]>('https://dietappeu.azurewebsites.net/api/doctor/pending/patients');
   }
   getDietitianReport(userId: number) {
-    return this.http.get<DietitianReport>('https://dietappeu.azurewebsites.net/api/doctor/pending/patient?idpatient=' + userId);
+    return this.http.get<DietitianReport>('https://dietappeu.azurewebsites.net/api/doctor/pending/patient/' + userId);
   }
   deletePatient(userId: number) {
     return this.http.delete<PendingUser>('https://dietappeu.azurewebsites.net/api/doctor/pending?idPatient=' + userId);

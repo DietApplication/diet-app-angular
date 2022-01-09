@@ -13,18 +13,18 @@ import { DiseaseHistoryService } from './disease-history.service';
   styleUrls: ['./disease-history.component.css']
 })
 export class DiseaseHistoryComponent implements OnInit {
-private routeSub: Subscription;
-idPatient: number;
-idDisease: number;
-error: string;
-data;
-dataArr;
-isToAdd: boolean = false;
-disease: Disease;
-diseases: [] = [];
-searchDisForm: FormGroup;
-assignDiseaseForm: FormGroup;
-  constructor(private route: ActivatedRoute,private diseaseService:DiseasesService, private diseaseHistoryService: DiseaseHistoryService ) { }
+  private routeSub: Subscription;
+  idPatient: number;
+  idDisease: number;
+  error: string;
+  data;
+  dataArr;
+  isToAdd: boolean = false;
+  disease: Disease;
+  diseases: [] = [];
+  searchDisForm: FormGroup;
+  assignDiseaseForm: FormGroup;
+  constructor(private route: ActivatedRoute, private diseaseService: DiseasesService, private diseaseHistoryService: DiseaseHistoryService) { }
 
 
   ngOnInit(): void {
@@ -36,23 +36,24 @@ assignDiseaseForm: FormGroup;
     this.onGetDiseases();
   }
 
-  onAssignDisease(){
-    this.diseaseHistoryService.assignDisease(this.idPatient, this.idDisease, this.assignDiseaseForm.value.date).subscribe((res)=>{
-     // console.log(res);
-      alert("Disease was successfully assigned");
-      this.assignDiseaseForm.reset();
-      this.searchDisForm.reset();
-      this.isToAdd = false;
-      this.onGetDiseases();
-    }, (err)=>{
-      this.error = err.error;
-        this.searchDisForm.reset();
-      this.isToAdd=false;
-    });
-
+  onAssignDisease() {
+    if (this.assignDiseaseForm.value.dateOfCure === null) {
+      this.diseaseHistoryService.assignDisease(this.idPatient, this.idDisease, this.assignDiseaseForm.value.date).subscribe((res) => {
+        this.afterAssign();
+      }, (err) => {
+        this.afterAssignError(err);
+      });
+    }
+    else {
+      this.diseaseHistoryService.assignDisease(this.idPatient, this.idDisease, this.assignDiseaseForm.value.date, this.assignDiseaseForm.value.dateOfCure).subscribe((res) => {
+        this.afterAssign();
+      }, (err) => {
+        this.afterAssignError(err);
+      });
+    }
   }
-  onGetDiseases(){
-    this.diseaseHistoryService.getDiseases(this.idPatient).subscribe((res)=>{
+  onGetDiseases() {
+    this.diseaseHistoryService.getDiseases(this.idPatient).subscribe((res) => {
 
       this.dataArr = res;
       this.diseases = this.dataArr;
@@ -62,18 +63,33 @@ assignDiseaseForm: FormGroup;
   private initAssignDiseaseForm() {
     this.assignDiseaseForm = new FormGroup({
       date: new FormControl(null, Validators.required),
-    }, {validators: [this.confirmDate.bind(this)]});
+      dateOfCure: new FormControl(null)
+    }, { validators: [this.confirmDate.bind(this), this.confirmDate2.bind(this), this.confirmDate.bind(this), this.confirmDateOfCure.bind(this)] });
   }
   confirmDate(formGroup: FormGroup) {
     const { value: date } = formGroup.get('date');
     const now = new Date();
     const actual = new Date(date);
-     actual.setHours(now.getHours());
+    actual.setHours(now.getHours());
     actual.setMinutes(now.getMinutes());
     actual.setSeconds(now.getSeconds());
     return actual <= now ? null : { dateInvalid: true };
   }
-    onSearch() {
+  confirmDate2(formGroup: FormGroup) {
+    const { value: date } = formGroup.get('dateOfCure');
+    const now = new Date();
+    const actual = new Date(date);
+    actual.setHours(now.getHours());
+    actual.setMinutes(now.getMinutes());
+    actual.setSeconds(now.getSeconds());
+    return actual <= now ? null : { date2Invalid: true };
+  }
+  confirmDateOfCure(formGroup: FormGroup) {
+    const { value: dateOfCure } = formGroup.get('dateOfCure');
+    const { value: dateOfDiagnosis } = formGroup.get('date');
+    return (dateOfDiagnosis < dateOfCure) || !dateOfCure ? null : { cureDateInvalid: true };
+  }
+  onSearch() {
     let name: string = this.searchDisForm.value.name;
     this.diseaseService.searchDiseases(name).subscribe((res) => {
       this.data = res;
@@ -94,9 +110,30 @@ assignDiseaseForm: FormGroup;
   onHandleError() {
     this.error = null;
   }
-  removeDisease(){
+  removeDisease() {
     this.disease = null;
     this.searchDisForm.reset();
-    this.isToAdd=false;
+    this.isToAdd = false;
+  }
+  onDeleteDisease(disease: any) {
+    if (confirm('Are you sure you want to delete ' + disease.name + ' disease?')) {
+      this.diseaseHistoryService.deleteDisease(disease.idPatientDisease).subscribe((res) => {
+        console.log(res);
+        this.onGetDiseases();
+      });
+
+    }
+  }
+  private afterAssign() {
+    alert("Disease was successfully assigned");
+    this.assignDiseaseForm.reset();
+    this.searchDisForm.reset();
+    this.isToAdd = false;
+    this.onGetDiseases();
+  }
+  private afterAssignError(err) {
+    this.error = err.error;
+    this.searchDisForm.reset();
+    this.isToAdd = false;
   }
 }

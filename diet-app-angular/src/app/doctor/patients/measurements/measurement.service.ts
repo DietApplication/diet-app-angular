@@ -16,13 +16,13 @@ export class MeasurementService {
   constructor(private http: HttpClient) { }
 
   getDates(idPatient: number) {
-    return this.http.get<MeasureDate[]>('https://dietappeu.azurewebsites.net/api/doctor/patient/measurements?idPatient=' + idPatient);
+    return this.http.get<MeasureDate[]>('https://dietappeu.azurewebsites.net/api/doctor/patient/measurements/' + idPatient);
   }
   getNewestMeasurements(idPatient: number) {
-    return this.http.get<Measurements>('https://dietappeu.azurewebsites.net/api/doctor/patient/measurement?idPatient=' + idPatient);
+    return this.http.get<Measurements>('https://dietappeu.azurewebsites.net/api/doctor/patient/measurement/' + idPatient);
   }
   getMeasurementByDateAndRole(idPatient: number, requestedDate: string, whoMeasured: string) {
-    return this.http.get<Measurements>('https://dietappeu.azurewebsites.net/api/doctor/patient/measurementsbydate?idPatient=' + idPatient + '&requestedDate=' + requestedDate + '&whomeasured=' + whoMeasured)
+    return this.http.get<Measurements>('https://dietappeu.azurewebsites.net/api/doctor/patient/measurementsbydate/' + idPatient + '?requestedDate=' + requestedDate + '&whomeasured=' + whoMeasured)
   }
   addMeasurements(idpatient: number,
     height: number,

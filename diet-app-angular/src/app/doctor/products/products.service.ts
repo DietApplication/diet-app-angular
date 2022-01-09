@@ -38,14 +38,12 @@ export class ProductsService {
   getParameters() {
     return this.http.get<Parameter[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/parameters');
   }
-  // getProducts() {
-  //   return this.http.get<Product[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/products');
-  // }
+
   getProducts(page: number) {
     return this.http.get<Product[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/products?page=' + page);
   }
   searchProduct(param: string) {
-    return this.http.get<Product[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/product/search?productName=' + param);
+    return this.http.get<Product[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/product/search/' + param);
   }
   editProduct(productId: number, name: string, unit: string, size: number, homeMeasure: string, homeMeasureSize: string, parameters: ParameterAdd[]) {
     return this.http.put<ProductAdd>('https://dietappeu.azurewebsites.net/api/knowledgebase/product', {
@@ -58,7 +56,7 @@ export class ProductsService {
       parameters: parameters
     })
   }
-    getParametersByProduct(idProduct:number) {
-    return this.http.get('https://dietappeu.azurewebsites.net/api/knowledgebase/product/parameters?IdProduct='+idProduct);
+  getParametersByProduct(idProduct: number) {
+    return this.http.get('https://dietappeu.azurewebsites.net/api/knowledgebase/product/parameters/' + idProduct);
   }
 }

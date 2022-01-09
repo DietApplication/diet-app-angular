@@ -1,0 +1,14 @@
+<div class="container-w-background container-fluid">
+    <div class="sticky-left-background">
+        <div id="content-left" class="content-left">
+        </div>
+    </div>
+    <div class="sticky-right">
+        <div class="content">
+            <h1>NOTES</h1>
+            <div class="notes" #notesCont>
+                <app-notes-patient-item *ngFor="let note of notes; let i = index;" [index]="i" [note]="note"></app-notes-patient-item>
+            </div>
+        </div>
+    </div>
+</div>

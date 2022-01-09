@@ -69,7 +69,7 @@ export class DietService {
 
   }
   getNumberOfDaysAndMeals(idDiet: number) {
-    return this.http.get<DietInfo>('https://dietappeu.azurewebsites.net/api/doctor/diet/days?idDiet=' + idDiet);
+    return this.http.get<DietInfo>('https://dietappeu.azurewebsites.net/api/doctor/diet/days/' + idDiet);
   }
   assignMeals(idDiet: number, dayNumber: number, meals: { idMeal: number, time: string, proportion: number }[]) {
     return this.http.post('https://dietappeu.azurewebsites.net/api/doctor/diet/mealtake', {

@@ -27,7 +27,7 @@ export class DiseasesService {
     return this.http.get<Disease[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/diseases?page=' + page);
   }
   searchDiseases(name: string) {
-    return this.http.get<Disease[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/diseases/search?diseaseName=' + name)
+    return this.http.get<Disease[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/diseases/search/' + name)
       .pipe(catchError(this.handleError));;
   }
   editDisease(idDisease: number, name: string, description: string, rec: string) {
@@ -38,6 +38,6 @@ export class DiseasesService {
       recomendation: rec
     })
   }
-  
+
 
 }

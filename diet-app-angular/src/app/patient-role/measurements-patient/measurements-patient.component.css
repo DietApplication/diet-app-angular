@@ -1,0 +1,105 @@
+.sticky-left-background,
+.sticky-right {
+    border-radius: 0;
+}
+
+.sticky-left-background {
+    background-attachment: fixed;
+    z-index: 1;
+    overflow: scroll;
+    background-size: 40%;
+    background-position: 0;
+}
+
+h1 {
+    margin-bottom: 4%;
+}
+
+.sticky-right {
+    overflow: scroll;
+}
+
+.content {
+    margin-top: 4%;
+    width: 86%;
+}
+
+th {
+    width: 33%;
+}
+
+.calculated {
+    color: #0A7B79;
+}
+
+label {
+    color: #0A7B79;
+}
+
+.dates,
+.roles,
+.whoMeasured {
+    width: 33%;
+}
+
+.measure-filter {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.filter {
+    background-color: #0A7B79;
+    color: white;
+}
+
+h4 {
+    color: #FEAD54;
+    margin-bottom: 2%;
+}
+
+.add {
+    color: #FEAD54;
+    background-color: #0A7B79;
+    border-radius: 14px;
+}
+
+.reset {
+    background-color: #D3F2E9;
+    padding: 8px 12px;
+    border-radius: 12px;
+}
+
+.buttons {
+    width: 36%;
+    display: flex;
+    justify-content: space-between;
+    float: right;
+}
+
+.getting-started-table {
+    margin-top: 5%;
+}
+
+table input {
+    border: none;
+    padding: 0;
+}
+
+.roleShow {
+    width: 40%;
+}
+
+.roleShow p {
+    color: #FEAD54;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.final {
+    margin-top: 4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

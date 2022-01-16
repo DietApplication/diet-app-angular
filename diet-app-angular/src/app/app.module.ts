@@ -8,10 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { PatientRoleComponent } from './patient-role/patient-role.component';
 import { PatientHeaderComponent } from './patient-role/patient-header/patient-header.component';
+import { SecretaryComponent } from './secretary/secretary.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    SecretaryComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

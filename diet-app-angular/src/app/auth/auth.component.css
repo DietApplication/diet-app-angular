@@ -1,7 +1,7 @@
 .list-auth ul li {
     background-color: #0A7B79;
     border: 1px solid white;
-    width: 55%;
+    width: 100%;
 }
 
 .list-auth li:nth-child(1) {
@@ -26,4 +26,8 @@ a {
 
 .list-auth ul li.active {
     background-color: #FEAD54;
+}
+
+.list-auth ul {
+    width: 80%;
 }

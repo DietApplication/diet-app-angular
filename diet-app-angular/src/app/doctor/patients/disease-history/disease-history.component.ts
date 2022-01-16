@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+
 import { Disease } from '../../diseases/disease.model';
 import { DiseasesService } from '../../diseases/diseases.service';
 import { DiseaseHistoryService } from './disease-history.service';
@@ -20,10 +21,13 @@ export class DiseaseHistoryComponent implements OnInit {
   data;
   dataArr;
   isToAdd: boolean = false;
+  clicked: number;
   disease: Disease;
-  diseases: [] = [];
+  diseases: any[] = [];
   searchDisForm: FormGroup;
   assignDiseaseForm: FormGroup;
+  editDiseaseForm: FormGroup;
+  isEditEnabled: boolean = false;
   constructor(private route: ActivatedRoute, private diseaseService: DiseasesService, private diseaseHistoryService: DiseaseHistoryService) { }
 
 
@@ -33,6 +37,7 @@ export class DiseaseHistoryComponent implements OnInit {
     });
     this.initSearchForm();
     this.initAssignDiseaseForm();
+    this.initEditDiseaseForm();
     this.onGetDiseases();
   }
 
@@ -64,7 +69,13 @@ export class DiseaseHistoryComponent implements OnInit {
     this.assignDiseaseForm = new FormGroup({
       date: new FormControl(null, Validators.required),
       dateOfCure: new FormControl(null)
-    }, { validators: [this.confirmDate.bind(this), this.confirmDate2.bind(this), this.confirmDate.bind(this), this.confirmDateOfCure.bind(this)] });
+    }, { validators: [this.confirmDate.bind(this), this.confirmDate2.bind(this), this.confirmDateOfCure.bind(this)] });
+  }
+  private initEditDiseaseForm() {
+    this.editDiseaseForm = new FormGroup({
+      date: new FormControl(null),
+      dateOfCure: new FormControl(null)
+    }, { validators: [this.confirmDate.bind(this), this.confirmDate2.bind(this), this.confirmDateOfCure2.bind(this)] });
   }
   confirmDate(formGroup: FormGroup) {
     const { value: date } = formGroup.get('date');
@@ -84,12 +95,20 @@ export class DiseaseHistoryComponent implements OnInit {
     actual.setSeconds(now.getSeconds());
     return actual <= now ? null : { date2Invalid: true };
   }
+
   confirmDateOfCure(formGroup: FormGroup) {
     const { value: dateOfCure } = formGroup.get('dateOfCure');
     const { value: dateOfDiagnosis } = formGroup.get('date');
     return (dateOfDiagnosis < dateOfCure) || !dateOfCure ? null : { cureDateInvalid: true };
   }
+  confirmDateOfCure2(formGroup: FormGroup) {
+    const { value: dateOfCure } = formGroup.get('dateOfCure');
+    const { value: dateOfDiagnosis } = formGroup.get('date');
+    return (dateOfDiagnosis < dateOfCure) || !dateOfCure || !dateOfDiagnosis ? null : { cureDate2Invalid: true };
+  }
+
   onSearch() {
+    this.isEditEnabled = false;
     let name: string = this.searchDisForm.value.name;
     this.diseaseService.searchDiseases(name).subscribe((res) => {
       this.data = res;
@@ -135,5 +154,18 @@ export class DiseaseHistoryComponent implements OnInit {
     this.error = err.error;
     this.searchDisForm.reset();
     this.isToAdd = false;
+  }
+  toggleEdit(i: number) {
+    this.clicked = i;
+    this.isEditEnabled = !this.isEditEnabled;
+  }
+  onEditDisease(i: number) {
+
+    this.diseaseHistoryService.editDisease(this.diseases[i].idPatientDisease, this.editDiseaseForm.value.date, this.editDiseaseForm.value.dateOfCure)
+      .subscribe((res) => {
+        console.log(res);
+        this.onGetDiseases();
+      })
+
   }
 }

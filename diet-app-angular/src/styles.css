@@ -25,6 +25,30 @@
         background-attachment: fixed;
     }
     
+    .sticky-left-background,
+    .sticky-right {
+        border-radius: 0;
+    }
+    
+    .sticky-left-background {
+        background-attachment: fixed;
+        z-index: 1;
+        overflow: scroll;
+        background-size: 40%;
+        background-position: 0;
+    }
+    
+    .content-left {
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin-right: 24px;
+        position: relative;
+        margin-bottom: 50px;
+    }
+    
     .sticky-right {
         background-attachment: fixed;
         background-color: white;

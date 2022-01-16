@@ -1,0 +1,22 @@
+<div class="container-w-background container-fluid">
+    <div class="sticky-left-background">
+    </div>
+    <div class="sticky-right">
+        <div class="content">
+            <div class="container">
+                <h1>Diseases Food Recommendations</h1>
+                <div class="history" *ngFor="let d of diseases;let i = index;">
+                    <div class="disease-header">
+                        <p style="color: #FEAD54; font-size: 20px; font-weight:600;">{{d.name}}</p>
+                    </div>
+
+                    <p><span style="color: #0A7B79;">Period:</span> {{d.dateOfDiagnosis.split("T")[0]}}-
+                        <span *ngIf="d.dateOfCure" style="color: rgb(50, 207, 50);">{{d.dateOfCure.split("T")[0]}}</span>
+                        <span *ngIf="!d.dateOfCure" style="color: red;">Present</span>
+                    </p>
+                    <p><span style="color: #0A7B79;">Description: </span> {{d.description}}</p>
+                    <p><span style="color: #0A7B79;">Recommendations: </span> {{d.recommendation}}</p>
+                </div>
+            </div>
+        </div>
+    </div>

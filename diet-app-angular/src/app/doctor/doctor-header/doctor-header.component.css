@@ -92,4 +92,9 @@ a:hover {
     color: #0A7B79;
     font-weight: 700;
     font-style: italic;
+    margin-right: 3%;
+}
+
+.logo a:nth-child(2):hover {
+    transform: scale(1.2) perspective(1px);
 }

@@ -46,7 +46,7 @@ export class TokenService {
   }
   logout() {
     localStorage.clear();
-    this.router.navigate(['/auth/accessSurvey'])
+    this.router.navigate(['/auth/login'])
   }
 
 }

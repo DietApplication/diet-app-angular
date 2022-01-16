@@ -34,4 +34,11 @@ export class DiseaseHistoryService {
   deleteDisease(idDiseasePatient: number) {
     return this.http.delete('https://dietappeu.azurewebsites.net/api/knowledgebase/patient/disease/' + idDiseasePatient);
   }
+  editDisease(idDiseasePatient: number, diagnosisDate: string, cureDate: string) {
+    return this.http.put('https://dietappeu.azurewebsites.net/api/knowledgebase/patient/disease', {
+      idPatientDisease: idDiseasePatient,
+      dateOfCure: cureDate,
+      dateOfDiagnosis: diagnosisDate
+    })
+  }
 }

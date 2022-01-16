@@ -151,12 +151,14 @@ export class MeasurementsPatientComponent implements OnInit {
       this.addMeasurementForm.value.calfcircumference,
       this.addMeasurementForm.value.waistlowercircumference).subscribe((res) => {
         console.log(res);
-        alert("Measurement successfully added!")
+        alert("Measurement successfully added!");
+        this.onGetNewestMeasurement();
+        this.onGetDates();
       }, (error) => {
         this.error = error.error;
       })
 
-    this.onGetDates();
+
 
 
   }

@@ -13,9 +13,7 @@ import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SecretaryComponent,
-    AdminComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

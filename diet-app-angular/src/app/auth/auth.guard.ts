@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
     if (this.tokenService.hasToken && this.tokenService.getRole() === 'DOCTOR') {
       return true;
     } else {
-      this.router.navigate(['/auth']);
+      this.router.navigate(['/auth/login']);
       return false;
     }
 

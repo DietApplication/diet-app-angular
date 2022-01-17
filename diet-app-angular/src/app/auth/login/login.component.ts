@@ -61,6 +61,10 @@ export class LoginComponent implements OnInit {
           console.log("patient");
           this.router.navigate(['/patient/notes'])
         }
+        if (this.tokenService.getRole() === 'ADMIN') {
+          console.log("admin");
+          this.router.navigate(['/admin/create-employee'])
+        }
       },
       (error) => {
         this.error = error.error;

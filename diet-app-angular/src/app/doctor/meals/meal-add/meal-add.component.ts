@@ -12,19 +12,26 @@ import { MealsService, ProductInMeal } from '../meals.service';
 export class MealAddComponent implements OnInit {
   error: string;
   data;
+  currentPage: number = 1;
+  dataProduct;
   product: Product[];
   products: Product[] = [];
+  productsInfo: Product[] = [];
   productsToAdd: ProductInMeal[] = [];
   searchProductForm: FormGroup;
+  searchProductInfo: FormGroup;
   addMealForm: FormGroup;
-  isDisplayed:boolean=false;
-  isInvalid:boolean=false;
+  isDisplayed: boolean = false;
+  isInvalid: boolean = false;
   productWeight: number;
+  pages: number[] = [];
   constructor(private productService: ProductsService, private mealsService: MealsService) { }
 
   ngOnInit(): void {
     this.initSearchForm();
+    this.initSearchProductsForm();
     this.initAddMealForm();
+    this.onGetProducts(this.currentPage);
   }
 
   onSearch() {
@@ -33,14 +40,14 @@ export class MealAddComponent implements OnInit {
       this.data = res;
       this.product = this.data;
       console.log(this.product);
-      if(this.products.filter((e=>e.idProduct===this.product[0].idProduct)).length===0){
-      this.products.push(this.product[0]);
+      if (this.products.filter((e => e.idProduct === this.product[0].idProduct)).length === 0) {
+        this.products.push(this.product[0]);
       }
-      else{
-        this.error="You have already added such product!"
+      else {
+        this.error = "You have already added such product!"
         console.log(this.error);
       }
-        this.searchProductForm.reset();
+      this.searchProductForm.reset();
     },
       (error) => {
         this.error = error.error;
@@ -49,6 +56,11 @@ export class MealAddComponent implements OnInit {
   private initSearchForm() {
     this.searchProductForm = new FormGroup({
       name: new FormControl(null)
+    })
+  }
+  private initSearchProductsForm() {
+    this.searchProductInfo = new FormGroup({
+      namePr: new FormControl(null)
     })
   }
   private initAddMealForm() {
@@ -64,34 +76,55 @@ export class MealAddComponent implements OnInit {
     console.log("new products " + this.products);
   }
   onAddMeal() {
-    if(this.products.length===0){
-       this.error = 'At least one product is required!';
-       return;
+    if (this.products.length === 0) {
+      this.error = 'At least one product is required!';
+      return;
     }
-    if(this.products.filter((e=>e.size===null)).length>0 ||this.products.filter((e=>e.size<=0)).length>0){
-        this.error = 'Amount of the product cannot be empty or less/equal 0';
-        return;
+    if (this.products.filter((e => e.size === null)).length > 0 || this.products.filter((e => e.size <= 0)).length > 0) {
+      this.error = 'Amount of the product cannot be empty or less/equal 0';
+      return;
     }
     {
-    this.products.forEach((pr) => {
+      this.products.forEach((pr) => {
         this.productsToAdd.push({ idProduct: this.products[this.products.indexOf(pr)].idProduct, amount: this.products[this.products.indexOf(pr)].size });
         console.log("products to add ", this.productsToAdd);
-    });
-    
-    this.mealsService.addMeal(this.addMealForm.value.productName, this.addMealForm.value.desc, this.addMealForm.value.url, this.productsToAdd).subscribe((res) => {
-      console.log(res);
-    })
-    window.location.reload();
+      });
+
+      this.mealsService.addMeal(this.addMealForm.value.productName, this.addMealForm.value.desc, this.addMealForm.value.url, this.productsToAdd).subscribe((res) => {
+        console.log(res);
+      })
+      window.location.reload();
     }
   }
   onHandleError() {
     this.error = null;
   }
-    onHandleDetails() {
+  onHandleDetails() {
     this.isDisplayed = false;
   }
   onOpenDetails() {
     this.isDisplayed = true;
     console.log("opened", this.product);
+  }
+  onGetProducts(page: number) {
+    this.currentPage = page;
+    this.productService.getProducts(page).subscribe((response) => {
+      this.dataProduct = response;
+      console.log(this.data);
+      this.productsInfo = this.dataProduct.products;
+      console.log(this.productsInfo);
+      this.pages.length = Math.ceil(this.dataProduct.totalRows / this.dataProduct.pageSize);
+    })
+  }
+  onSearchProductsInfo() {
+    let name: string = this.searchProductInfo.value.namePr;
+    this.productService.searchProduct(name).subscribe((res) => {
+      this.dataProduct = res;
+      this.productsInfo = this.dataProduct;
+      console.log(this.productsInfo);
+    },
+      (error) => {
+        this.error = "No such product";
+      });
   }
 }

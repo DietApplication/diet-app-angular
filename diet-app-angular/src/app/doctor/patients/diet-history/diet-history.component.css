@@ -36,3 +36,30 @@ h1 {
     margin-top: 4%;
     width: 86%;
 }
+
+.btn-custom {
+    background-color: #D3F2E9;
+    color: #0A7B79;
+    margin-right: 3%;
+    justify-self: flex-end;
+}
+
+.diet-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.btns {
+    display: flex;
+    width: 30%;
+}
+
+.btns a {
+    padding: 3% 5%;
+    border-radius: 6px;
+}
+
+.btns a:hover {
+    transform: scale(1.1) perspective(1px);
+}

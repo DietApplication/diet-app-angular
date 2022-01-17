@@ -51,7 +51,7 @@
         right: 1%;
         height: 100vh;
         position: fixed;
-        overflow-y: scroll;
+        overflow-y: hidden;
         padding-bottom: 8%;
     }
     

@@ -20,8 +20,6 @@ table {
 
 tr {
     border-bottom: 3px solid white;
-    display: flex;
-    justify-content: space-between;
 }
 
 td {
@@ -54,13 +52,14 @@ img {
 
 .double-info {
     display: flex;
+    justify-content: center;
 }
 
-p {
-    padding: 0;
-    margin: 0;
+a {
+    text-decoration: none;
+    color: #0A7B79;
 }
 
-p:first-child {
-    margin-right: 2px;
+a:hover {
+    color: #FEAD54;
 }

@@ -1,0 +1,17 @@
+.sticky-left-background,
+.sticky-right {
+    border-radius: 0;
+}
+
+.sticky-left-background {
+    background-attachment: fixed;
+    z-index: 1;
+    overflow: scroll;
+    background-size: 40%;
+    background-position: 0;
+}
+
+.content {
+    margin-top: 3%;
+    width: 86%;
+}

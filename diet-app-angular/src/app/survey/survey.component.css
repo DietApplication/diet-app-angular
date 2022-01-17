@@ -8,3 +8,7 @@
     top: 70%;
     transform: translateY(-50%);
 }
+
+.sticky-right {
+    overflow-y: scroll;
+}

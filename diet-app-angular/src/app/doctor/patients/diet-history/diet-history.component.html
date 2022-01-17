@@ -7,8 +7,13 @@
                 <div class="row report">
                     <h1>Diet History</h1>
                     <div class="history" *ngFor="let d of diets">
-                        <div class="disease-header">
+                        <div class="diet-header">
                             <p style="color: #FEAD54; font-size: 20px; font-weight:600;">{{d.name}}</p>
+                            <div class="btns">
+                                <a class="btn btn-custom" routerLink="/doctor/diet/{{d.idDiet}}/assign-meals">Assign Meals</a>
+                                <a class="btn btn-warning" routerLink="/doctor/diet/{{d.idDiet}}/meals">Details</a>
+                            </div>
+
                         </div>
 
                         <p><span style="color: #0A7B79;">Period:</span> {{d.dateFrom.split("T")[0]}}-

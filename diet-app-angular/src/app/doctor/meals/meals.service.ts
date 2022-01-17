@@ -25,7 +25,7 @@ export class MealsService {
     return this.http.get<Meal[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/meals?page=' + page);
   }
   searchMeals(param: string) {
-    return this.http.get<Meal[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/meal/search/' + param);
+    return this.http.get<Meal[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/meal/search?mealName=' + param);
     // return this.http.get<Meal[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/meal/search?mealName=' + param).pipe().toPromise().then();
   }
 }

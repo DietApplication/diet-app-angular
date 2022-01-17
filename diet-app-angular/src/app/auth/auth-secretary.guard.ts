@@ -6,19 +6,20 @@ import { TokenService } from '../core/services/token.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthPatientGuard implements CanActivate {
+export class AuthSecretaryGuard implements CanActivate {
   constructor(public tokenService: TokenService, public router: Router) {
 
   }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.tokenService.hasToken && this.tokenService.getRole() === 'PATIENT') {
+    if (this.tokenService.hasToken && this.tokenService.getRole() === 'SECRETARY') {
       return true;
     } else {
       this.router.navigate(['/auth/login']);
       return false;
     }
+
   }
 
 }

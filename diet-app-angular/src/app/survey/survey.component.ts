@@ -83,7 +83,7 @@ export class SurveyComponent implements OnInit {
       city: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(40)]),
       street: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
       streetNumber: new FormControl(null, [Validators.required, Validators.minLength(1), Validators.maxLength(10)]),
-      flat: new FormControl(null, [Validators.min(1), Validators.max(9999)]),
+      flat: new FormControl(null, [Validators.minLength(1), Validators.maxLength(10)]),
 
       weight: new FormControl(null, [Validators.required, Validators.min(20), Validators.max(730)]),
       height: new FormControl(null, [Validators.required, Validators.min(30), Validators.max(251)]),

@@ -15,6 +15,14 @@
          margin-top: 2%;
      }
      
+     h4 {
+         margin-top: 80px;
+         margin-bottom: 5%;
+         text-align: center;
+         color: #FEAD54;
+         font-weight: 600;
+     }
+     
      .parameters-form {
          margin-top: 4%;
          ;
@@ -49,7 +57,7 @@
          flex-direction: column;
          justify-content: space-between;
          align-items: center;
-         margin-right: 24px;
+         margin-right: 60px;
          position: relative;
          margin-bottom: 50px;
      }
@@ -162,4 +170,62 @@
          padding-top: 9px;
          color: #0A7B79;
          padding-bottom: 9px;
+     }
+     
+     .pag {
+         margin-top: 3%;
+     }
+     
+     .page-link.page-a {
+         border: none;
+         background-color: #FEAD54;
+         color: white;
+     }
+     
+     .page-link {
+         border: none;
+         color: #0A7B79
+     }
+     
+     .searchInfo {
+         display: flex;
+         width: 68%;
+         margin-bottom: 16px;
+         justify-content: space-between;
+     }
+     
+     .searchInfo input {
+         width: 88%;
+         height: 42px;
+     }
+     
+     .searchInfo button {
+         background-color: #D3F2E9;
+     }
+     
+     .searchInfo button:hover {
+         background-color: #FEAD54;
+     }
+     
+     .searchInfo img {
+         padding-bottom: 2px;
+     }
+     
+     .productInfo {
+         width: 60%;
+     }
+     
+     .productInfo li {
+         background-color: white;
+         margin-bottom: 3%;
+         border-radius: 50px;
+         padding-left: 5%;
+         padding-top: 3%;
+         padding-bottom: 3%;
+         font-weight: 600;
+     }
+     
+     .productInfo li img {
+         width: 15%;
+         margin-right: 3%;
      }

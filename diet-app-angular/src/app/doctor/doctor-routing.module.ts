@@ -19,6 +19,7 @@ import { DietCreateComponent } from './diet/diet-create/diet-create.component';
 import { DiseaseHistoryComponent } from './patients/disease-history/disease-history.component';
 import { DietMealsComponent } from './diet/diet-meals/diet-meals.component';
 import { DietHistoryComponent } from './patients/diet-history/diet-history.component';
+import { DietMealsListComponent } from './patients/diet-history/diet-meals-list/diet-meals-list.component';
 
 const doctorRoutes: Routes = [
   {
@@ -38,6 +39,7 @@ const doctorRoutes: Routes = [
       { path: 'patients', component: PatientsComponent },
       { path: 'diet/create-diet', component: DietCreateComponent },
       { path: 'diet/:idDiet/assign-meals', component: DietMealsComponent },
+      { path: 'diet/:idDiet/meals', component: DietMealsListComponent },
       { path: 'patients/:idPatient/personal-info', component: PersonalInfoComponent },
       { path: 'patients/:idPatient/measurements', component: MeasurementsComponent },
       { path: 'patients/:idPatient/disease-history', component: DiseaseHistoryComponent },

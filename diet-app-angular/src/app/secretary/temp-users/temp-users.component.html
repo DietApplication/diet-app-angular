@@ -4,7 +4,7 @@
     <div class="sticky-right">
         <div class="content">
             <div class="container">
-                <app-secretary-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-secretary-alert>
+                <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
                 <h1>Assign Survey</h1>
                 <form [formGroup]="assignSurveyForm" (ngSubmit)="onAssignSurvey()">
 

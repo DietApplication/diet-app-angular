@@ -4,7 +4,7 @@
     <div class="sticky-right">
         <div class="content">
             <div class="container">
-                <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-doctor-alert>
+                <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
                 <div class="row report">
                     <h1>Measurements History</h1>
                     <h4>Find Measurements</h4>

@@ -9,14 +9,15 @@ import { SecretaryRoutingModule } from './secretary-routing.module';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { SecretaryComponent } from './secretary.component';
 import { TempUsersComponent } from './temp-users/temp-users.component';
-import { SecretaryAlertComponent } from './secretary-alert/secretary-alert.component';
+
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [
     CreateAppointmentComponent,
     SecretaryHeaderComponent,
-    AppointmentsComponent, SecretaryComponent, TempUsersComponent, SecretaryAlertComponent
+    AppointmentsComponent, SecretaryComponent, TempUsersComponent
   ],
   imports: [
     RouterModule,
@@ -24,7 +25,8 @@ import { SecretaryAlertComponent } from './secretary-alert/secretary-alert.compo
     ReactiveFormsModule,
     FormsModule,
     SecretaryRoutingModule,
-    AutosizeModule
+    AutosizeModule,
+    SharedModule
   ]
 })
 export class SecretaryModule { }

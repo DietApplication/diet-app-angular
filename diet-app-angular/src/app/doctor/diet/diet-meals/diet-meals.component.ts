@@ -3,9 +3,9 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { Meal } from '../../meals/meal.model';
-import { MealsService } from '../../meals/meals.service';
-import { ProductsService } from '../../products/products.service';
+import { Meal } from '../../../shared/meals/meal.model';
+import { MealsService } from '../../../shared/meals/meals.service';
+import { ProductsService } from '../../../shared/products/products.service';
 import { DietCreate, DietService, ProductInRecipe } from '../diet.service';
 
 @Component({

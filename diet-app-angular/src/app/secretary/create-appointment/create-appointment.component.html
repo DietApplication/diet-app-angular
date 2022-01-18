@@ -1,1 +1,42 @@
-<p>create-appointment works!</p>
+<div class="container-w-background container-fluid">
+    <div class="sticky-left-background">
+    </div>
+    <div class="sticky-right">
+        <div class="content">
+            <div class="container">
+                <!-- <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert> -->
+                <h1>Create Appointment</h1>
+                <form class="apptForm" [formGroup]="createAppointmentForm">
+                    <div class="date">
+                        <label for="date" class="form-label">Select Date</label>
+                        <input type="date" id="date" class="form-control">
+                    </div>
+                    <div class="date">
+                        <label for="time" class="form-label">Time</label>
+                        <input type="time" id="time" class="form-control">
+                    </div>
+                    <div class="user">
+                        <label for="doctor" class="form-label">Select Doctor</label>
+                        <form class="search">
+                            <input type="text" id="doctor" class="form-control" placeholder="last name/first name & last name">
+                            <button class="btn"> <img src="../../../assets/searchGreen.svg" alt="search"></button>
+                        </form>
+                    </div>
+                    <div class="user">
+                        <label for="patient" class="form-label">Select Patient</label>
+                        <form class="search">
+                            <input type="text" id="patient" class="form-control" placeholder="last name/first name & last name">
+                            <button class="btn"> <img src="../../../assets/searchGreen.svg" alt="search"></button>
+                        </form>
+                    </div>
+                    <div class="desc">
+                        <label for="desc" class="form-label">Description</label>
+                        <textarea class="form-control" id="desc" autosize></textarea>
+                    </div>
+                    <button class="btn add">Create Appointment</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

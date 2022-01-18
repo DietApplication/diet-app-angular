@@ -6,10 +6,7 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
-import { PatientRoleComponent } from './patient-role/patient-role.component';
-import { PatientHeaderComponent } from './patient-role/patient-header/patient-header.component';
-import { SecretaryComponent } from './secretary/secretary.component';
-import { AdminComponent } from './admin/admin.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +18,7 @@ import { AdminComponent } from './admin/admin.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CoreModule
+    CoreModule, SharedModule
 
   ],
   providers: [],

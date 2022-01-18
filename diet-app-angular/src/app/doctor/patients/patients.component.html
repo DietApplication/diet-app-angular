@@ -1,6 +1,5 @@
 <div class="container">
-    <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-doctor-alert>
-
+    <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
     <h1>PATIENTS</h1>
     <form [formGroup]="searchUsersForm" class="search" (ngSubmit)="onSearch()">
         <input type="text" class="form-control" formControlName="name" placeholder="Search">

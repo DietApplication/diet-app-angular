@@ -1,0 +1,114 @@
+<div class="container-w-background container-fluid">
+    <div class="sticky-left-background">
+        <div id="content-left" class="content-left">
+            <h4>Add New Parameter</h4>
+            <form [formGroup]="addParameterForm" (ngSubmit)="onAddParameter()">
+                <div class="def-parameter">
+                    <label for="param" class="form-label">Parameter Name</label>
+                    <input type="text" class="form-control" id="param" formControlName="parameterName">
+                    <span class="form-text" *ngIf="!addParameterForm.get('parameterName').valid && addParameterForm.get('parameterName').touched">Parameter name is not provided or invalid</span>
+
+                </div>
+                <div class="def-parameter">
+                    <label for="mUnit" class="form-label">Measure Unit</label>
+                    <input type="text" class="form-control" id="mUnit" formControlName="measureUnit">
+                    <span class="form-text" *ngIf="!addParameterForm.get('measureUnit').valid && addParameterForm.get('measureUnit').touched">Measure unit is not provided or invalid</span>
+                </div>
+                <button class="btn" [disabled]="!addParameterForm.valid">Add</button>
+                <span class="error" *ngIf="addParameterError">{{addParameterError}}</span>
+            </form>
+            <a routerLink='../products' class="btn back">Product Base</a>
+        </div>
+    </div>
+    <div class="sticky-right">
+        <div class="content">
+            <div class="container">
+                <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
+                <h1>ADD NEW PRODUCT</h1>
+                <form class="parameters-form" [formGroup]="addProductForm" (ngSubmit)="onAddProduct()">
+                    <div class="def-parameter">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" formControlName="name">
+                    </div>
+                    <span class="form-text" *ngIf="!addProductForm.get('name').valid && addProductForm.get('name').touched">Product name is not provided or invalid </span>
+
+                    <div class="desc-group">
+                        <div class="def-parameter">
+                            <label for="weightUnit" class="form-label">Weight Unit</label>
+                            <input type="text" class="form-control" id="weightUnit" formControlName="weightUnit">
+                        </div>
+
+
+                        <div class="def-parameter">
+                            <label for="weight" class="form-label">Weight</label>
+                            <input type="number" class="form-control" id="weight" formControlName="weight">
+                        </div>
+                    </div>
+                    <span class="form-text" *ngIf="!addProductForm.get('weightUnit').valid && addProductForm.get('weightUnit').touched">Weight Unit is not provided or invalid; </span>
+                    <span class="form-text" *ngIf="!addProductForm.get('weight').valid && addProductForm.get('weight').touched">Weight is not provided or invalid; </span>
+                    <div class="desc-group">
+                        <div class="def-parameter">
+                            <label for="homeM" class="form-label">Home measure</label>
+                            <input type="text" class="form-control" id="homeM" formControlName="homeMeasure">
+                        </div>
+
+
+                        <div class="def-parameter">
+                            <label for="homeValue" class="form-label">Size</label>
+                            <input type="number" class="form-control" id="homeValue" formControlName="homeMeasureValue">
+                        </div>
+                    </div>
+                    <span class="form-text" *ngIf="!addProductForm.get('homeMeasure').valid && addProductForm.get('homeMeasure').touched">Home Measure is not provided or invalid; </span>
+                    <span class="form-text" *ngIf="!addProductForm.get('homeMeasureValue').valid && addProductForm.get('homeMeasureValue').touched">Home Measure Size is not provided or invalid; </span>
+                    <div class="def-group">
+                        <div class="def-parameter">
+                            <label for="proteins" class="form-label">Proteins</label>
+                            <input type="number" class="form-control" id="proteins" formControlName="proteins">
+                        </div>
+                        <div class="def-parameter">
+                            <label for="calories" class="form-label">Calories</label>
+                            <input type="number" class="form-control" id="calories" formControlName="calories">
+                        </div>
+                    </div>
+                    <span class="form-text" *ngIf="!addProductForm.get('proteins').valid && addProductForm.get('proteins').touched">Proteins is not provided or invalid; </span>
+                    <span class="form-text" *ngIf="!addProductForm.get('calories').valid && addProductForm.get('calories').touched">Calories is not provided or invalid; </span>
+
+                    <form [formGroup]="selectParamForm">
+                        <div class="parameters-select">
+                            <div class="def-parameter">
+                                <label for="params" class="form-label">Existing Parameters</label>
+                                <input class="form-control" list="parameters" name="parameters" id="params" autocomplete="off" placeholder="Type to search..." formControlName="param">
+                                <datalist id="parameters">
+                         <option *ngFor="let p of parametersWithoutDefs" style="width:100%">{{p.name}}</option>
+                    </datalist>
+
+                            </div>
+                            <div class="def-parameter">
+                                <label for="size" class="form-label">Amount</label>
+                                <input type="number" class="form-control" id="homeValue" formControlName="size">
+                            </div>
+                            <button class="button btn add" type="button" (click)="onAdd()" [disabled]="!selectParamForm.valid">Add Parameter</button>
+                        </div>
+                        <span class="form-text" *ngIf="!selectParamForm.get('size').valid && selectParamForm.get('size').touched">Size is not provided or invalid </span>
+                        <span class="form-text" *ngIf="!selectParamForm.get('param').valid && selectParamForm.get('param').touched">Parameter is not provided or invalid </span>
+                        <span class="form-text" *ngIf="selectParamForm.get('param').dirty && selectParamForm.errors?.paramDoNotMatch">There is no such parameter yet.</span>
+                        <span class="form-text" *ngIf="selectParamForm.get('param').dirty && selectParamForm.errors?.paramAdded">Selected parameter was already added</span>
+
+                        <ng-template [ngIf]="isToAdd">
+                            <div class="nondef-params" *ngFor="let a of addedParams">
+                                <div class="def-parameter">
+                                    <label for="pName" class="form-label">{{a.name}}</label>
+                                    <input type="text" class="form-control" id="pSize" disabled value="{{a.size}} ({{a.measureUnit}})">
+                                </div>
+                                <button type="button" class="btn btn-danger" (click)="onDelete(a)">X</button>
+                            </div>
+                        </ng-template>
+                    </form>
+                    <button type="submit" class="btn btn-success" [disabled]="!addProductForm.valid">Add Product</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

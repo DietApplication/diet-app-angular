@@ -7,13 +7,14 @@ import { RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminHeaderComponent } from './admin-header/admin-header.component';
-import { AdminAlertComponent } from './admin-alert/admin-alert.component';
+
+import { SharedModule } from '../shared/shared.module';
 
 
 
 @NgModule({
   declarations: [
-    AdminComponent, CreateEmployeeComponent, AdminHeaderComponent, AdminAlertComponent
+    AdminComponent, CreateEmployeeComponent, AdminHeaderComponent
   ],
   imports: [
     RouterModule,
@@ -21,7 +22,8 @@ import { AdminAlertComponent } from './admin-alert/admin-alert.component';
     ReactiveFormsModule,
     FormsModule,
     AdminRoutingModule,
-    AutosizeModule
+    AutosizeModule,
+    SharedModule
   ]
 })
 export class AdminModule { }

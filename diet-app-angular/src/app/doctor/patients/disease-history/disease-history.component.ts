@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { Disease } from '../../diseases/disease.model';
-import { DiseasesService } from '../../diseases/diseases.service';
+import { Disease } from '../../../shared/diseases/disease.model';
+import { DiseasesService } from '../../../shared/diseases/diseases.service';
 import { DiseaseHistoryService } from './disease-history.service';
 
 

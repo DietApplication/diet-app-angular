@@ -26,8 +26,8 @@
         </div>
     </div>
     <div class="sticky-right">
-        <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error">
-        </app-doctor-alert>
+        <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
+
         <h1 style="color: rgb(240, 84, 37); margin-left:20%; margin-top:10%" *ngIf="errorDiet">{{errorDiet}}</h1>
         <h1 style="color:#FEAD54; margin-left:20%; margin-top:10%" *ngIf="isFinished">Diet is fully filled!
             <a style="color: #0A7B79;" href="/doctor/patients">Return to Patients</a>

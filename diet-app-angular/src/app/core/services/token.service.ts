@@ -11,7 +11,7 @@ import jwt_decode from 'jwt-decode';
   providedIn: 'root'
 })
 export class TokenService {
-  constructor(private router: Router) {
+  constructor(private router: Router, private http: HttpClient) {
 
   }
   get hasToken() {
@@ -45,8 +45,11 @@ export class TokenService {
     return localStorage.getItem('refresh_token');
   }
   logout() {
+    this.http.put('https://dietappeu.azurewebsites.net/api/auth/logout?idUser=' + this.getUserId(), {
+      idUser: this.getUserId()
+    }).subscribe((res) => { console.log(res) });
     localStorage.clear();
-    this.router.navigate(['/auth/login'])
+    this.router.navigate(['/auth/login']);
   }
 
 }

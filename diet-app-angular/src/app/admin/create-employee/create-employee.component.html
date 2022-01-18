@@ -4,7 +4,7 @@
     <div class="sticky-right">
         <div class="content">
             <div class="container">
-                <app-admin-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-admin-alert>
+                <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
                 <h1>Create New Employee</h1>
                 <form [formGroup]="createEmployeeForm" (ngSubmit)="onCreateEmp()">
                     <div class="role sub">

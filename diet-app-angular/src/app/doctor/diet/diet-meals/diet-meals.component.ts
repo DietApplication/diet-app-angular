@@ -24,7 +24,7 @@ export class DietMealsComponent implements OnInit {
   error: string;
   errorDiet: string;
   step: number = 7;
-  daysPerStep: number[] = [];
+
   daysNumberFilled: number[] = [];
   currentDay: number;
   searchMealForm: FormGroup;
@@ -32,6 +32,7 @@ export class DietMealsComponent implements OnInit {
   currentMeal: number = 1;
   meal: Meal;
   meals: any[] = [];
+  mealsInfo: any[] = [];
   products: ProductInRecipe[] = [];
   data;
   isAddDay: boolean = false;
@@ -41,12 +42,15 @@ export class DietMealsComponent implements OnInit {
   totalProteins: number = 0;
   proteinProporion: number = 0;
   parameters: any[] = [];
-  daysToShow: number[] = [];
   recipeParameters: any[] = [];
   isLoading: boolean = false;
   searchEnabled: boolean = true;
   isFinished: boolean = false;
-  daysDisabled: boolean = false;
+
+  currentPage: number = 1;
+  dataMeal;
+  searchMealsInfo: FormGroup;
+  pages: number[] = [];
   recipeParamsByProduct: { idProduct: number, parameters: any[] }[] = [];
   constructor(private dietService: DietService, private route: ActivatedRoute, private cdref: ChangeDetectorRef, private mealsService: MealsService, private productService: ProductsService) {
 
@@ -59,6 +63,9 @@ export class DietMealsComponent implements OnInit {
     this.initSearchForm();
     this.initDayForm();
     this.onGetDaysAndMeals();
+    this.initSearchMealsForm();
+    this.onGetMeals(this.currentPage);
+
   }
 
   onGetDaysAndMeals() {
@@ -72,10 +79,11 @@ export class DietMealsComponent implements OnInit {
       this.daysFilled = res.daysFilled;
       this.daysLeft = this.days - this.daysFilled;
       this.daysNumberFilled = res.daysNumberFilled;
+      this.onHandleDays();
       if (this.days === this.daysFilled) {
         this.isFinished = true;
       }
-      this.fillDaysPerStep(1);
+
       console.log(res);
     }, (error) => {
       this.errorDiet = 'Diet not found';
@@ -93,53 +101,6 @@ export class DietMealsComponent implements OnInit {
     this.error = null;
   }
 
-  goBack() {
-    if (this.daysPerStep[0] > this.step) {
-      this.fillDaysPerStep(this.daysPerStep[0] - this.step);
-      console.log("back " + this.daysPerStep);
-    }
-  }
-
-  goForward() {
-    if (this.daysPerStep[0] <= this.days - this.step) {
-      this.fillDaysPerStep(this.daysPerStep[0] + this.step);
-      console.log("forward " + this.daysPerStep);
-    }
-  }
-  private fillDaysPerStep(start: number) {
-    console.log("days ", this.days)
-    this.daysPerStep = [];
-    this.daysToShow = [];
-    this.daysPerStep.length = this.step;
-    if (this.days - start < this.step) {
-      this.daysPerStep.length = this.days - start;
-    }
-
-    for (let i = 0; i < this.step; i++) {
-      if (start > this.days) {
-        console.log("vot etot if ")
-        continue;
-      }
-
-      this.daysPerStep[i] = start++;
-      if (!this.daysNumberFilled.includes(this.daysPerStep[i])) {
-        this.daysToShow.push(this.daysPerStep[i])
-      }
-
-
-      // if (this.daysNumberFilled.includes(this.daysPerStep[i])) {
-      //   this.daysPerStep.splice(this.daysPerStep.indexOf(i), 1);
-      // }
-    }
-    if (this.daysToShow.length === 0) {
-      console.log("in if")
-      this.goForward();
-    }
-    this.currentDay = this.daysToShow[0];
-    console.log("init day: " + this.currentDay)
-
-
-  }
   private initSearchForm() {
     this.searchMealForm = new FormGroup({
       name: new FormControl(null, Validators.required)
@@ -206,7 +167,6 @@ export class DietMealsComponent implements OnInit {
   }
   onAssignMeals() {
     this.dietService.assignMeals(this.idDiet, this.currentDay, this.meals).subscribe((res) => {
-      this.daysPerStep.splice(this.currentDay, 1);
       this.isAddDay = false;
       console.log("added ", res);
       alert("Meals for day " + this.currentDay + " were assigned")
@@ -240,6 +200,35 @@ export class DietMealsComponent implements OnInit {
     this.totalProteins = null;
     this.mealAdded = false;
     this.searchEnabled = true;
+  }
+  private initSearchMealsForm() {
+    this.searchMealsInfo = new FormGroup({
+      nameMl: new FormControl(null)
+    })
+  }
+  onGetMeals(page: number) {
+    this.currentPage = page;
+    this.mealsService.getMeals(page).subscribe((res) => {
+      this.dataMeal = res;
+      console.log(this.dataMeal);
+      this.mealsInfo = this.dataMeal.meals;
+      console.log(this.mealsInfo);
+      this.pages.length = Math.ceil(this.dataMeal.totalRows / this.dataMeal.pageSize);
+    })
+  }
+  onSearchMealsInfo() {
+    let name: string = this.searchMealsInfo.value.namePr;
+    this.productService.searchProduct(name).subscribe((res) => {
+      this.dataMeal = res;
+      this.mealsInfo = this.dataMeal;
+      console.log(this.mealsInfo);
+    },
+      (error) => {
+        this.error = "No such product";
+      });
+  }
+  onHandleDays() {
+    this.currentDay = this.daysNumberFilled.length + 1;
   }
 }
 

@@ -1,7 +1,33 @@
 <div class="container-w-background container-fluid">
-    <div class="sticky-left-background"></div>
+    <div class="sticky-left-background">
+        <div id="content-left" class="content-left">
+            <h4 class="meal-head">Available Meals</h4>
+            <form [formGroup]="searchMealsInfo" class="searchInfo" (ngSubmit)="onSearchMealsInfo()">
+
+                <input type="text" class="form-control" formControlName="nameMl" placeholder="Search">
+                <button class="btn" [disabled]="!searchMealsInfo.valid">
+                  <img src="../../../assets/searchGreen.svg" alt="search">
+                </button>
+            </form>
+            <ul class="list-group mealInfo">
+                <li class="list-group-item" *ngFor="let ml of mealsInfo"> <img src="../../../../assets/meal-icon.svg" alt="meal">{{ml.nameOfMeal}}</li>
+            </ul>
+            <div class="pag">
+                <nav aria-label="...">
+                    <ul class="pagination pagination-xs">
+                        <li class="page-item" *ngFor="let p of pages; let i = index;">
+                            <a class="page-link" [class.page-a]="currentPage === i+1" tabindex="-1" (click)="onGetMeals(i+1)">{{i+1}}</a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </div>
     <div class="sticky-right">
-        <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-doctor-alert>
+        <app-doctor-alert [message]="error" (close)="onHandleError()" *ngIf="error">
+        </app-doctor-alert>
         <h1 style="color: rgb(240, 84, 37); margin-left:20%; margin-top:10%" *ngIf="errorDiet">{{errorDiet}}</h1>
         <h1 style="color:#FEAD54; margin-left:20%; margin-top:10%" *ngIf="isFinished">Diet is fully filled!
             <a style="color: #0A7B79;" href="/doctor/patients">Return to Patients</a>
@@ -10,17 +36,7 @@
         <div *ngIf="!errorDiet && !isFinished" class="content">
             <h1>DIET DETAILS</h1>
             <div class="days-container">
-                <h3>Day {{currentDay}}</h3>
-                <ul class="pagination pagination-xs">
-                    <li><button class="btn" type="button" (click)="goBack()"><img src="../../../../assets/chevron-left.svg" alt="left-arrow"></button></li>
-                    <li *ngFor="let d of daysToShow; let i = index;" class="days">
-                        <a class="page-link" [class.page-a]="currentDay === d" tabindex="-1" (click)="setDay(d)">{{d}}</a>
-                    </li>
-                    <li><button (click)="goForward()" class="btn" type="button"><img src="../../../../assets/chevron-right.svg" alt="left-arrow"></button></li>
-
-                </ul>
-
-                <h3 style="color: #FEAD54;">Days: {{daysLeft}}</h3>
+                <h2>Day {{currentDay}}/{{days}}</h2>
             </div>
             <div class="meal-container">
                 <div class="meals">

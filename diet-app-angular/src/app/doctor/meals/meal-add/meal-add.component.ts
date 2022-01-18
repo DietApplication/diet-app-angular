@@ -110,7 +110,7 @@ export class MealAddComponent implements OnInit {
     this.currentPage = page;
     this.productService.getProducts(page).subscribe((response) => {
       this.dataProduct = response;
-      console.log(this.data);
+      console.log(this.dataProduct);
       this.productsInfo = this.dataProduct.products;
       console.log(this.productsInfo);
       this.pages.length = Math.ceil(this.dataProduct.totalRows / this.dataProduct.pageSize);

@@ -1,0 +1,44 @@
+<div class="container-w-background container-fluid">
+    <div class="sticky-left-background">
+    </div>
+    <div class="sticky-right">
+        <div class="content">
+            <div class="container">
+                <app-secretary-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-secretary-alert>
+                <h1>Assign Survey</h1>
+                <form [formGroup]="assignSurveyForm" (ngSubmit)="onAssignSurvey()">
+
+                    <div class="names">
+                        <div class="fname sub">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" formControlName="firstName">
+                            <span class="form-text" *ngIf="!assignSurveyForm.get('firstName').valid && assignSurveyForm.get('firstName').touched">the first name is not provided or invalid</span>
+                        </div>
+                        <div class="lname sub">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" formControlName="lastName">
+                            <span class="form-text" *ngIf="!assignSurveyForm.get('lastName').valid && assignSurveyForm.get('lastName').touched">the last name is not provided or invalid</span>
+                        </div>
+                    </div>
+                    <div class="email sub">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="example@example.com" formControlName="email">
+                        <span class="form-text" *ngIf="!assignSurveyForm.get('email').valid && assignSurveyForm.get('email').touched">the email is not provided or invalid</span>
+                    </div>
+
+                    <div class="email sub">
+                        <label for="email" class="form-label">Confirm Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="example@example.com" formControlName="confEmail">
+                        <span class="form-text" *ngIf="!assignSurveyForm.get('confEmail').valid && assignSurveyForm.get('confEmail').touched">confirm email is not provided or invalid</span>
+                        <span class="form-text" *ngIf="assignSurveyForm.get('confEmail').dirty && assignSurveyForm.errors?.emailsNotMatch">Emails must match</span>
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn assign" [disabled]="!assignSurveyForm.valid">Assign Survey</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

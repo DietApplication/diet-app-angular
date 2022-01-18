@@ -58,6 +58,7 @@ export class MealDetailsComponent implements OnInit {
   onHandleError() {
     this.error = null;
   }
+
   expandParameters(p) {
     this.productService.getParametersByProduct(p.idProduct).subscribe((res) => {
       this.data = res[0];

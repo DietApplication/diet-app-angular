@@ -65,6 +65,10 @@ export class LoginComponent implements OnInit {
           console.log("admin");
           this.router.navigate(['/admin/create-employee'])
         }
+        if (this.tokenService.getRole() === 'SECRETARY') {
+          console.log("secretary");
+          this.router.navigate(['/secretary/assign-survey'])
+        }
       },
       (error) => {
         this.error = error.error;

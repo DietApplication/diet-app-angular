@@ -9,12 +9,14 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminHeaderComponent } from './admin-header/admin-header.component';
 
 import { SharedModule } from '../shared/shared.module';
+import { AllEmployeesComponent } from './all-employees/all-employees.component';
+import { EmployeeComponent } from './all-employees/employee/employee.component';
 
 
 
 @NgModule({
   declarations: [
-    AdminComponent, CreateEmployeeComponent, AdminHeaderComponent
+    AdminComponent, CreateEmployeeComponent, AdminHeaderComponent, AllEmployeesComponent, EmployeeComponent
   ],
   imports: [
     RouterModule,

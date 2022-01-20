@@ -1,3 +1,15 @@
+export interface Employee {
+  idUser: number;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  email: string;
+  phoneNumber: string;
+  pesel: string;
+  office: string;
+  role: string;
+  isActive: boolean;
+}
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -28,5 +40,8 @@ export class AdminService {
       office: office,
       role: role
     })
+  }
+  getEmployees(page: number) {
+    return this.http.get<Employee[]>('https://dietappeu.azurewebsites.net/api/admin/users?Page=' + page);
   }
 }

@@ -4,38 +4,60 @@
     <div class="sticky-right">
         <div class="content">
             <div class="container">
-                <!-- <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert> -->
+                <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
                 <h1>Create Appointment</h1>
-                <form class="apptForm" [formGroup]="createAppointmentForm">
+                <form class="apptForm" [formGroup]="datesForm">
                     <div class="date">
                         <label for="date" class="form-label">Select Date</label>
-                        <input type="date" id="date" class="form-control">
+                        <input type="date" id="date" class="form-control" formControlName="date">
+                        <span class="form-text" *ngIf="!datesForm.get('date').valid && datesForm.get('date').touched">the date is not provided</span>
+                        <span class="form-text" *ngIf="datesForm.get('date').dirty && datesForm.errors?.dateInvalid">date is earlier than today!</span>
                     </div>
                     <div class="date">
                         <label for="time" class="form-label">Time</label>
-                        <input type="time" id="time" class="form-control">
+                        <input type="time" id="time" class="form-control" formControlName="time">
+                        <span class="form-text" *ngIf="!datesForm.get('time').valid && datesForm.get('time').touched">the time is not provided</span>
+                        <span class="form-text" *ngIf="datesForm.get('time').dirty && datesForm.errors?.timeInvalid">time is earlier than today!</span>
                     </div>
-                    <div class="user">
-                        <label for="doctor" class="form-label">Select Doctor</label>
-                        <form class="search">
-                            <input type="text" id="doctor" class="form-control" placeholder="last name/first name & last name">
-                            <button class="btn"> <img src="../../../assets/searchGreen.svg" alt="search"></button>
-                        </form>
-                    </div>
-                    <div class="user">
-                        <label for="patient" class="form-label">Select Patient</label>
-                        <form class="search">
-                            <input type="text" id="patient" class="form-control" placeholder="last name/first name & last name">
-                            <button class="btn"> <img src="../../../assets/searchGreen.svg" alt="search"></button>
-                        </form>
-                    </div>
+                </form>
+                <div class="user">
+                    <label for="doctor" class="form-label">Select Doctor</label>
+                    <form [formGroup]="searchDoctorForm" class="search" (ngSubmit)="onSearchDoctors()">
+                        <input type="text" id="doctor" class="form-control" placeholder="last name/first name & last name" formControlName="doctorName">
+                        <button class="btn" [disabled]="!searchDoctorForm.valid"> <img src="../../../assets/searchGreen.svg" alt="search"></button>
+                    </form>
+                    <span class="form-text" *ngIf="!searchDoctorForm.get('doctorName').valid && searchDoctorForm.get('doctorName').touched">doctor is not provided</span>
+                    <ul class="results list-group">
+                        <li class="list-group-item" [ngClass]="clickedD=== i ? 'active-user': not-active-user" *ngFor="let d of doctors;let i = index;" style="display: flex;" (click)="setIdDoctor(i)"> <b>{{d.firstName}} {{d.lastName}} </b>
+                            <em style="color: #0A7B79; margin-bottom: 0;"> <b>({{d.email}})</b></em>
+                        </li>
+                    </ul>
+                </div>
+                <div class="user">
+                    <label for="patient" class="form-label">Select Patient</label>
+                    <form class="search" [formGroup]="searchPatientForm" (ngSubmit)="onSearchPatients()">
+                        <input type="text" id="patient" class="form-control" placeholder="last name/first name & last name" formControlName="patientName">
+                        <button class="btn" [disabled]="!searchPatientForm.valid"> <img src="../../../assets/searchGreen.svg" alt="search"></button>
+                    </form>
+                    <span class="form-text" *ngIf="!searchPatientForm.get('patientName').valid && searchPatientForm.get('patientName').touched">patient is not provided</span>
+
+                    <ul class="results list-group">
+                        <li [ngClass]="clickedP=== i ? 'active-user': not-active-user" class="list-group-item" *ngFor="let p of patients;let i = index;" style="display: flex;" (click)="setIdPatient(i)"> <b>{{p.firstName}} {{p.lastName}} </b>
+                            <em style="color: #0A7B79; margin-bottom: 0;"> <b>({{p.email}})</b></em>
+                        </li>
+                    </ul>
+                </div>
+                <form [formGroup]="descForm">
                     <div class="desc">
                         <label for="desc" class="form-label">Description</label>
-                        <textarea class="form-control" id="desc" autosize></textarea>
+                        <textarea class="form-control" id="desc" autosize formControlName="desc"></textarea>
                     </div>
-                    <button class="btn add">Create Appointment</button>
+                    <span class="form-text" *ngIf="!descForm.get('desc').valid && descForm.get('desc').touched">description is invalid or not provided</span>
 
                 </form>
+
+                <button class="btn add" [disabled]="!datesForm.valid || !searchDoctorForm.valid || !searchPatientForm.valid || !descForm.valid || !patientSelected || !doctorSelected" (click)="onCreateAppointment()">Create Appointment</button>
+
             </div>
         </div>
     </div>

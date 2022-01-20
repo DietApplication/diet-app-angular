@@ -1,1 +1,19 @@
-<p>appointments works!</p>
+<div class="container-w-background container-fluid">
+    <div class="sticky-left-background">
+    </div>
+    <div class="sticky-right">
+        <div class="content">
+            <div class="container">
+                <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
+                <h1>Appointments</h1>
+                <div class="dates">
+                    <label for="dates" class="form-label">Select Date</label>
+                    <input class="form-control" list="mDates" name="mDates" id="dates" autocomplete="off" placeholder="Type to search...">
+                    <datalist id="mDates">
+                         <option *ngFor="let d of dates" style="width:100%">{{d.split("T")[0]}}</option>
+                    </datalist>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

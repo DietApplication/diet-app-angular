@@ -49,6 +49,7 @@ export class MeasurementsPatientComponent implements OnInit {
   onGetDates() {
     this.measurementService.getDates(this.idPatient).subscribe(
       (res) => {
+        console.log(res);
         res.forEach((key) => {
           key.date = key.date.split("T")[0];
         });

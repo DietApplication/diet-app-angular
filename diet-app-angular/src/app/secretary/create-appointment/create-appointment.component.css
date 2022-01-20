@@ -75,3 +75,25 @@ label {
     border-radius: 10px;
     margin-top: 5%;
 }
+
+.results li {
+    width: 92%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+}
+
+em::before {
+    content: "\00a0 ";
+}
+
+.active-user {
+    border: 1px solid #0A7B79;
+    background-color: #D3F2E9;
+    color: #FEAD54;
+}
+
+.not-active-user {
+    border: none;
+    background-color: transparent;
+    color: black;
+}

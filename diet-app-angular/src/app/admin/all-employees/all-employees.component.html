@@ -1,0 +1,16 @@
+<div class="container">
+    <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
+    <h1>Employees</h1>
+    <app-employee *ngFor="let user of users; let i = index;" [index]="i" [user]="user"></app-employee>
+
+    <div class="pag">
+        <nav aria-label="...">
+            <ul class="pagination pagination-xs">
+                <li class="page-item" *ngFor="let p of pages; let i = index;">
+                    <a class="page-link" [class.page-a]="currentPage === i+1" tabindex="-1" (click)="onGetUsers(i+1)">{{i+1}}</a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+</div>

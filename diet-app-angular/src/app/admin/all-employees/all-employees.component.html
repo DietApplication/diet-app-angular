@@ -1,7 +1,34 @@
 <div class="container">
     <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
     <h1>Employees</h1>
-    <app-employee *ngFor="let user of users; let i = index;" [index]="i" [user]="user"></app-employee>
+    <form [formGroup]="searchUsersForm" class="search" (ngSubmit)="onSearch()">
+        <input type="text" class="form-control" formControlName="name" placeholder="Search">
+        <button class="btn" [disabled]="!searchUsersForm.valid">
+                  <img src="../../../assets/searchGreen.svg" alt="search">
+                </button>
+    </form>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>Role</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Date of Birth</th>
+                    <th>Email</th>
+                    <th>Pesel</th>
+                    <th>Phone Number</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr app-employee *ngFor="let user of users; let i = index;" [index]="i" [user]="user">
+            </tbody>
+        </table>
+    </div>
+
+
 
     <div class="pag">
         <nav aria-label="...">

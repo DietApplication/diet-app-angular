@@ -6,13 +6,65 @@
             <div class="container">
                 <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
                 <h1>Appointments</h1>
-                <div class="dates">
-                    <label for="dates" class="form-label">Select Date</label>
-                    <input class="form-control" list="mDates" name="mDates" id="dates" autocomplete="off" placeholder="Type to search...">
-                    <datalist id="mDates">
+
+                <form class="date-filter" [formGroup]="datesForm" (ngSubmit)="onGetApptByDate()">
+                    <div class="dates">
+                        <label for="dates" class="form-label">Select Date</label>
+                        <input class="form-control" list="mDates" name="mDates" id="dates" autocomplete="off" placeholder="Type to search..." formControlName="date">
+                        <datalist id="mDates">
                          <option *ngFor="let d of dates" style="width:100%">{{d.split("T")[0]}}</option>
                     </datalist>
+
+                    </div>
+                    <button class="btn filter" [disabled]="!datesForm.valid">Find</button>
+                </form>
+                <span class="form-text" *ngIf="!datesForm.get('date').valid && datesForm.get('date').touched">Date is not provided or invalid </span>
+                <span class="form-text" *ngIf="datesForm.get('date').dirty && datesForm.errors?.dateDoNotMatch">No visits on this date yet.</span>
+                <div class="results table-responsive" *ngIf="!errorDate">
+                    <h2 *ngIf="appointments">{{chosenDate}}</h2>
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th>Doctor</th>
+                                <th>Patient</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let a of appointments">
+                                <td>{{a.doctorFullName}}</td>
+                                <td>{{a.patientFullName}}</td>
+                                <td>{{a.timeToDisplay}}</td>
+                                <td><button class="btn btn-details" (click)="onGetDetails(a)">Details</button></td>
+                                <td><button class="btn btn-danger" (click)="onDelete(a)">Cancel</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="details" class="details" id="details">
+                        <div class="elem">
+                            <label for="doctor" class="form-label">Doctor</label>
+                            <input type="text" class="form-control" disabled value="{{details.doctorFullName}}">
+                        </div>
+                        <div class="elem">
+                            <label for="patient" class="form-label">Patient</label>
+                            <input type="text" class="form-control" disabled value="{{details.patientFullName}}   {{details. patientEmail}}   {{details.patientDateOfBirth}}">
+                        </div>
+                        <div class="elem">
+                            <label for="date" class="form-label">Date</label>
+                            <input type="text" class="form-control" disabled value="{{details.appointmentDate}}">
+                        </div>
+                        <div class="elem">
+                            <label for="time" class="form-label">Time</label>
+                            <input type="text" class="form-control" disabled value="{{details.appointmentTime}}">
+                        </div>
+                        <div class="elem">
+                            <label for="desc" class="form-label">Description</label>
+                            <textarea autosize type="desc" class="form-control" disabled>{{details.description}}</textarea>
+                        </div>
+
+                    </div>
                 </div>
+                <h2 *ngIf="errorDate" style="margin-top:3%; color:rgb(245, 152, 46)">{{errorDate}}</h2>
             </div>
         </div>
     </div>

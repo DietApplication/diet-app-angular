@@ -1,14 +1,14 @@
-<div class="user list-group-item">
+<td class="pic">
     <img src="../../../../assets/user-icon.svg" alt="user icon">
-
     <p name="role" ngDefaultControl [(ngModel)]="role">{{role}}
         <em name="office" *ngIf="role==='DOCTOR'" ngDefaultControl [(ngModel)]="office" style="color:#FEAD54;">({{office}})</em></p>
-    <p name="firstName" ngDefaultControl [(ngModel)]="firstName">{{firstName}}</p>
-    <p name="lastName" ngDefaultControl [(ngModel)]="lastName">{{lastName}}</p>
-    <p name="dob" ngDefaultControl [(ngModel)]="dob">{{dob.split("T")[0]}}</p>
-    <p name="email" ngDefaultControl [(ngModel)]="email">{{email}}</p>
-    <p name="pesel" ngDefaultControl [(ngModel)]="pesel">{{pesel}}</p>
-    <p name="phone" ngDefaultControl [(ngModel)]="phone">{{phone}}</p>
-    <button *ngIf="isActive" class="btn btn-danger">Deactivate</button>
-    <button *ngIf="!isActive" class="btn btn-success">Activate</button>
-</div>
+</td>
+
+<td name="firstName" ngDefaultControl [(ngModel)]="firstName">{{firstName}}</td>
+<td name="lastName" ngDefaultControl [(ngModel)]="lastName">{{lastName}}</td>
+<td name="dob" ngDefaultControl [(ngModel)]="dob">{{dob.split("T")[0]}}</td>
+<td name="email" ngDefaultControl [(ngModel)]="email">{{email}}</td>
+<td name="pesel" ngDefaultControl [(ngModel)]="pesel">{{pesel}}</td>
+<td name="phone" ngDefaultControl [(ngModel)]="phone">{{phone}}</td>
+<td *ngIf="isActive"> <button class="btn btn-danger" (click)="onDeactivate()">Deactivate</button></td>
+<td *ngIf="!isActive"><button class="btn btn-success" (click)="onActivate()">Activate</button></td>

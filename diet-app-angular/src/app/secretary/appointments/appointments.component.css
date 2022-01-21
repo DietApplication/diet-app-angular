@@ -16,6 +16,10 @@
     width: 86%;
 }
 
+.sticky-right {
+    overflow: scroll;
+}
+
 .dates {
     margin-top: 3%;
     width: 25%;
@@ -25,4 +29,75 @@ label {
     font-size: 16px;
     font-weight: 600;
     color: #0A7B79;
+}
+
+.filter {
+    background-color: #0A7B79;
+    color: white;
+    margin-left: 2%;
+}
+
+.date-filter {
+    display: flex;
+    align-items: flex-end;
+}
+
+.btn-details {
+    background-color: #D3F2E9;
+    color: #0A7B79;
+}
+
+tr {
+    border-bottom: 1px solid lightgrey;
+}
+
+.results {
+    margin-top: 5%;
+}
+
+td {
+    vertical-align: middle;
+    font-weight: 600;
+}
+
+th {
+    font-weight: 600;
+    color: #0A7B79;
+}
+
+tbody button {
+    padding: 10% 25%;
+    font-weight: 600;
+    border-radius: 16px;
+}
+
+tbody button:hover {
+    transform: scale(1.1) perspective(1px);
+}
+
+.details input[disabled],
+textarea[disabled] {
+    background-color: transparent;
+}
+
+.details input {
+    font-weight: 600;
+    padding-left: 0;
+    border: none;
+    border-bottom: 1px solid lightgrey;
+}
+
+.elem {
+    margin-bottom: 3%;
+}
+
+.details {
+    margin-top: 5%;
+    border: 1px solid lightgrey;
+    border-radius: 50px;
+    padding: 5% 5%;
+}
+
+.details textarea {
+    border-radius: 16px;
 }

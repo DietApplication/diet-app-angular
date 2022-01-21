@@ -1,21 +1,18 @@
 .list-group-item {
-    padding-top: 10px;
-    padding-bottom: 10px;
     border: none;
-    border-bottom: 1px solid #0A7B79;
+    border-bottom: 1px solid lightgrey;
 }
 
 img {
-    margin-right: 20px;
     height: 54px;
+    margin-bottom: 5%;
 }
 
 p {
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 0;
-    width: 13%;
-    margin-right: 1.2%;
+    margin-right: 0;
 }
 
 .name-info {
@@ -23,8 +20,7 @@ p {
     display: flex;
 }
 
-p[name="dob"] {
-    font-size: 14px;
+td[name="dob"] {
     color: #FEAD54;
     font-size: 400;
 }
@@ -47,4 +43,8 @@ button:hover {
 
 button:last-child {
     margin-right: 0;
+}
+
+td {
+    text-align: center;
 }

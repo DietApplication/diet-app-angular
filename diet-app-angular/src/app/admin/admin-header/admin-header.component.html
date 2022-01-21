@@ -1,16 +1,19 @@
-<nav class="navbar navbar-expand-xl navbar-custom">
-    <div class="logo">
-        <a class="nav-item">SOME LOGO</a>
-        <a class="nav-item" style="color:#e67700" (click)="onLogout()">Logout</a>
-    </div>
+<nav class="navbar navbar-expand-xl navbar-custom container-fluid">
     <div class="container-fluid header-custom">
-        <ul class="nav nav-pills  list-doctor-header">
-            <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" aria-current="page" routerLink="/admin/create-employee">Create Employee</a>
-            </li>
-            <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" routerLink="/admin/all-employees">All Employees</a>
-            </li>
-        </ul>
+        <div class="left">
+            <a class="nav-brand">LOGO</a>
+            <a style="color:#e67700" class="logout" (click)="onLogout()">Logout</a>
+        </div>
+
+        <div>
+            <ul class="nav nav-pills  list-doctor-header">
+                <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link" aria-current="page" routerLink="/admin/create-employee">Create Employee</a>
+                </li>
+                <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link" routerLink="/admin/all-employees">All Employees</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>

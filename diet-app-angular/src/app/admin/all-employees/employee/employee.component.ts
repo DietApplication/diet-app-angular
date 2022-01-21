@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Employee } from '../../admin.service';
+import { AdminService, Employee } from '../../admin.service';
 
 @Component({
-  selector: 'app-employee',
+  selector: '[app-employee]',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css']
 })
@@ -21,7 +21,7 @@ export class EmployeeComponent implements OnInit {
   office: string;
   role: string;
   isActive: boolean;
-  constructor() { }
+  constructor(private adminService: AdminService) { }
 
   ngOnInit(): void {
     this.firstName = this.user.firstName;
@@ -34,5 +34,25 @@ export class EmployeeComponent implements OnInit {
     this.office = this.user.office;
     this.isActive = this.user.isActive;
     this.role = this.user.role;
+  }
+  onDeactivate() {
+    if (confirm('Are you sure you want to deactivate this user?')) {
+      this.adminService.deactivateUser(this.idUser).subscribe((res) => {
+        console.log(res);
+        window.location.reload();
+      })
+    } else {
+      console.log("not deactivated")
+    }
+  }
+  onActivate() {
+    if (confirm('Are you sure you want to reactivate this user?')) {
+      this.adminService.activateUser(this.idUser).subscribe((res) => {
+        console.log(res);
+        window.location.reload();
+      })
+    } else {
+      console.log("not activated")
+    }
   }
 }

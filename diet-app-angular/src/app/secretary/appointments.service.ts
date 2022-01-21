@@ -9,7 +9,22 @@ export interface DoctorSearch {
   firstName: string;
   lastName: string;
   email: string;
-
+}
+export interface Appointment {
+  idVisit: number;
+  doctorFullName: string;
+  patientFullName: string;
+  timeToDisplay: string;
+  date: string;
+}
+export interface AppointmentDetails {
+  doctorFullName: string;
+  patientFullName: string;
+  patientEmail: string;
+  patientDateOfBirth: string;
+  appointmentDate: string;
+  appointmentTime: string;
+  description: string;
 }
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -56,10 +71,16 @@ export class AppointmentsService {
       description: description
     })
   }
-  getAppointments() {
-    return this.http.get('')
+  getAppointmentsByDate(date: string) {
+    return this.http.get<Appointment[]>('https://dietappeu.azurewebsites.net/api/secretary/appointments/dates?request=' + date)
   }
   getDates() {
     return this.http.get<any[]>('https://dietappeu.azurewebsites.net/api/secretary/appointments');
+  }
+  getDetails(idVisit: number) {
+    return this.http.get<AppointmentDetails>('https://dietappeu.azurewebsites.net/api/secretary/appointments/details/' + idVisit);
+  }
+  cancelAppt(idVisit: number) {
+    return this.http.delete('https://dietappeu.azurewebsites.net/api/secretary/appointments?idVisit=' + idVisit);
   }
 }

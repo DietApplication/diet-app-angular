@@ -44,4 +44,26 @@ export class AdminService {
   getEmployees(page: number) {
     return this.http.get<Employee[]>('https://dietappeu.azurewebsites.net/api/admin/users?Page=' + page);
   }
+  searchUsers(firstName: string, lastName: string) {
+    let url;
+    if (firstName !== null) {
+      url = 'https://dietappeu.azurewebsites.net/api/admin/users/search?firstName=' + firstName + '&lastName=' + lastName;
+    }
+    else {
+      url = 'https://dietappeu.azurewebsites.net/api/admin/users/search?lastName=' + lastName;
+    }
+    return this.http.get<Employee[]>(url);
+  }
+  deactivateUser(idUser: number) {
+    return this.http.put('https://dietappeu.azurewebsites.net/api/admin/users/accounts/deactivate', {
+      idUser: idUser
+    })
+  }
+  activateUser(idUser: number) {
+    return this.http.put('https://dietappeu.azurewebsites.net/api/admin/users/accounts/activate', {
+      idUser: idUser
+    })
+  }
 }
+
+

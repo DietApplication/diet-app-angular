@@ -43,6 +43,10 @@ form {
     border-radius: 0;
 }
 
+.sticky-right {
+    overflow: scroll;
+}
+
 .sticky-left-background {
     background-attachment: fixed;
     z-index: 1;

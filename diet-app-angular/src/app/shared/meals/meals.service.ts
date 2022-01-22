@@ -28,4 +28,8 @@ export class MealsService {
     return this.http.get<Meal[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/meal/search?mealName=' + param);
     // return this.http.get<Meal[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/meal/search?mealName=' + param).pipe().toPromise().then();
   }
+  serachMealAsync(param: string) {
+    return this.http.get<Meal[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/meal/search?mealName=' + param).pipe().toPromise();
+  }
+
 }

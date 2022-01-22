@@ -4,7 +4,7 @@
             <h4 class="meal-head">Available Meals</h4>
             <form [formGroup]="searchMealsInfo" class="searchInfo" (ngSubmit)="onSearchMealsInfo()">
 
-                <input type="text" class="form-control" formControlName="nameMl" placeholder="Search">
+                <input type="text" class="form-control" formControlName="nameMeal" placeholder="Search">
                 <button class="btn" [disabled]="!searchMealsInfo.valid">
                   <img src="../../../assets/searchGreen.svg" alt="search">
                 </button>
@@ -43,11 +43,11 @@
                     <button *ngFor="let meal of totalMeals; let i = index" [class.meal-b]="currentMeal === i+1" tabindex="-1" type="button" class="btn">Meal {{i+1}}</button>
                 </div>
                 <div class="meal-details">
-                    <form [formGroup]="addDayForm">
+                    <form *ngIf="!isAddDay" [formGroup]="addDayForm">
                         <label for="time" class="form-label">Time</label>
                         <input type="time" class="form-control time" id="time" formControlName="time">
                     </form>
-                    <form class="search-form" [formGroup]="searchMealForm" (ngSubmit)="onSearch()">
+                    <form *ngIf="!isAddDay" class="search-form" [formGroup]="searchMealForm" (ngSubmit)="onSearch()">
                         <label class="form-label">Meal</label>
                         <div class="search">
                             <input type="text" class="form-control" placeholder="Search" formControlName="name">
@@ -81,10 +81,10 @@
                                 <tr *ngFor="let p of products; let i = index">
                                     <td>{{i+1}}</td>
                                     <td>{{p.name}}</td>
-                                    <td>{{p.amount}} {{p.unit}}</td>
-                                    <td>{{p.homeMeasureSize}} {{p.homeMeasure}}</td>
+                                    <td>{{p.calculatedRecipeAmount | roundNumberAssignMeals}} {{p.unit}}</td>
+                                    <td>{{p.homeMeasureSize | roundNumberAssignMeals}} {{p.homeMeasure}}</td>
                                     <td>
-                                        <p *ngFor="let param of recipeParamsByProduct[i]?.parameters;">{{param.name}}: {{param.amount}} {{param.measureUnit}}</p>
+                                        <p *ngFor="let param of p.params;">{{param.paramName}}: {{param.calculatedParamSize | roundNumberAssignMeals}} {{param.paramMeasureUnit}}</p>
                                     </td>
                                 </tr>
                             </tbody>

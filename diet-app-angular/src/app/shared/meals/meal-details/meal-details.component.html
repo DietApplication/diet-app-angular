@@ -11,7 +11,7 @@
                 <ul *ngFor="let p of products; let i = index" class="ingredients" style="list-style: none; padding-left: 0;">
                     <li style="color: #FEAD54; font-weight: 600; font-size: 16px; margin-bottom: 3%;">{{p.name}}: {{p.amount}} {{p.unit}}
                         <ul class="list-group" style="margin-top:1%;">
-                            <li class="list-group-item" *ngFor="let finalParam of allParams[i]">{{finalParam.name}}: {{finalParam.amount * p.amount/p.size | roundNumber}} {{finalParam.measureUnit}}</li>
+                            <li class="list-group-item" *ngFor="let finalParam of p.params">{{finalParam.paramName}}: {{finalParam.calculatedParamSize | roundNumber}} {{finalParam.paramMeasureUnit}}</li>
                         </ul>
                     </li>
                 </ul>

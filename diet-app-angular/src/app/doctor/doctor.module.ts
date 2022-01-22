@@ -19,17 +19,17 @@ import { MeasurementsComponent } from './patients/measurements/measurements.comp
 import { DietComponent } from './diet/diet.component';
 import { DietCreateComponent } from './diet/diet-create/diet-create.component';
 import { DiseaseHistoryComponent } from './patients/disease-history/disease-history.component';
-import { DietMealsComponent } from './diet/diet-meals/diet-meals.component';
+import { DietMealsComponent, RoundNumberAssignMealsPipe } from './diet/diet-meals/diet-meals.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { DietHistoryComponent } from './patients/diet-history/diet-history.component';
-import { DietMealsListComponent } from './patients/diet-history/diet-meals-list/diet-meals-list.component';
+import { DietMealsListComponent, RoundNumberPipeDietMeals } from './patients/diet-history/diet-meals-list/diet-meals-list.component';
 import { SharedModule } from '../shared/shared.module';
 
 
 
 
 @NgModule({
-  declarations: [DoctorComponent,
+  declarations: [RoundNumberPipeDietMeals, RoundNumberAssignMealsPipe, DoctorComponent,
     DoctorHeaderComponent, PendingListComponent,
     PendingListItemComponent,
     NotesComponent, PatientsItemComponent, NotesItemComponent, PatientsComponent,
@@ -44,6 +44,6 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule
 
   ],
-  exports: [DoctorComponent, DoctorHeaderComponent, PendingListComponent]
+  exports: [DoctorComponent, DoctorHeaderComponent, PendingListComponent, RoundNumberPipeDietMeals, RoundNumberAssignMealsPipe]
 })
 export class DoctorModule { }

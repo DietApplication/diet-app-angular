@@ -13,18 +13,18 @@ export class MealItemComponent implements OnInit {
   isDisplayed: boolean = false;
   idMeal: number;
   nameOfMeal: string;
-  description: string; 
-  cookingURL: string; 
+  description: string;
+  cookingURL: string;
   products: {
     amount: number;
+    calculatedSize;
     homeMeasure: string;
     homeMeasureSize: number;
     idMealRecipe: number;
     idProduct: number;
     name: string;
-    size: number;
     unit: string;
-  }[];
+  }[] = [];
   constructor(private router: Router) { }
   ngOnInit(): void {
     this.idMeal = this.meal.idMeal;

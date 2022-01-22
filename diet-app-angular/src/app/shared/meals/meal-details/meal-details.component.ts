@@ -21,12 +21,12 @@ export class MealDetailsComponent implements OnInit {
   cookingURL: string;
   products: {
     amount: number;
+    calculatedSize;
     homeMeasure: string;
     homeMeasureSize: number;
     idMealRecipe: number;
     idProduct: number;
     name: string;
-    size: number;
     unit: string;
   }[] = [];
   proportion: number;
@@ -45,10 +45,7 @@ export class MealDetailsComponent implements OnInit {
       this.description = res[0].description;
       this.cookingURL = res[0].cookingURL;
       this.products = res[0].products;
-      this.products.forEach((pr) => {
-        this.expandParameters(pr);
 
-      })
     }, (err) => {
       this.nameOfMeal = "Not found"
       this.error = err.error;

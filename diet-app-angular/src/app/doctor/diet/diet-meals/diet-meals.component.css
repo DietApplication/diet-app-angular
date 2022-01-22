@@ -11,6 +11,10 @@
     color: #FEAD54;
 }
 
+.meals button {
+    background-color: #D3F2E9;
+}
+
 .page-link {
     border: none;
     border-radius: 8px;
@@ -57,7 +61,6 @@ img {
 .meals button {
     font-weight: 600;
     font-size: 16px;
-    background-color: #D3F2E9;
     color: #0A7B79;
     padding: 22px 40px;
     border-radius: 20px;
@@ -167,6 +170,7 @@ label {
 
 .page-link {
     border: none;
+    background-color: #D3F2E9;
     color: #0A7B79
 }
 

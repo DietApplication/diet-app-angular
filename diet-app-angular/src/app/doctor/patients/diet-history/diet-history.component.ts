@@ -11,7 +11,8 @@ export class DietHistoryComponent implements OnInit {
   routeSub: any;
   idPatient: any;
   diets: DietHistory[];
-
+  error: string;
+  errorDiet: string;
   constructor(private route: ActivatedRoute, private dietHistoryService: DietHistoryService) { }
 
   ngOnInit(): void {
@@ -24,6 +25,8 @@ export class DietHistoryComponent implements OnInit {
     this.dietHistoryService.getDiets(this.idPatient).subscribe((res) => {
       this.diets = res;
       console.log(res);
+    }, (err) => {
+      this.errorDiet = err.error;
     });
   }
 }

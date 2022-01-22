@@ -15,3 +15,46 @@
     margin-top: 3%;
     width: 86%;
 }
+
+.sticky-right {
+    overflow: scroll;
+}
+
+.days-container button {
+    border: none;
+}
+
+.days-container {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pag {
+    margin-top: 3%;
+}
+
+.page-link.page-a {
+    border: none;
+    background-color: #FEAD54;
+    color: white;
+}
+
+.page-link {
+    border: none;
+    color: #0A7B79;
+    border-radius: 4px;
+}
+
+label {
+    font-weight: 600;
+    color: #0A7B79;
+}
+
+.results {
+    margin-top: 3%;
+}
+
+h3 {
+    color: #0A7B79;
+}

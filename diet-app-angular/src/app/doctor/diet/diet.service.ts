@@ -11,17 +11,41 @@ export interface DietCreate {
     idSupplement: number,
     dietSupplDescription: string
   }[]
-
+}
+export interface CalculatedMeal {
+  idMeal: number;
+  proportion: number;
+  nameOfMeal: string;
+  description: string;
+  cookingURL: string;
+  recipes:
+  {
+    idMealRecipe: number;
+    idProduct: number;
+    name: string;
+    unit: string;
+    homeMeasure: string;
+    homeMeasureSize: number;
+    calculatedRecipeAmount: number;
+    params:
+    {
+      calculatedParamSize: number;
+      paramName: string;
+      paramMeasureUnit: string;
+    }[]
+  }[]
 }
 export class ProductInRecipe {
+
   amount: number;
+  calculatedSize;
   homeMeasure: string;
   homeMeasureSize: number;
   idMealRecipe: number;
   idProduct: number;
   name: string;
-  size: number;
   unit: string;
+
 
   constructor(obj) {
     Object.assign(this, obj);
@@ -77,5 +101,9 @@ export class DietService {
       dayNumber: dayNumber,
       meals: meals
     })
+  }
+  searchChangedMeals(idDiet: number, name: string) {
+    return this.http.get<CalculatedMeal>('https://dietappeu.azurewebsites.net/api/doctor/diet/meals/calculated?mealName=' + name + '&idDiet=' + idDiet);
+
   }
 }

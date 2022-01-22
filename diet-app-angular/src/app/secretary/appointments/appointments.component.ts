@@ -1,15 +1,16 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Appointment, AppointmentDetails, AppointmentsService } from '../appointments.service';
+import { ScrollHelper } from './ScrollHelper';
 
 @Component({
   selector: 'app-appointments',
   templateUrl: './appointments.component.html',
   styleUrls: ['./appointments.component.css']
 })
-export class AppointmentsComponent implements OnInit {
+export class AppointmentsComponent implements OnInit, AfterViewChecked {
   error: string;
-
+  private scrollHelper: ScrollHelper = new ScrollHelper();
   errorDate: string;
   dates: string[] = [];
   data;
@@ -70,11 +71,13 @@ export class AppointmentsComponent implements OnInit {
     }
   }
   onGetDetails(appt: Appointment) {
-
     this.appointmentService.getDetails(appt.idVisit).subscribe((res) => {
       console.log(res);
       this.details = res;
     })
+
+    this.scrollHelper.scrollToFirst("details");
+
   }
   private initAppts() {
     let today = new Date().toLocaleDateString('en-US', { timeZone: 'CET' });
@@ -89,5 +92,7 @@ export class AppointmentsComponent implements OnInit {
     this.getApptByDate(request);
     this.onGetDates();
   }
-
+  ngAfterViewChecked() {
+    this.scrollHelper.doScroll();
+  }
 }

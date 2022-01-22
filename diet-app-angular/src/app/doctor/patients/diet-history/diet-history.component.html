@@ -4,8 +4,10 @@
     <div class="sticky-right">
         <div class="content">
             <div class="container">
-                <div class="row report">
+                <h1 *ngIf="errorDiet" style="color:#FEAD54">{{errorDiet}}</h1>
+                <div *ngIf="!errorDiet" class="row report">
                     <h1>Diet History</h1>
+
                     <div class="history" *ngFor="let d of diets">
                         <div class="diet-header">
                             <p style="color: #FEAD54; font-size: 20px; font-weight:600;">{{d.name}}</p>

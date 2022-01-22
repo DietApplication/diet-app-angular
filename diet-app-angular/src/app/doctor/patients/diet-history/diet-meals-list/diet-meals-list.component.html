@@ -4,10 +4,63 @@
         <div class="content">
             <h1>DIET MEALS</h1>
             <div class="days-container">
+                <h3 *ngIf="daysFilled>0">Day: {{currentDay}}</h3>
+                <ul *ngIf="daysFilled>0" class="pagination pagination-xs">
+                    <li><button (click)="goBack()" class="btn" type="button"><img src="../../../../assets/chevron-left.svg" alt="left-arrow"></button></li>
+                    <li *ngFor="let d of daysToShow; let i = index;" class="days">
+                        <a class="page-link" [class.page-a]="currentDay === d" tabindex="-1" (click)="setDay(d)">{{d}}</a>
+                    </li>
+                    <li>
+                        <button (click)="goForward()" class="btn" type="button"><img src="../../../../assets/chevron-right.svg" alt="left-arrow"></button>
+                    </li>
 
+                </ul>
+                <h1 *ngIf="daysFilled===0" style="color: #e45604;">{{errorDiet}}</h1>
+                <h1 *ngIf="errorDiet" style="color: #e45604;">{{errorDiet}}</h1>
+
+                <h3 style="color: #FEAD54;">Days: {{daysFilled}}/{{days}}</h3>
             </div>
+            <div class="results" *ngFor="let meal of dayMeals.get(currentDay)">
+                <h2 style="padding-bottom: 1%;">{{meal.nameOfMeal}}</h2>
+                <h3>{{meal.time}}</h3>
+                <h5 style="color:black; margin-top:2%">Is Meal Followed? <label style="margin-left:1%;" class="check"> 
+                                        <input type="checkbox" class="checkb" id="followed" autocomplete="off" [checked]="meal.isFollowed" disabled>
+                                        <span></span>
+                                    </label></h5>
+
+                <div *ngIf="meal" style="margin-top: 3%;">
+                    <label for="desc" class="form-label">Description</label>
+                    <input type="text" class="form-control" disabled value="{{meal.description}}">
+                </div>
+                <div *ngIf="meal" style="margin-top: 3%;">
+                    <h4><a class="link-success" href="{{meal.cookingURL}}">Cooking URL</a></h4>
+                </div>
+                <table class="table table-bordered" style="margin-top: 5%;">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Ingredient</th>
+                            <th scope="col">Weight</th>
+                            <th scope="col">Home Measure</th>
+                            <th scope="col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let recipe of meal.recipes; let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{recipe.name}}</td>
+                            <td>{{recipe.calculatedSize | roundNumberDietMeals}} {{recipe.unit}}</td>
+                            <td>{{recipe.homeMeasureSize | roundNumberDietMeals}} {{recipe.homeMeasure}} </td>
+                            <td>
+                                <p *ngFor="let param of recipe.params;">{{param.paramName}}: {{param.calculatedParamSize | roundNumberDietMeals}} {{param.paramMeasureUnit}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <label for="rep" class="form-label">Patient's Feedback</label>
+            <textarea id="rep" class="form-control" disabled autosize>{{dayReport.get(currentDay)}}</textarea>
         </div>
-
-
     </div>
 </div>

@@ -21,26 +21,27 @@ export class MealsComponent implements OnInit {
     this.onGetMeals(this.currentPage);
     this.initSearchForm();
   }
-  onGetMeals(page:number){
+  onGetMeals(page: number) {
     this.currentPage = page;
-    this.mealsService.getMeals(page).subscribe((res)=>{
+    this.mealsService.getMeals(page).subscribe((res) => {
       this.data = res;
       console.log(this.data);
       this.meals = this.data.meals;
       console.log(this.meals);
-      this.pages.length = Math.ceil(this.data.totalRows / this.data.pageSize);
+      this.pages.length = Math.floor(this.data.totalRows / this.data.pageSize);
+
     })
-}
+  }
   onHandleError() {
     this.error = null;
   }
-   private initSearchForm() {
+  private initSearchForm() {
     this.searchMealForm = new FormGroup({
       name: new FormControl(null, Validators.required)
     })
   }
-  onSearch(){
-  let name: string = this.searchMealForm.value.name;
+  onSearch() {
+    let name: string = this.searchMealForm.value.name;
     this.mealsService.searchMeals(name).subscribe((res) => {
       this.data = res;
       this.meals = this.data;

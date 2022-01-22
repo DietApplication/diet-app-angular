@@ -8,6 +8,34 @@ export interface DietHistory {
   protein: number;
   changesDate: string;
 }
+export interface DietMealsInfo {
+  idDay: number;
+  dayNumber: number;
+  patientReport: string;
+  meals: {
+    cooking_URL: string;
+    description: string;
+    isFollowed: boolean;
+    nameOfMeal: string;
+    proportion: number;
+    recipes: {
+      homeMeasure: string;
+      homeMeasureSize: number;
+      idProduct: number;
+      name: string;
+      calculatedSize: number;
+      unit: string;
+      params:
+      {
+        calculatedParamSize: number;
+        paramName: string;
+        paramMeasureUnit: string;
+      }[]
+    }[],
+    time: string;
+  }[];
+
+}
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -20,5 +48,8 @@ export class DietHistoryService {
 
   getDiets(idPatient: number) {
     return this.http.get<DietHistory[]>('https://dietappeu.azurewebsites.net/api/doctor/diet/diets/' + idPatient);
+  }
+  getMeals(idDiet: number) {
+    return this.http.get<DietMealsInfo[]>('https://dietappeu.azurewebsites.net/api/doctor/diet/meals/' + idDiet);
   }
 }

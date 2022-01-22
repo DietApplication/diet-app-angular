@@ -1,16 +1,12 @@
 .navbar-custom {
     background: #D3F2E9;
-    height: 60px;
     box-shadow: 0px 2px 6px 0px grey;
     z-index: 3;
 }
 
 .header-custom {
-    margin-right: 30px;
-}
-
-.navbar-custom>.container-fluid {
-    justify-content: flex-end;
+    display: flex;
+    justify-content: space-between;
 }
 
 .list-doctor-header {
@@ -18,12 +14,6 @@
     align-items: center;
     justify-content: flex-end;
 }
-
-
-/* .main-item {
-    display: flex;
-    align-items: center;
-} */
 
 .sub-menu {
     align-items: flex-end;
@@ -80,21 +70,18 @@ a:hover {
     font-weight: 500;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    margin-left: 30px;
-    width: 100%;
-}
-
-.logo a {
+.left .nav-brand {
     text-decoration: none;
     color: #0A7B79;
     font-weight: 700;
     font-style: italic;
-    margin-right: 3%;
+    margin-right: 16%;
 }
 
 .logo a:nth-child(2):hover {
     transform: scale(1.2) perspective(1px);
+}
+
+.left {
+    display: flex;
 }

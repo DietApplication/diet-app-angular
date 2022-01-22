@@ -77,3 +77,7 @@
     .pagination {
         justify-content: center;
     }
+    
+    .container {
+        padding-bottom: 3%;
+    }

@@ -15,6 +15,7 @@ export class ProductsComponent implements OnInit {
   data;
   error;
   pages: number[] = [];
+  productName = new FormControl();
   constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {

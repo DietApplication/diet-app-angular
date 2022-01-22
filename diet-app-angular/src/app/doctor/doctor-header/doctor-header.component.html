@@ -1,36 +1,39 @@
-<nav class="navbar navbar-expand-xl navbar-custom">
-    <div class="logo">
-        <a class="nav-item">SOME LOGO</a>
-        <a class="nav-item" style="color:#e67700" (click)="onLogout()">Logout</a>
-    </div>
+<nav class="navbar navbar-expand-xl navbar-custom container-fluid">
     <div class="container-fluid header-custom">
-        <ul class="nav nav-pills  list-doctor-header">
-            <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" aria-current="page" routerLink="/doctor/pendingList">Pending List</a>
-            </li>
-            <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" routerLink="/doctor/diet/create-diet">Create Diet</a>
-            </li>
-            <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" routerLink="/doctor/patients">Patients</a>
-            </li>
-            <li class="nav-item main-item dropdown" appDropdown #r="appDropdown" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="left">
+            <a class="nav-brand">LOGO</a>
+            <a style="color:#e67700" class="logout" (click)="onLogout()">Logout</a>
+        </div>
+
+        <div>
+            <ul class="nav nav-pills  list-doctor-header">
+                <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link" aria-current="page" routerLink="/doctor/pendingList">Pending List</a>
+                </li>
+                <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link" routerLink="/doctor/diet/create-diet">Create Diet</a>
+                </li>
+                <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link" routerLink="/doctor/patients">Patients</a>
+                </li>
+                <li class="nav-item main-item dropdown" appDropdown #r="appDropdown" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Knowledge Bases
                 </a>
-                <ul [ngClass]="{'show':r.isOpen}" class="dropdown-menu sub-menu" aria-labelledby="navbarDropdown">
-                    <li class="sub-item"><a class="dropdown-item sub-a" routerLink="/doctor/products">Product Base</a></li>
-                    <li class="sub-item"><a class="dropdown-item sub-a" routerLink="/doctor/meals">Meal Base</a></li>
-                    <li class="sub-item"><a class="dropdown-item sub-a" routerLink="/doctor/supplements">Supplement Base</a></li>
-                    <li class="sub-item"><a class="dropdown-item sub-a" routerLink="/doctor/diseases">Disease Base</a></li>
-                </ul>
-            </li>
-            <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" routerLink="/doctor/notes">Notes</a>
-            </li>
-            <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" routerLink="/doctor">Appointments</a>
-            </li>
-        </ul>
+                    <ul [ngClass]="{'show':r.isOpen}" class="dropdown-menu sub-menu" aria-labelledby="navbarDropdown">
+                        <li class="sub-item"><a class="dropdown-item sub-a" routerLink="/doctor/products">Product Base</a></li>
+                        <li class="sub-item"><a class="dropdown-item sub-a" routerLink="/doctor/meals">Meal Base</a></li>
+                        <li class="sub-item"><a class="dropdown-item sub-a" routerLink="/doctor/supplements">Supplement Base</a></li>
+                        <li class="sub-item"><a class="dropdown-item sub-a" routerLink="/doctor/diseases">Disease Base</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link" routerLink="/doctor/notes">Notes</a>
+                </li>
+                <li class="nav-item main-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link" routerLink="/doctor">Appointments</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>

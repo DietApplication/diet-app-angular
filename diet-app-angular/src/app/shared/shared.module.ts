@@ -29,7 +29,6 @@ import { ProductsService } from './products/products.service';
 import { DropdownDirective } from './dropdown.directive';
 
 
-
 @NgModule({
   declarations: [DiseaseAddComponent, DiseaseListComponent, DiseasesComponent, DiseaseItemComponent, RecommendationsComponent, AlertComponent,
     SupplementItemComponent, SupplementsComponent,
@@ -40,7 +39,7 @@ import { DropdownDirective } from './dropdown.directive';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    AutosizeModule,
+    AutosizeModule
   ],
   exports: [DiseaseAddComponent, DiseaseListComponent, DiseasesComponent, DiseaseItemComponent, RecommendationsComponent, CommonModule, AlertComponent,
     SupplementItemComponent, SupplementsComponent,

@@ -20,6 +20,7 @@ import { DiseaseHistoryComponent } from './patients/disease-history/disease-hist
 import { DietMealsComponent } from './diet/diet-meals/diet-meals.component';
 import { DietHistoryComponent } from './patients/diet-history/diet-history.component';
 import { DietMealsListComponent } from './patients/diet-history/diet-meals-list/diet-meals-list.component';
+import { AppointmentsDoctorComponent } from './appointments-doctor/appointments-doctor.component';
 
 const doctorRoutes: Routes = [
   {
@@ -44,6 +45,7 @@ const doctorRoutes: Routes = [
       { path: 'patients/:idPatient/measurements', component: MeasurementsComponent },
       { path: 'patients/:idPatient/disease-history', component: DiseaseHistoryComponent },
       { path: 'patients/:idPatient/diet-history', component: DietHistoryComponent },
+      { path: 'appointments', component: AppointmentsDoctorComponent }
     ]
   },
 ]

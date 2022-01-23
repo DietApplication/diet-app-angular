@@ -24,6 +24,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { DietHistoryComponent } from './patients/diet-history/diet-history.component';
 import { DietMealsListComponent, RoundNumberPipeDietMeals } from './patients/diet-history/diet-meals-list/diet-meals-list.component';
 import { SharedModule } from '../shared/shared.module';
+import { AppointmentsDoctorComponent } from './appointments-doctor/appointments-doctor.component';
 
 
 
@@ -33,7 +34,7 @@ import { SharedModule } from '../shared/shared.module';
     DoctorHeaderComponent, PendingListComponent,
     PendingListItemComponent,
     NotesComponent, PatientsItemComponent, NotesItemComponent, PatientsComponent,
-    PatientItemComponent, PersonalInfoComponent, MeasurementsComponent, DietComponent, DietCreateComponent, DiseaseHistoryComponent, DietMealsComponent, LoadingSpinnerComponent, DietHistoryComponent, DietMealsListComponent],
+    PatientItemComponent, PersonalInfoComponent, MeasurementsComponent, DietComponent, DietCreateComponent, DiseaseHistoryComponent, DietMealsComponent, LoadingSpinnerComponent, DietHistoryComponent, DietMealsListComponent, AppointmentsDoctorComponent],
   imports: [
     RouterModule,
     CommonModule,

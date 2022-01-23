@@ -59,8 +59,10 @@
                     </tbody>
                 </table>
             </div>
-            <label for="rep" class="form-label">Patient's Feedback</label>
-            <textarea id="rep" class="form-control" disabled autosize>{{dayReport.get(currentDay)}}</textarea>
+            <div *ngIf="!errorDiet">
+                <label for="rep" class="form-label">Patient's Feedback</label>
+                <textarea id="rep" class="form-control" disabled autosize>{{dayReport.get(currentDay)}}</textarea>
+            </div>
         </div>
     </div>
 </div>

@@ -1,14 +1,15 @@
-import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Appointment, AppointmentDetails, AppointmentsService } from '../appointments.service';
-import { ScrollHelper } from '../../shared/ScrollHelper';
+import { ScrollHelper } from 'src/app/shared/ScrollHelper';
+import { AppointmentDetailsDoctor, AppointmentDoctor, ApptsDoctorService } from './appts-doctor.service';
 
 @Component({
-  selector: 'app-appointments',
-  templateUrl: './appointments.component.html',
-  styleUrls: ['./appointments.component.css']
+  selector: 'app-appointments-doctor',
+  templateUrl: './appointments-doctor.component.html',
+  styleUrls: ['./appointments-doctor.component.css']
 })
-export class AppointmentsComponent implements OnInit, AfterViewChecked {
+export class AppointmentsDoctorComponent implements OnInit {
+
   error: string;
   private scrollHelper: ScrollHelper = new ScrollHelper();
   errorDate: string;
@@ -16,9 +17,9 @@ export class AppointmentsComponent implements OnInit, AfterViewChecked {
   data;
   chosenDate;
   datesForm: FormGroup;
-  appointments: Appointment[] = [];
-  details: AppointmentDetails;
-  constructor(private appointmentService: AppointmentsService) { }
+  appointments: AppointmentDoctor[] = [];
+  details: AppointmentDetailsDoctor;
+  constructor(private appointmentService: ApptsDoctorService) { }
 
   ngOnInit(): void {
     this.initAppts();
@@ -38,12 +39,14 @@ export class AppointmentsComponent implements OnInit, AfterViewChecked {
   }
   private getApptByDate(date: string) {
     this.appointmentService.getAppointmentsByDate(date).subscribe((res) => {
+      this.errorDate = null;
       this.appointments = res;
       this.chosenDate = this.appointments[0].date.split("T")[0];
       console.log(this.appointments);
     }, (err) => {
-      this.errorDate = "No upcoming appointments available. Select the date to see history";
+      this.errorDate = err.error;
     })
+    console.log("error " + this.errorDate);
   }
   onGetApptByDate() {
     this.getApptByDate(this.datesForm.value.date);
@@ -57,20 +60,8 @@ export class AppointmentsComponent implements OnInit, AfterViewChecked {
     const { value: date } = formGroup.get('date');
     return this.dates.filter(e => e.split("T")[0] === date).length > 0 ? null : { dateDoNotMatch: true };
   }
-  onDelete(appt: Appointment) {
-    if (confirm('Are you sure you want to delete this appointment?')) {
-      this.appointmentService.cancelAppt(appt.idVisit).subscribe((res) => {
-        console.log(res);
-        this.onGetDates();
-        this.onGetApptByDate();
-      }, (err) => {
-        this.error = err.error;
-      });
-    } else {
-      console.log('not deleted');
-    }
-  }
-  onGetDetails(appt: Appointment) {
+
+  onGetDetails(appt: AppointmentDoctor) {
     this.appointmentService.getDetails(appt.idVisit).subscribe((res) => {
       console.log(res);
       this.details = res;

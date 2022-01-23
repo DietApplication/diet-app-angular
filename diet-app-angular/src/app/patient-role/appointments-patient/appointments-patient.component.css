@@ -1,0 +1,91 @@
+.sticky-left-background,
+.sticky-right {
+    border-radius: 0;
+}
+
+.sticky-left-background {
+    background-attachment: fixed;
+    z-index: 1;
+    overflow: scroll;
+    background-size: 40%;
+    background-position: 0;
+}
+
+.content {
+    margin-top: 3%;
+    width: 86%;
+}
+
+.sticky-right {
+    overflow: scroll;
+}
+
+label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0A7B79;
+}
+
+.btn-details {
+    background-color: #D3F2E9;
+    color: #0A7B79;
+}
+
+tr {
+    border-bottom: 1px solid lightgrey;
+}
+
+.results {
+    margin-top: 5%;
+}
+
+td {
+    vertical-align: middle;
+    font-weight: 600;
+}
+
+th {
+    font-weight: 600;
+    color: #0A7B79;
+}
+
+tbody button {
+    padding: 8% 20%;
+    font-weight: 600;
+    border-radius: 16px;
+    float: right;
+}
+
+tbody button:hover {
+    transform: scale(1.1) perspective(1px);
+}
+
+.details input[disabled],
+textarea[disabled] {
+    background-color: transparent;
+}
+
+.details input {
+    font-weight: 600;
+    padding-left: 0;
+    border: none;
+    border-bottom: 1px solid lightgrey;
+}
+
+.elem {
+    margin-bottom: 3%;
+}
+
+h3 {
+    margin-top: 5%;
+}
+
+.details {
+    border: 1px solid lightgrey;
+    border-radius: 50px;
+    padding: 5% 5%;
+}
+
+.details textarea {
+    border-radius: 16px;
+}

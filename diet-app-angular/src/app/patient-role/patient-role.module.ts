@@ -11,11 +11,14 @@ import { NotesPatientItemComponent } from './notes-patient/notes-patient-item/no
 import { MeasurementsPatientComponent } from './measurements-patient/measurements-patient.component';
 import { DiseasesPatientComponent } from './diseases-patient/diseases-patient.component';
 import { SharedModule } from '../shared/shared.module';
+import { AppointmentsPatientComponent } from './appointments-patient/appointments-patient.component';
+import { DietPatientComponent } from './diet-patient/diet-patient.component';
+import { MenuComponent, RoundNumberPipeDietMenu } from './diet-patient/menu/menu.component';
 
 
 
 @NgModule({
-  declarations: [PatientHeaderComponent, PatientRoleComponent, NotesPatientComponent, NotesPatientItemComponent, MeasurementsPatientComponent, DiseasesPatientComponent],
+  declarations: [RoundNumberPipeDietMenu, PatientHeaderComponent, PatientRoleComponent, NotesPatientComponent, NotesPatientItemComponent, MeasurementsPatientComponent, DiseasesPatientComponent, AppointmentsPatientComponent, DietPatientComponent, MenuComponent],
   imports: [
     RouterModule,
     CommonModule,
@@ -24,6 +27,7 @@ import { SharedModule } from '../shared/shared.module';
     PatientRoleRoutingModule,
     AutosizeModule,
     SharedModule
-  ]
+  ], 
+  exports: [RoundNumberPipeDietMenu]
 })
 export class PatientRoleModule { }

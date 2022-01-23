@@ -1,0 +1,31 @@
+<div class="container-w-background container-fluid">
+    <div class="sticky-left-background">
+    </div>
+    <div class="sticky-right">
+        <div class="content">
+            <div class="container">
+                <h1 *ngIf="errorDiet" style="color:#FEAD54">{{errorDiet}}</h1>
+                <div *ngIf="!errorDiet" class="row report">
+                    <h1>Diet History</h1>
+
+                    <div class="history" *ngFor="let d of diets">
+                        <div class="diet-header">
+                            <p style="color: #FEAD54; font-size: 20px; font-weight:600;">{{d.name}}</p>
+
+                            <a class="btn btn-warning" routerLink="/patient/diet/{{d.idDiet}}/menu">Details</a>
+
+                        </div>
+
+                        <p><span style="color: #0A7B79;">Period:</span> {{d.dateFrom.split("T")[0]}}-
+                            <span>{{d.dateTo.split("T")[0]}}</span>
+                        </p>
+                        <p><span style="color: #0A7B79;">Description: </span> {{d.description}}</p>
+                        <p><span style="color: #0A7B79;">Number of meals per day: </span> {{d.dailyMeals}}</p>
+                        <p><span style="color: #0A7B79;">Proteins: </span> {{d.protein}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

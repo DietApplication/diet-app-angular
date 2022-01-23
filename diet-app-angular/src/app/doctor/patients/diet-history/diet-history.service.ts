@@ -13,6 +13,7 @@ export interface DietMealsInfo {
   dayNumber: number;
   patientReport: string;
   meals: {
+    idMealTake: number;
     cooking_URL: string;
     description: string;
     isFollowed: boolean;

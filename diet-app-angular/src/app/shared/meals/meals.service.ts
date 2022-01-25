@@ -31,5 +31,15 @@ export class MealsService {
   serachMealAsync(param: string) {
     return this.http.get<Meal[]>('https://dietappeu.azurewebsites.net/api/knowledgebase/meal/search?mealName=' + param).pipe().toPromise();
   }
-
+  getAllMeals() {
+    return this.http.get<{ mealName: string }[]>('https://dietappeu.azurewebsites.net/api/autocomplete/meals');
+  }
+  editMeal(idMeal: number, description: string, cookingURL: string, mealName: string) {
+    return this.http.put('https://dietappeu.azurewebsites.net/api/knowledgebase/meals', {
+      idMeal: idMeal,
+      description: description,
+      cookingURL: cookingURL,
+      mealName: mealName
+    });
+  }
 }

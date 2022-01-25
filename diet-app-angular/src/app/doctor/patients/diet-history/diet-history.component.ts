@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BaseInfo, InformationService } from 'src/app/shared/information.service';
 import { DietHistory, DietHistoryService } from './diet-history.service';
 
 @Component({
@@ -13,11 +14,13 @@ export class DietHistoryComponent implements OnInit {
   diets: DietHistory[];
   error: string;
   errorDiet: string;
-  constructor(private route: ActivatedRoute, private dietHistoryService: DietHistoryService) { }
+  info: BaseInfo;
+  constructor(private route: ActivatedRoute, private dietHistoryService: DietHistoryService, private infoService: InformationService) { }
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe((params) => {
       this.idPatient = params['idPatient'];
+      this.onGetBaseInfo(this.idPatient);
     });
     this.onGetDiets();
   }
@@ -28,5 +31,11 @@ export class DietHistoryComponent implements OnInit {
     }, (err) => {
       this.errorDiet = err.error;
     });
+  }
+  onGetBaseInfo(idPatient: number) {
+    this.infoService.getBasenfo(this.idPatient).subscribe((res) => {
+      this.info = res;
+      console.log(this.info);
+    })
   }
 }

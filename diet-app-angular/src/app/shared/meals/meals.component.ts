@@ -15,10 +15,12 @@ export class MealsComponent implements OnInit {
   data;
   searchMealForm: FormGroup;
   pages: number[] = [];
+  allMeals: any[] = [];
   constructor(private mealsService: MealsService) { }
 
   ngOnInit(): void {
     this.onGetMeals(this.currentPage);
+    this.onGetAllMeals();
     this.initSearchForm();
   }
   onGetMeals(page: number) {
@@ -51,4 +53,11 @@ export class MealsComponent implements OnInit {
         this.error = error.error;
       });
   }
+  onGetAllMeals() {
+    this.mealsService.getAllMeals().subscribe((res) => {
+      this.allMeals = res;
+      console.log(this.allMeals);
+    })
+  }
+
 }

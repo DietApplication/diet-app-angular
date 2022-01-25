@@ -62,4 +62,7 @@ export class ProductsService {
   async getParametersByProductAsync(idProduct: number) {
     return await this.http.get('https://dietappeu.azurewebsites.net/api/knowledgebase/product/parameters/' + idProduct).pipe().toPromise();
   }
+  getAllProducts() {
+    return this.http.get<{ productName: string }[]>('https://dietappeu.azurewebsites.net/api/autocomplete/products');
+  }
 }

@@ -7,6 +7,7 @@ import { Note } from './note.model';
 import { NotesService } from './notes.service';
 import { Patient } from '../patient.model';
 import { PatientsService } from '../patients.service';
+import { BaseInfo, InformationService } from 'src/app/shared/information.service';
 
 @Component({
   selector: 'app-notes',
@@ -27,12 +28,15 @@ export class NotesComponent implements OnInit, AfterViewChecked {
   @Input() patients: Patient[];
   searchUsersForm: FormGroup;
   sendNoteForm: FormGroup;
-  constructor(private notesService: NotesService, private tokenService: TokenService, private patientsService: PatientsService) { }
+  allPatients: any[] = [];
+  info: BaseInfo;
+  constructor(private notesService: NotesService, private tokenService: TokenService, private patientsService: PatientsService, private infoService: InformationService) { }
 
   ngOnInit(): void {
     this.onGetPatients(this.currentPage);
     this.initSearchForm();
     this.initSendNoteForm();
+    this.onGetAllPatients();
   }
   ngAfterViewChecked(): void {
     this.scrollToBottomNotes();
@@ -43,7 +47,9 @@ export class NotesComponent implements OnInit, AfterViewChecked {
     console.log("patientId ", this.idPatient);
     console.log("patient ", this.patients[i]);
     this.onGetNotes();
+    this.onGetBaseInfo(this.idPatient);
   }
+
   onGetPatients(page?: number) {
     this.currentPage = page;
     this.patientsService.getPatients(page).subscribe((response) => {
@@ -114,5 +120,17 @@ export class NotesComponent implements OnInit, AfterViewChecked {
   }
   onHandleError() {
     this.error = null;
+  }
+  onGetAllPatients() {
+    this.patientsService.getAllPatients().subscribe((res) => {
+      this.allPatients = res;
+      console.log(this.allPatients);
+    })
+  }
+  onGetBaseInfo(idPatient: number) {
+    this.infoService.getBasenfo(this.idPatient).subscribe((res) => {
+      this.info = res;
+      console.log(this.info);
+    })
   }
 }

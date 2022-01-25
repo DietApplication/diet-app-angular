@@ -11,6 +11,7 @@ import { ProductsService } from './products.service';
 export class ProductsComponent implements OnInit {
   searchProductForm: FormGroup;
   @Input() products: Product[];
+  allProducts: any[] = [];
   currentPage: number = 1;
   data;
   error;
@@ -20,6 +21,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.onGetProducts(this.currentPage);
+    this.onGetAllProducts();
     this.initSearchForm();
   }
 
@@ -52,4 +54,11 @@ export class ProductsComponent implements OnInit {
   onHandleError() {
     this.error = null;
   }
+  onGetAllProducts() {
+    this.productsService.getAllProducts().subscribe((res) => {
+      this.allProducts = res;
+      console.log(this.allProducts);
+    })
+  }
+
 }

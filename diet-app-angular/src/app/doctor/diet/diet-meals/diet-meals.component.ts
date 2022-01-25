@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { InformationService, PreDietInfo } from 'src/app/shared/information.service';
 import { Meal } from '../../../shared/meals/meal.model';
 import { MealsService } from '../../../shared/meals/meals.service';
 import { ProductsService } from '../../../shared/products/products.service';
@@ -17,6 +18,7 @@ import { CalculatedMeal, DietCreate, DietService, ProductInRecipe } from '../die
 export class DietMealsComponent implements OnInit {
   private routeSub: Subscription;
   idDiet: number;
+  idPatient: number;
   proteins: number;
   totalMeals: number[] = [];
   days: number;
@@ -44,24 +46,28 @@ export class DietMealsComponent implements OnInit {
   isLoading: boolean = false;
   searchEnabled: boolean = true;
   isFinished: boolean = false;
-
+  allMeals: any[] = [];
   currentPage: number = 1;
   dataMeal;
   searchMealsInfo: FormGroup;
   pages: number[] = [];
-  constructor(private dietService: DietService, private route: ActivatedRoute, private cdref: ChangeDetectorRef, private mealsService: MealsService, private productService: ProductsService) {
+  info: PreDietInfo;
+  constructor(private infoService: InformationService, private dietService: DietService, private route: ActivatedRoute, private cdref: ChangeDetectorRef, private mealsService: MealsService, private productService: ProductsService) {
 
   }
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe((params) => {
       this.idDiet = params['idDiet'];
+      this.idPatient = params['idPatient'];
+      this.onGetPatientDietIformation(this.idPatient, this.idDiet);
     });
     this.initSearchForm();
     this.initDayForm();
     this.onGetDaysAndMeals();
     this.initSearchMealsForm();
     this.onGetMeals(this.currentPage);
+    this.onGetAllMeals();
 
   }
 
@@ -190,7 +196,20 @@ export class DietMealsComponent implements OnInit {
   onHandleDays() {
     this.currentDay = this.daysNumberFilled.length + 1;
   }
-
+  onGetAllMeals() {
+    this.mealsService.getAllMeals().subscribe((res) => {
+      this.allMeals = res;
+      console.log(this.allMeals);
+    })
+  }
+  onGetPatientDietIformation(idPatient: number, idDiet: number) {
+    this.infoService.getPreDietCreationInfo(idPatient, idDiet).subscribe((res) => {
+      this.info = res;
+      console.log(this.info);
+    }, (err) => {
+      this.errorDiet = err.error;
+    })
+  }
 }
 @Pipe({ name: 'roundNumberAssignMeals' })
 export class RoundNumberAssignMealsPipe implements PipeTransform {

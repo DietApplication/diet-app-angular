@@ -28,6 +28,7 @@ export interface AppointmentDetails {
 }
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { stringify } from 'querystring';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -82,5 +83,8 @@ export class AppointmentsService {
   }
   cancelAppt(idVisit: number) {
     return this.http.delete('https://dietappeu.azurewebsites.net/api/secretary/appointments?idVisit=' + idVisit);
+  }
+  getAllDoctors() {
+    return this.http.get<{ firstName: string, lastName: string }[]>('https://dietappeu.azurewebsites.net/api/autocomplete/doctors')
   }
 }

@@ -38,6 +38,8 @@ export class DiseasesService {
       recomendation: rec
     })
   }
-
+  getAllDiseases() {
+    return this.http.get<{ diseaseName: string }[]>('https://dietappeu.azurewebsites.net/api/autocomplete/diseases');
+  }
 
 }

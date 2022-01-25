@@ -1,8 +1,24 @@
 <div class="container-w-background container-fluid">
-    <div class="sticky-left-background"></div>
+    <div class="sticky-left-background">
+        <div *ngIf="info" class="content-left" id="content-left">
+            <h4>Patient's Info</h4>
+            <div class="info-patient">
+                <div class="def">
+                    <label class="form-label">Full Name, Age</label>
+                    <input type="text" class="form-control" disabled value="{{info.firstName}} {{info.lastName}}, {{info.age}}">
+                </div>
+
+                <div class="def">
+                    <label class="form-label">PESEL</label>
+                    <input type="text" class="form-control" disabled value="{{info.pesel}}">
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="sticky-right">
         <div class="content">
             <h1>DIET MEALS</h1>
+            <h2 *ngIf="info" style="padding-bottom: 0; margin-top:1.5%;"><em>{{info.selectedDiet}}</em></h2>
             <div class="days-container">
                 <h3 *ngIf="daysFilled>0">Day: {{currentDay}}</h3>
                 <ul *ngIf="daysFilled>0" class="pagination pagination-xs">

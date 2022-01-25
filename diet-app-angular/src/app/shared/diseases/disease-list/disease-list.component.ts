@@ -14,12 +14,14 @@ export class DiseaseListComponent implements OnInit {
   error: string;
   data;
   pages: number[] = [];
+  allDiseases: any[] = [];
   currentPage: number = 1;
   constructor(private diseasesService: DiseasesService) { }
 
   ngOnInit(): void {
     this.initSearchForm();
     this.onGetDiseases(this.currentPage);
+    this.onGetAllDiseases();
   }
   onGetDiseases(page?: number) {
     this.currentPage = page;
@@ -48,5 +50,11 @@ export class DiseaseListComponent implements OnInit {
   }
   onHandleError() {
     this.error = null;
+  }
+  onGetAllDiseases() {
+    this.diseasesService.getAllDiseases().subscribe((res) => {
+      this.allDiseases = res;
+      console.log(this.allDiseases);
+    })
   }
 }

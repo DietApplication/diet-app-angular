@@ -68,6 +68,7 @@ export class DietService {
 
   constructor(private http: HttpClient) { }
   createDiet(idPatient: number,
+    idDoctor: number,
     name: string,
     description: string,
     dateFrom: string,
@@ -81,6 +82,7 @@ export class DietService {
       }[]) {
     return this.http.post<{ idDiet: number, name: string }>('https://dietappeu.azurewebsites.net/api/doctor/diet', {
       idPatient: idPatient,
+      idDoctor: idDoctor,
       name: name,
       description: description,
       dateFrom: dateFrom,

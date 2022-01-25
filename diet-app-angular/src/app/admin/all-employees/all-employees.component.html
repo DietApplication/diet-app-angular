@@ -2,7 +2,10 @@
     <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
     <h1>Employees</h1>
     <form [formGroup]="searchUsersForm" class="search" (ngSubmit)="onSearch()">
-        <input type="text" class="form-control" formControlName="name" placeholder="Search">
+        <input class="form-control" list="allusers" name="allusers" id="mealautocomplete" autocomplete="off" placeholder="Type to search..." formControlName="name">
+        <datalist id="allusers">
+                         <option *ngFor="let u of allUsers" style="width:100%">{{u.firstName}} {{u.lastName}}</option>
+                    </datalist>
         <button class="btn" [disabled]="!searchUsersForm.valid">
                   <img src="../../../assets/searchGreen.svg" alt="search">
                 </button>

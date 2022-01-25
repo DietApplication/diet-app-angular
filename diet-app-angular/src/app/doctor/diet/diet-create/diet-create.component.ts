@@ -7,6 +7,8 @@ import { Supplement } from '../../../shared/supplements/supplement.model';
 import { SupplementsService } from '../../../shared/supplements/supplements.service';
 import { DietService } from '../diet.service';
 import { SupplementDiet } from './supplement-diet.model';
+import { TokenService } from 'src/app/core/services/token.service';
+import { InformationService, PreDietInfo } from 'src/app/shared/information.service';
 
 @Component({
   selector: 'app-diet-create',
@@ -31,8 +33,10 @@ export class DietCreateComponent implements OnInit {
   instrForm: FormGroup;
   isToAdd: boolean = false;
   isAllowed: boolean = true;
+  allPatients: any[] = [];
+  info: PreDietInfo;
   @Input() patients: Patient[];
-  constructor(private patientsService: PatientsService, private dietService: DietService, private supplService: SupplementsService, private router: Router) { }
+  constructor(private infoService: InformationService, private patientsService: PatientsService, private dietService: DietService, private supplService: SupplementsService, private router: Router, private tokenService: TokenService) { }
 
 
   ngOnInit(): void {
@@ -41,10 +45,13 @@ export class DietCreateComponent implements OnInit {
     this.initSearchSupForm();
     this.initInstrForm();
     this.onGetPatients(this.currentPage);
+    this.onGetAllPatients();
+
   }
   setIdUser(i: number) {
     this.clicked = i;
     this.idPatient = this.patients[i].idPatient;
+    this.onGetPatientDietIformation(this.idPatient);
     console.log("patientId ", this.idPatient);
     console.log("patient ", this.patients[i]);
 
@@ -163,6 +170,7 @@ export class DietCreateComponent implements OnInit {
   onCreateDiet() {
 
     this.dietService.createDiet(this.idPatient,
+      parseInt(this.tokenService.getUserId()),
       this.createDietForm.value.dietName,
       this.createDietForm.value.desc,
       this.createDietForm.value.startDate,
@@ -173,7 +181,7 @@ export class DietCreateComponent implements OnInit {
     ).subscribe((res) => {
       console.log(res);
       alert("Diet was successfully created");
-      this.router.navigate(['doctor/diet/' + res.idDiet + '/assign-meals'])
+      this.router.navigate(['doctor/diet/' + this.idPatient + '/' + res.idDiet + '/assign-meals'])
     },
       (error) => {
         this.error = error;
@@ -190,5 +198,19 @@ export class DietCreateComponent implements OnInit {
     console.log(this.supplementDiet);
     this.isToAdd = false;
     this.isAllowed = true;
+  }
+  onGetAllPatients() {
+    this.patientsService.getAllPatients().subscribe((res) => {
+      this.allPatients = res;
+      console.log(this.allPatients);
+    })
+  }
+  onGetPatientDietIformation(idPatient: number) {
+    this.infoService.getPreDietCreationInfo(idPatient).subscribe((res) => {
+      this.info = res;
+      console.log(this.info);
+    }, (err) => {
+      this.error = err.error;
+    })
   }
 }

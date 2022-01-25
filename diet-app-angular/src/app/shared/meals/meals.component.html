@@ -4,11 +4,16 @@
 
     <div class="meal-header">
         <form class="search" [formGroup]="searchMealForm" class="search" (ngSubmit)="onSearch()">
-            <input type="text" class="form-control" placeholder="Search" formControlName="name">
+            <input class="form-control" list="allmeals" name="allmeals" id="mealautocomplete" autocomplete="off" placeholder="Type to search..." formControlName="name">
+            <datalist id="allmeals">
+                         <option *ngFor="let p of allMeals" style="width:100%">{{p.mealName}}</option>
+                    </datalist>
             <button class="btn" [disabled]="!searchMealForm.valid">
-                <img src="../../../assets/searchGreen.svg" alt="search">
-            </button>
+                              <img src="../../../assets/searchGreen.svg" alt="search">
+                           </button>
+
         </form>
+
         <button class="btn add-meal" routerLink="../add-meals" type="button">Add New Meal</button>
     </div>
     <div class="items">

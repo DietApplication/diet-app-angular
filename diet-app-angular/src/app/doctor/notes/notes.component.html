@@ -4,7 +4,10 @@
         <div id="content-left" class="content-left">
             <h4 id="myHeader">Patients</h4>
             <form [formGroup]="searchUsersForm" class="search" (ngSubmit)="onSearch()">
-                <input type="text" class="form-control" formControlName="name" placeholder="Search">
+                <input class="form-control" list="allpatients" name="allpatients" id="mealautocomplete" autocomplete="off" placeholder="Type to search..." formControlName="name">
+                <datalist id="allpatients">
+                         <option *ngFor="let p of allPatients" style="width:100%">{{p.firstName}} {{p.lastName}}</option>
+                    </datalist>
                 <button class="btn" [disabled]="!searchUsersForm.valid">
                   <img src="../../../assets/searchGreen.svg" alt="search">
                 </button>
@@ -26,6 +29,27 @@
     <div class="sticky-right">
         <div class="content">
             <h1>NOTES</h1>
+            <div *ngIf="info" class="patient-info">
+                <table class="table table-borderless init-info">
+                    <tbody>
+                        <tr>
+                            <th>Full Name, Age</th>
+                            <td>{{info.firstName}} {{info.lastName}}, {{info.age}}</td>
+                        </tr>
+                        <tr>
+                            <th>PESEL</th>
+                            <td>{{info.pesel}}</td>
+
+                        </tr>
+                        <tr *ngIf="info.currentDietName">
+                            <th>Newest Diet</th>
+                            <td>{{info.currentDietName}}</td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
             <div class="notes" #notesCont>
                 <app-notes-item *ngFor="let note of notes; let i = index;" [index]="i" [note]="note"></app-notes-item>
             </div>

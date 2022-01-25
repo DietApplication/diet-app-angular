@@ -106,3 +106,302 @@ textarea[disabled] {
 .date-dis {
     margin-bottom: 2%;
 }
+
+.page-link.page-a {
+    border: none;
+    background-color: #FEAD54;
+    color: white;
+    border-radius: 8px;
+    height: 38px;
+}
+
+.meals button.meal-b {
+    background-color: #0A7B79;
+    color: #FEAD54;
+}
+
+.meals button {
+    background-color: #D3F2E9;
+}
+
+.page-link {
+    border: none;
+    border-radius: 8px;
+    color: #0A7B79
+}
+
+.days {
+    display: flex;
+}
+
+.sticky-left-background,
+.sticky-right {
+    border-radius: 0;
+}
+
+.sticky-left-background {
+    background-attachment: fixed;
+    z-index: 1;
+    overflow: scroll;
+    background-size: 40%;
+    background-position: 0;
+}
+
+.content {
+    margin-top: 3%;
+    width: 86%;
+}
+
+.days-container {
+    margin-top: 3%;
+    display: flex;
+    justify-content: space-between;
+}
+
+h4 {
+    margin-bottom: 0;
+    color: grey;
+}
+
+img {
+    padding-bottom: 3px;
+}
+
+.meals button {
+    font-weight: 600;
+    font-size: 16px;
+    color: #0A7B79;
+    padding: 22px 40px;
+    border-radius: 20px;
+}
+
+.meals {
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.days-container button {
+    border: none;
+}
+
+.meal-details {
+    margin-top: 4%;
+}
+
+.search-form,
+.ingredients {
+    margin-top: 4%;
+}
+
+.search {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.search input {
+    width: 92%;
+    height: 42px;
+}
+
+label {
+    color: #0A7B79;
+}
+
+.search button {
+    background-color: #D3F2E9;
+}
+
+.time {
+    width: 30%;
+}
+
+.search button:hover {
+    background-color: #FEAD54;
+}
+
+.sticky-right {
+    overflow-y: scroll;
+    padding-bottom: 8%;
+}
+
+.buttons {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons-right {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    float: right;
+    align-items: flex-end;
+}
+
+.add-meal,
+.add-day,
+.btn-danger {
+    font-weight: 500;
+    border-radius: 10px;
+    width: 20%;
+}
+
+.add-meal {
+    background-color: #0A7B79;
+    color: #D3F2E9;
+    padding: 10px 20px;
+}
+
+.add-day {
+    margin-top: 4%;
+    background-color: #FEAD54;
+    color: #0A7B79;
+    margin-left: 2%;
+    padding: 10px 20px
+}
+
+.add-meal:hover,
+.add-day:hover {
+    transform: scale(1.1) perspective(1px);
+}
+
+.pag {
+    margin-top: 3%;
+}
+
+.page-link.page-a {
+    border: none;
+    background-color: #FEAD54;
+    color: white;
+}
+
+.page-link {
+    border: none;
+    background-color: #D3F2E9;
+    color: #0A7B79
+}
+
+.searchInfo {
+    display: flex;
+    width: 68%;
+    margin-bottom: 16px;
+    justify-content: space-between;
+}
+
+.searchInfo input {
+    width: 88%;
+    height: 42px;
+}
+
+.searchInfo button {
+    background-color: #D3F2E9;
+}
+
+.meal-head {
+    margin-top: 80px;
+    margin-bottom: 5%;
+    text-align: center;
+    color: #FEAD54;
+    font-weight: 600;
+}
+
+.searchInfo button:hover {
+    background-color: #FEAD54;
+}
+
+.searchInfo img {
+    padding-bottom: 2px;
+}
+
+.mealInfo {
+    width: 60%;
+}
+
+.mealInfo li {
+    background-color: white;
+    margin-bottom: 3%;
+    border-radius: 50px;
+    padding-left: 5%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    font-weight: 600;
+}
+
+.mealInfo li img {
+    width: 10%;
+    margin-right: 3%;
+}
+
+h4 {
+    font-size: 30px;
+    margin-top: 12%;
+    color: #D3F2E9;
+}
+
+.info-patient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #D3F2E9;
+    width: 80%;
+    margin-top: 2%;
+    margin-right: 4%;
+    padding-top: 20px;
+    padding-bottom: 5%;
+    padding-bottom: 20px;
+    border-radius: 20px;
+}
+
+.content-left input[disabled],
+textarea[disabled] {
+    background-color: white;
+}
+
+.content-left {
+    padding-bottom: 7%;
+}
+
+.content-left textarea {
+    border-radius: 20px;
+    border: none;
+    border-bottom: 1px solid #D0D1D5;
+    padding-right: 10px;
+    padding-left: 18px;
+    font-weight: 500;
+}
+
+.content-left label {
+    color: #0A7B79;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.def {
+    text-align: center;
+    width: 70%;
+    margin-top: 2%;
+}
+
+.def input {
+    font-weight: 500;
+    text-align: center;
+    border: none;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 20px;
+    height: 46px;
+    border-bottom: 1px solid #D0D1D5;
+}
+
+.content-left table {
+    margin-top: 3%;
+    width: 50%;
+    background-color: white;
+    border-radius: 30px;
+}
+
+.content-left th {
+    padding-left: 18px;
+}

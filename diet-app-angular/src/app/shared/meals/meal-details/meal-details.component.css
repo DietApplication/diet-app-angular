@@ -1,4 +1,5 @@
-     .def-parameter input {
+     .def-parameter input,
+     .nameOfMeal {
          border: none;
          padding-left: 0;
          border-bottom: 1px solid #D0D1D5;
@@ -138,4 +139,20 @@
      textarea[disabled],
      input[disabled] {
          background-color: transparent;
+     }
+     
+     .nameOfMeal {
+         color: #0A7B79;
+         font-size: 32px;
+         font-weight: 600;
+     }
+     
+     .btn-warning {
+         margin-top: 3%;
+         float: right;
+         padding: 1% 4%;
+     }
+     
+     .btn-warning:hover {
+         transform: scale(1.1) perspective(1px);
      }

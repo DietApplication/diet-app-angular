@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TokenService } from 'src/app/core/services/token.service';
+import { BaseInfo, InformationService } from 'src/app/shared/information.service';
 import { MeasureDate, MeasurementService } from './measurement.service';
 import { Measurements } from './measurements.model';
 
@@ -36,12 +37,14 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
   private routeSub: Subscription;
   filterMeasurementForm: FormGroup;
   addMeasurementForm: FormGroup;
-  constructor(private route: ActivatedRoute, private measurementService: MeasurementService, private cdref: ChangeDetectorRef) { }
+  info: BaseInfo;
+  constructor(private route: ActivatedRoute, private measurementService: MeasurementService, private cdref: ChangeDetectorRef, private infoService: InformationService) { }
 
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe((params) => {
       this.idPatient = params['idPatient'];
+      this.onGetBaseInfo(this.idPatient);
     });
     this.onGetDates();
     this.initFilterForm();
@@ -230,6 +233,12 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
   checkDates(formGroup: FormGroup) {
     const { value: date } = formGroup.get('date');
     return this.dates.filter(e => e.date === date).length > 0 ? null : { dateDoNotMatch: true };
+  }
+  onGetBaseInfo(idPatient: number) {
+    this.infoService.getBasenfo(this.idPatient).subscribe((res) => {
+      this.info = res;
+      console.log(this.info);
+    })
   }
 }
 

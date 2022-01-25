@@ -25,6 +25,7 @@ export class MealAddComponent implements OnInit {
   isInvalid: boolean = false;
   productWeight: number;
   pages: number[] = [];
+  allProducts: any[] = [];
   constructor(private productService: ProductsService, private mealsService: MealsService) { }
 
   ngOnInit(): void {
@@ -32,6 +33,7 @@ export class MealAddComponent implements OnInit {
     this.initSearchProductsForm();
     this.initAddMealForm();
     this.onGetProducts(this.currentPage);
+    this.onGetAllProducts();
   }
 
   onSearch() {
@@ -67,7 +69,7 @@ export class MealAddComponent implements OnInit {
     this.addMealForm = new FormGroup({
       productName: new FormControl(null, [Validators.required, Validators.maxLength(50), Validators.minLength(2)]),
       desc: new FormControl(null, [Validators.required, Validators.maxLength(15000), Validators.minLength(2)]),
-      url: new FormControl(null, [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]),
+      url: new FormControl(null, [Validators.required, Validators.pattern('https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$')]),
 
     })
   }
@@ -126,5 +128,11 @@ export class MealAddComponent implements OnInit {
       (error) => {
         this.error = "No such product";
       });
+  }
+  onGetAllProducts() {
+    this.productService.getAllProducts().subscribe((res) => {
+      this.allProducts = res;
+      console.log(this.allProducts);
+    })
   }
 }

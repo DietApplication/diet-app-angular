@@ -13,7 +13,7 @@ export class SupplementListComponent implements OnInit {
   searchSupForm: FormGroup;
   data;
   error: string;
-
+  allSupplements: any[] = [];
   currentPage: number = 1;
   pages: number[] = [];
   constructor(private supplService: SupplementsService) { }
@@ -21,6 +21,7 @@ export class SupplementListComponent implements OnInit {
   ngOnInit(): void {
     this.onGetSupplements(this.currentPage);
     this.initSearchForm();
+    this.onGetAllSupplements();
   }
 
   onGetSupplements(page?: number) {
@@ -49,6 +50,12 @@ export class SupplementListComponent implements OnInit {
   private initSearchForm() {
     this.searchSupForm = new FormGroup({
       name: new FormControl(null, Validators.required)
+    })
+  }
+  onGetAllSupplements() {
+    this.supplService.getAllSupplements().subscribe((res) => {
+      this.allSupplements = res;
+      console.log(this.allSupplements);
     })
   }
 }

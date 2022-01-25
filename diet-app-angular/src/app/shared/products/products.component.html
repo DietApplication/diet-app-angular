@@ -3,7 +3,11 @@
     <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
     <div class="product-header">
         <form class="search" [formGroup]="searchProductForm" class="search" (ngSubmit)="onSearch()">
-            <input type="text" class="form-control" placeholder="Search" formControlName="name">
+            <!-- <input type="text" class="form-control" placeholder="Search" formControlName="name"> -->
+            <input class="form-control" list="allproducts" name="allproducts" id="productsautocomplete" autocomplete="off" placeholder="Type to search..." formControlName="name">
+            <datalist id="allproducts">
+                         <option *ngFor="let p of allProducts" style="width:100%">{{p.productName}}</option>
+                    </datalist>
             <button class="btn" [disabled]="!searchProductForm.valid">
                               <img src="../../../assets/searchGreen.svg" alt="search">
                            </button>

@@ -1,5 +1,72 @@
 <div class="container-w-background container-fluid">
     <div class="sticky-left-background">
+        <div *ngIf="info" id="content-left" class="content-left">
+            <h4>Patient's Info</h4>
+            <div class="info-patient">
+                <div class="def">
+                    <label class="form-label">Full Name, Age</label>
+                    <input type="text" class="form-control" disabled value="{{info.firstName}} {{info.lastName}}, {{info.age}}">
+                </div>
+                <div class="def">
+                    <label class="form-label">PESEL</label>
+                    <input type="text" class="form-control" disabled value="{{info.pesel}}">
+                </div>
+
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <th>Diabetes</th>
+                            <td>
+                                <label class="check"> 
+                                        <input type="checkbox" class="checkb" id="diabetes" autocomplete="off" [checked]="info.diabetes" disabled>
+                                        <span></span>
+                                    </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Hypertension</th>
+                            <td>
+                                <label class="check"> 
+                                        <input type="checkbox" class="checkb" id="diabetes" autocomplete="off" [checked]="info.hypertension" disabled>
+                                        <span></span>
+                                    </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Insulin Resistance</th>
+                            <td>
+                                <label class="check"> 
+                                        <input type="checkbox" class="checkb" id="diabetes" autocomplete="off" [checked]="info.insulinResistance" disabled>
+                                        <span></span>
+                                    </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Hypothyroidism</th>
+                            <td>
+                                <label class="check"> 
+                                        <input type="checkbox" class="checkb" id="diabetes" autocomplete="off" [checked]="info.hypothyroidism" disabled>
+                                        <span></span>
+                                    </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Intestinal Diseases</th>
+                            <td>
+                                <label class="check"> 
+                                        <input type="checkbox" class="checkb" id="diabetes" autocomplete="off" [checked]="info.intestinalDiseases" disabled>
+                                        <span></span>
+                                    </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="def">
+                    <label class="form-label">Other Diseases</label>
+                    <textarea type="text" class="form-control" autosize disabled>{{info.otherDiseases}}</textarea>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="sticky-right">
         <div class="content">
@@ -8,7 +75,10 @@
                 <div class="row report">
                     <h1>Diseases History</h1>
                     <form [formGroup]="searchDisForm" class="search" (ngSubmit)="onSearch()">
-                        <input type="text" class="form-control" formControlName="name" placeholder="Search disease to add">
+                        <input class="form-control" list="alldiseases" name="alldiseases" id="mealautocomplete" autocomplete="off" placeholder="Type to search..." formControlName="name">
+                        <datalist id="alldiseases">
+                         <option *ngFor="let d of allDiseases" style="width:100%">{{d.diseaseName}}</option>
+                    </datalist>
                         <button class="btn" [disabled]="!searchDisForm.valid">+ </button>
                     </form>
                     <div class="result-disease" *ngIf="isToAdd">

@@ -1,28 +1,99 @@
 <div class="container-w-background container-fluid">
     <div class="sticky-left-background">
-        <div id="content-left" class="content-left">
-            <h4 class="meal-head">Available Meals</h4>
-            <form [formGroup]="searchMealsInfo" class="searchInfo" (ngSubmit)="onSearchMealsInfo()">
+        <div *ngIf="info" id="content-left" class="content-left">
+            <h4>Patient's Info</h4>
+            <div class="info-patient">
+                <div class="def">
+                    <label class="form-label">Full Name, Age</label>
+                    <input type="text" class="form-control" disabled value="{{info.firstName}} {{info.lastName}}, {{info.age}}">
+                </div>
+                <div class="def">
+                    <label class="form-label">Email, Phone Number</label>
+                    <input type="text" class="form-control" disabled value="{{info.email}}, {{info.phoneNumber}}">
+                </div>
+                <div class="def">
+                    <label class="form-label">PESEL</label>
+                    <input type="text" class="form-control" disabled value="{{info.pesel}}">
+                </div>
+                <div class="def">
+                    <label class="form-label">k (PAL)</label>
+                    <input type="text" class="form-control" disabled value="{{info.pal}}">
+                </div>
+                <div class="def">
+                    <label class="form-label">Main Problems</label>
+                    <textarea type="text" class="form-control" autosize disabled>{{info.mainProblems}}</textarea>
+                </div>
 
-                <input type="text" class="form-control" formControlName="nameMeal" placeholder="Search">
-                <button class="btn" [disabled]="!searchMealsInfo.valid">
-                  <img src="../../../assets/searchGreen.svg" alt="search">
-                </button>
-            </form>
-            <ul class="list-group mealInfo">
-                <li class="list-group-item" *ngFor="let ml of mealsInfo"> <img src="../../../../assets/meal-icon.svg" alt="meal">{{ml.nameOfMeal}}</li>
-            </ul>
-            <div class="pag">
-                <nav aria-label="...">
-                    <ul class="pagination pagination-xs">
-                        <li class="page-item" *ngFor="let p of pages; let i = index;">
-                            <a class="page-link" [class.page-a]="currentPage === i+1" tabindex="-1" (click)="onGetMeals(i+1)">{{i+1}}</a>
-                        </li>
-
-                    </ul>
-                </nav>
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <th>Diabetes</th>
+                            <td>
+                                <label class="check"> 
+                                        <input type="checkbox" class="checkb" id="diabetes" autocomplete="off" [checked]="info.diabetes" disabled>
+                                        <span></span>
+                                    </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Hypertension</th>
+                            <td>
+                                <label class="check"> 
+                                        <input type="checkbox" class="checkb" id="diabetes" autocomplete="off" [checked]="info.hypertension" disabled>
+                                        <span></span>
+                                    </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Insulin Resistance</th>
+                            <td>
+                                <label class="check"> 
+                                        <input type="checkbox" class="checkb" id="diabetes" autocomplete="off" [checked]="info.insulinResistance" disabled>
+                                        <span></span>
+                                    </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Hypothyroidism</th>
+                            <td>
+                                <label class="check"> 
+                                        <input type="checkbox" class="checkb" id="diabetes" autocomplete="off" [checked]="info.hypothyroidism" disabled>
+                                        <span></span>
+                                    </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Intestinal Diseases</th>
+                            <td>
+                                <label class="check"> 
+                                        <input type="checkbox" class="checkb" id="diabetes" autocomplete="off" [checked]="info.intestinalDiseases" disabled>
+                                        <span></span>
+                                    </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="def">
+                    <label class="form-label">Other Diseases</label>
+                    <textarea type="text" class="form-control" autosize disabled>{{info.otherDiseases}}</textarea>
+                </div>
+                <div class="def">
+                    <label class="form-label">Food Hypersensetivity</label>
+                    <input type="text" class="form-control" disabled value="{{info.hypersensProds}}">
+                </div>
+                <div class="def">
+                    <label class="form-label">Food Allergies</label>
+                    <input type="text" class="form-control" disabled value="{{info.alergieProds}}">
+                </div>
+                <div class="def">
+                    <label class="form-label">Favorite Food</label>
+                    <textarea type="text" class="form-control" autosize disabled>{{info.favFood}}</textarea>
+                </div>
+                <div class="def">
+                    <label class="form-label">Disliked Food</label>
+                    <textarea type="text" class="form-control" autosize disabled>{{info.notFavFood}}</textarea>
+                </div>
             </div>
-
         </div>
     </div>
     <div class="sticky-right">
@@ -35,6 +106,7 @@
 
         <div *ngIf="!errorDiet && !isFinished" class="content">
             <h1>DIET DETAILS</h1>
+            <h2 *ngIf="info" style="padding-bottom: 0; margin-top:1.5%;"><em>{{info.selectedDiet}}</em></h2>
             <div class="days-container">
                 <h2>Day {{currentDay}}/{{days}}</h2>
             </div>
@@ -50,7 +122,10 @@
                     <form *ngIf="!isAddDay" class="search-form" [formGroup]="searchMealForm" (ngSubmit)="onSearch()">
                         <label class="form-label">Meal</label>
                         <div class="search">
-                            <input type="text" class="form-control" placeholder="Search" formControlName="name">
+                            <input class="form-control" list="allmeals" name="allmeals" id="mealautocomplete" autocomplete="off" placeholder="Type to search..." formControlName="name">
+                            <datalist id="allmeals">
+                         <option *ngFor="let p of allMeals" style="width:100%">{{p.mealName}}</option>
+                    </datalist>
                             <button class="btn" [disabled]="!searchMealForm.valid || !searchEnabled">+</button>
                         </div>
                     </form>

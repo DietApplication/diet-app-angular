@@ -1,5 +1,23 @@
 <div class="container-w-background container-fluid">
     <div class="sticky-left-background">
+        <div *ngIf="info" class="content-left" id="content-left">
+            <h4>Patient's Info</h4>
+            <div class="info-patient">
+                <div class="def">
+                    <label class="form-label">Full Name, Age</label>
+                    <input type="text" class="form-control" disabled value="{{info.firstName}} {{info.lastName}}, {{info.age}}">
+                </div>
+
+                <div class="def">
+                    <label class="form-label">PESEL</label>
+                    <input type="text" class="form-control" disabled value="{{info.pesel}}">
+                </div>
+                <div *ngIf="info.currentDietName" class="def">
+                    <label class="form-label">Newest Diet</label>
+                    <input type="text" class="form-control" disabled value="{{info.currentDietName}}">
+                </div>
+            </div>
+        </div>
     </div>
     <div class="sticky-right">
         <div class="content">
@@ -12,8 +30,8 @@
                         <div class="diet-header">
                             <p style="color: #FEAD54; font-size: 20px; font-weight:600;">{{d.name}}</p>
                             <div class="btns">
-                                <a class="btn btn-custom" routerLink="/doctor/diet/{{d.idDiet}}/assign-meals">Assign Meals</a>
-                                <a class="btn btn-warning" routerLink="/doctor/diet/{{d.idDiet}}/meals">Details</a>
+                                <a class="btn btn-custom" routerLink="/doctor/diet/{{idPatient}}/{{d.idDiet}}/assign-meals">Assign Meals</a>
+                                <a class="btn btn-warning" routerLink="/doctor/diet/{{idPatient}}/{{d.idDiet}}/meals">Details</a>
                             </div>
 
                         </div>

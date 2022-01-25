@@ -23,7 +23,10 @@
                 <div class="user">
                     <label for="doctor" class="form-label">Select Doctor</label>
                     <form [formGroup]="searchDoctorForm" class="search" (ngSubmit)="onSearchDoctors()">
-                        <input type="text" id="doctor" class="form-control" placeholder="last name/first name & last name" formControlName="doctorName">
+                        <input class="form-control" list="alldoctors" name="alldoctors" id="mealautocomplete" autocomplete="off" placeholder="Type to search..." formControlName="doctorName">
+                        <datalist id="alldoctors">
+                         <option *ngFor="let d of allDoctors" style="width:100%">{{d.firstName}} {{d.lastName}}</option>
+                    </datalist>
                         <button class="btn" [disabled]="!searchDoctorForm.valid"> <img src="../../../assets/searchGreen.svg" alt="search"></button>
                     </form>
                     <span class="form-text" *ngIf="!searchDoctorForm.get('doctorName').valid && searchDoctorForm.get('doctorName').touched">doctor is not provided</span>
@@ -36,7 +39,10 @@
                 <div class="user">
                     <label for="patient" class="form-label">Select Patient</label>
                     <form class="search" [formGroup]="searchPatientForm" (ngSubmit)="onSearchPatients()">
-                        <input type="text" id="patient" class="form-control" placeholder="last name/first name & last name" formControlName="patientName">
+                        <input class="form-control" list="allpatients" name="allpatients" id="mealautocomplete" autocomplete="off" placeholder="Type to search..." formControlName="patientName">
+                        <datalist id="allpatients">
+                         <option *ngFor="let p of allPatients" style="width:100%">{{p.firstName}} {{p.lastName}}</option>
+                    </datalist>
                         <button class="btn" [disabled]="!searchPatientForm.valid"> <img src="../../../assets/searchGreen.svg" alt="search"></button>
                     </form>
                     <span class="form-text" *ngIf="!searchPatientForm.get('patientName').valid && searchPatientForm.get('patientName').touched">patient is not provided</span>

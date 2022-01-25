@@ -15,11 +15,13 @@ export class PatientsComponent implements OnInit {
   error: string;
   pages: number[] = [];
   @Input() patients: Patient[];
+  allPatients: any[] = [];
   constructor(private patientsService: PatientsService) { }
 
   ngOnInit(): void {
     this.onGetPatients(this.currentPage);
     this.initSearchForm();
+    this.onGetAllPatients();
   }
   onSearch() {
     let name: string = this.searchUsersForm.value.name;
@@ -61,5 +63,11 @@ export class PatientsComponent implements OnInit {
   }
   onHandleError() {
     this.error = null;
+  }
+  onGetAllPatients() {
+    this.patientsService.getAllPatients().subscribe((res) => {
+      this.allPatients = res;
+      console.log(this.allPatients);
+    })
   }
 }

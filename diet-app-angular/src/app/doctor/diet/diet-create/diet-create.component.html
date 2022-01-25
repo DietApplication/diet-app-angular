@@ -4,7 +4,10 @@
         <div id="content-left" class="content-left">
             <h4 id="myHeader">Patients</h4>
             <form [formGroup]="searchUsersForm" class="search" (ngSubmit)="onSearch()">
-                <input type="text" class="form-control" formControlName="name" placeholder="Search">
+                <input class="form-control" list="allpatients" name="allpatients" id="mealautocomplete" autocomplete="off" placeholder="Type to search..." formControlName="name">
+                <datalist id="allpatients">
+                         <option *ngFor="let p of allPatients" style="width:100%">{{p.firstName}} {{p.lastName}}</option>
+                    </datalist>
                 <button class="btn" [disabled]="!searchUsersForm.valid">
                   <img src="../../../assets/searchGreen.svg" alt="search">
                 </button>
@@ -25,6 +28,91 @@
     <div class="sticky-right">
         <div class="content">
             <h1>CREATE DIET</h1>
+            <div *ngIf="info" class="patient-info">
+                <table class="table table-borderless init-info">
+                    <tbody>
+                        <tr>
+                            <th>Full Name, Age</th>
+                            <td>{{info.firstName}} {{info.lastName}}, {{info.age}}</td>
+                        </tr>
+                        <tr>
+                            <th>Email, Phone Number</th>
+                            <td>{{info.email}}, {{info.phoneNumber}}</td>
+                        </tr>
+                        <tr>
+                            <th>PESEL</th>
+                            <td>{{info.pesel}}</td>
+
+                        </tr>
+
+                        <tr>
+                            <th>k (PAL)</th>
+                            <td>{{info.pal}}</td>
+                        </tr>
+                        <tr *ngIf="info.currentDiet">
+                            <th>Newest Diet</th>
+                            <td>{{info.currentDiet}}</td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="text-block">
+                    <label>Main Problems</label>
+                    <p>{{info.mainProblems}}</p>
+
+                </div>
+                <table class="table table-borderless">
+                    <tbody style="text-align: center;">
+                        <tr>
+                            <th>Diabetes</th>
+                            <th>Hypertension</th>
+                            <th>Insulin Resistance</th>
+                            <th>Hypothyroidism</th>
+                            <th>Intestinal Diseases</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="check"> 
+                                        <input type="checkbox" class="checkb" id="diabetes" autocomplete="off" [checked]="info.diabetes" disabled>
+                                        <span></span>
+                                    </label>
+                            </td>
+                            <td>
+                                <label class="check"> 
+                                        <input type="checkbox" class="checkb" id="diabetes" autocomplete="off" [checked]="info.hypertension" disabled>
+                                        <span></span>
+                                    </label>
+                            </td>
+                            <td>
+                                <label class="check"> 
+                                        <input type="checkbox" class="checkb" id="diabetes" autocomplete="off" [checked]="info.insulinResistance" disabled>
+                                        <span></span>
+                                    </label>
+                            </td>
+                            <td>
+                                <label class="check"> 
+                                        <input type="checkbox" class="checkb" id="diabetes" autocomplete="off" [checked]="info.hypothyroidism" disabled>
+                                        <span></span>
+                                    </label>
+                            </td>
+                            <td>
+                                <label class="check"> 
+                                        <input type="checkbox" class="checkb" id="diabetes" autocomplete="off" [checked]="info.intestinalDiseases" disabled>
+                                        <span></span>
+                                    </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-block">
+                    <label for="dss">Other Diseases</label>
+                    <p>
+                        {{info.otherDiseases}}
+                    </p>
+                </div>
+
+            </div>
             <form class="createDietForm" [formGroup]="createDietForm" (ngSubmit)="onCreateDiet()">
                 <div class="diet-input">
                     <label for="prName" class="form-label">Name</label>

@@ -6,7 +6,7 @@
         <div class="content">
             <div class="container">
                 <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
-                <h1>{{nameOfMeal}}</h1>
+                <input type="text" class="form-control nameOfMeal" for="url" name="nameOfMeal" ngDefaultControl [(ngModel)]="nameOfMeal">
                 <h4>Ingredients</h4>
                 <ul *ngFor="let p of products; let i = index" class="ingredients" style="list-style: none; padding-left: 0;">
                     <li style="color: #FEAD54; font-weight: 600; font-size: 16px; margin-bottom: 3%;">{{p.name}}: {{p.amount}} {{p.unit}}
@@ -17,12 +17,14 @@
                 </ul>
                 <div class="def-parameter desc">
                     <label for="description" class="form-label">Description/Directions</label>
-                    <textarea disabled autosize class="form-control" id="description">{{description}}</textarea>
+                    <textarea autosize class="form-control" name="description" id="description" ngDefaultControl [(ngModel)]="description"></textarea>
                 </div>
                 <div class="def-parameter">
                     <label for="url" class="form-label">Cooking URL</label>
-                    <input disabled type="text" class="form-control" for="url" value="{{cookingURL}}">
+                    <input type="text" class="form-control" for="url" name="cookingURL" (ngModelChange)="checkIfValidUrl($event)" ngDefaultControl [(ngModel)]="cookingURL">
                 </div>
+
+                <button class="btn btn-warning" (click)="onEdit()" [disabled]="invalid">Edit</button>
             </div>
 
         </div>

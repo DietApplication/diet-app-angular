@@ -36,7 +36,7 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        margin-right: 24px;
+        margin-right: 8%;
         position: relative;
         margin-bottom: 50px;
     }
@@ -303,5 +303,13 @@
             border-radius: 46px;
         }
     }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+    
+    html,
+    body {
+        height: 100%;
+    }
+    
+    body {
+        margin: 0;
+        font-family: Roboto, "Helvetica Neue", sans-serif;
+    }

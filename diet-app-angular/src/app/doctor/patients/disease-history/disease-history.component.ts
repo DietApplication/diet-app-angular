@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { BaseInfo, DiseasesIncludedInfo, InformationService } from 'src/app/shared/information.service';
 
 import { Disease } from '../../../shared/diseases/disease.model';
 import { DiseasesService } from '../../../shared/diseases/diseases.service';
@@ -24,21 +25,25 @@ export class DiseaseHistoryComponent implements OnInit {
   clicked: number;
   disease: Disease;
   diseases: any[] = [];
+  allDiseases: any[] = [];
   searchDisForm: FormGroup;
   assignDiseaseForm: FormGroup;
   editDiseaseForm: FormGroup;
   isEditEnabled: boolean = false;
-  constructor(private route: ActivatedRoute, private diseaseService: DiseasesService, private diseaseHistoryService: DiseaseHistoryService) { }
+  info: DiseasesIncludedInfo;
+  constructor(private route: ActivatedRoute, private diseaseService: DiseasesService, private diseaseHistoryService: DiseaseHistoryService, private infoService: InformationService) { }
 
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe((params) => {
       this.idPatient = params['idPatient'];
+      this.onGetDiseaseInfo(this.idPatient);
     });
     this.initSearchForm();
     this.initAssignDiseaseForm();
     this.initEditDiseaseForm();
     this.onGetDiseases();
+    this.onGetAllDiseases();
   }
 
   onAssignDisease() {
@@ -166,6 +171,17 @@ export class DiseaseHistoryComponent implements OnInit {
         console.log(res);
         this.onGetDiseases();
       })
-
+  }
+  onGetAllDiseases() {
+    this.diseaseService.getAllDiseases().subscribe((res) => {
+      this.allDiseases = res;
+      console.log(this.allDiseases);
+    })
+  }
+  onGetDiseaseInfo(idPatient: number) {
+    this.infoService.getDiseaseIncludedInfo(this.idPatient).subscribe((res) => {
+      this.info = res;
+      console.log(this.info);
+    })
   }
 }

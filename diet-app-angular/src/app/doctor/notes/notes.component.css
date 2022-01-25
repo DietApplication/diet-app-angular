@@ -17,7 +17,6 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-right: 24px;
     position: relative;
     margin-bottom: 50px;
 }
@@ -127,7 +126,7 @@ label {
 }
 
 .notes {
-    height: 64vh;
+    height: 53vh;
     margin-top: 30px;
     overflow-y: scroll;
 }
@@ -137,4 +136,41 @@ label {
     border-radius: 20px;
     padding-left: 3%;
     padding-top: 2%;
+}
+
+.patient-info {
+    margin-top: 3%;
+    margin-bottom: 3%;
+    background-color: #D3F2E9;
+    border-radius: 20px;
+    padding-top: 1%;
+    padding-bottom: 0.2%;
+}
+
+.init-info {
+    margin-left: 1.5%;
+}
+
+.init-info th {
+    color: #0A7B79;
+}
+
+.init-info td {
+    font-weight: 600;
+}
+
+.text-block {
+    margin-left: 2.1%;
+}
+
+.text-block p {
+    font-size: 16px;
+    color: black;
+    font-weight: 600;
+}
+
+.text-block label {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 0.7%;
 }

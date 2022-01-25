@@ -12,6 +12,7 @@ export interface Employee {
 }
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { stringify } from 'querystring';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,9 @@ export class AdminService {
     return this.http.put('https://dietappeu.azurewebsites.net/api/admin/users/accounts/activate', {
       idUser: idUser
     })
+  }
+  getAllUsers() {
+    return this.http.get<{ firstName: string, lastName: string }[]>('https://dietappeu.azurewebsites.net/api/autocomplete/users');
   }
 }
 

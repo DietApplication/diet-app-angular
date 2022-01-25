@@ -37,4 +37,7 @@ export class SupplementsService {
       description: description
     })
   }
+  getAllSupplements() {
+    return this.http.get<{ supplementName: string }[]>('https://dietappeu.azurewebsites.net/api/autocomplete/supplements');
+  }
 }

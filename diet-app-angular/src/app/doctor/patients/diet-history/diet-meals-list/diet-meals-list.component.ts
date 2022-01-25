@@ -1,6 +1,7 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DietService } from 'src/app/doctor/diet/diet.service';
+import { BaseInfo, InformationService, PreDietInfo } from 'src/app/shared/information.service';
 import { DietHistoryService, DietMealsInfo } from '../diet-history.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { DietHistoryService, DietMealsInfo } from '../diet-history.service';
 export class DietMealsListComponent implements OnInit {
   routeSub: any;
   idDiet: number;
+  idPatient: number;
   proteins: number;
   totalMeals: number[] = [];
   days: number;
@@ -28,11 +30,15 @@ export class DietMealsListComponent implements OnInit {
   dietMeals: DietMealsInfo[];
   dayMeals = new Map();
   dayReport = new Map();
-  constructor(private route: ActivatedRoute, private dietHistoryService: DietHistoryService, private dietService: DietService) { }
+  info: BaseInfo;
+
+  constructor(private route: ActivatedRoute, private dietHistoryService: DietHistoryService, private dietService: DietService, private infoService: InformationService) { }
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe((params) => {
       this.idDiet = params['idDiet'];
+      this.idPatient = params['idPatient'];
+      this.onGetBaseInfo(this.idPatient, this.idDiet)
     });
     this.onGetDaysAndMeals();
     this.onGetMeals();
@@ -100,7 +106,12 @@ export class DietMealsListComponent implements OnInit {
     this.daysToShow = this.daysNumberFilled.slice((this.page * this.step) - this.step, this.step * this.page);
     console.log("back ", this.daysToShow)
   }
-
+  onGetBaseInfo(idPatient: number, idDiet: number) {
+    this.infoService.getBasenfo(this.idPatient, this.idDiet).subscribe((res) => {
+      this.info = res;
+      console.log(this.info);
+    })
+  }
 }
 @Pipe({ name: 'roundNumberDietMeals' })
 export class RoundNumberPipeDietMeals implements PipeTransform {

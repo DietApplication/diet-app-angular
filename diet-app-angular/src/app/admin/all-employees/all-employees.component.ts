@@ -13,12 +13,14 @@ export class AllEmployeesComponent implements OnInit {
   data;
   pages: number[] = [];
   searchUsersForm: FormGroup;
+  allUsers: any[] = [];
   @Input() users: Employee[];
   constructor(private adminServuce: AdminService) { }
 
   ngOnInit(): void {
     this.onGetUsers(this.currentPage);
     this.initSearchForm();
+    this.onGetAllUsers();
   }
   onHandleError() {
     this.error = null;
@@ -69,6 +71,12 @@ export class AllEmployeesComponent implements OnInit {
   private initSearchForm() {
     this.searchUsersForm = new FormGroup({
       name: new FormControl(null)
+    })
+  }
+  onGetAllUsers() {
+    this.adminServuce.getAllUsers().subscribe((res) => {
+      this.allUsers = res;
+      console.log(this.allUsers);
     })
   }
 }

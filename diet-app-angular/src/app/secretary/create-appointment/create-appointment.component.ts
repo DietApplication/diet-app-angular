@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { PatientsService } from 'src/app/doctor/patients.service';
 import { AppointmentsService, DoctorSearch, PatientSearch } from '../appointments.service';
 
 @Component({
@@ -24,13 +25,17 @@ export class CreateAppointmentComponent implements OnInit {
   doctorSelected: boolean = false;
   idPatient: number;
   idDoctor: number;
-  constructor(private appointmentService: AppointmentsService) { }
+  allPatients: any[] = [];
+  allDoctors: any[] = [];
+  constructor(private appointmentService: AppointmentsService, private patientService: PatientsService) { }
 
   ngOnInit(): void {
     this.initDatesForm();
     this.initDoctorSearchForm();
     this.initPatientSearchForm();
     this.initDescriptionForm();
+    this.onGetAllPatients();
+    this.onGetAllDoctors();
   }
   onSearchPatients() {
     let name: string = this.searchPatientForm.value.patientName;
@@ -154,5 +159,17 @@ export class CreateAppointmentComponent implements OnInit {
     const now = new Date();
     const actual = new Date(date + "T" + time);
     return actual.getTime() >= now.getTime() ? null : { timeInvalid: true };
+  }
+  onGetAllPatients() {
+    this.patientService.getAllPatients().subscribe((res) => {
+      this.allPatients = res;
+      console.log(this.allPatients);
+    })
+  }
+  onGetAllDoctors() {
+    this.appointmentService.getAllDoctors().subscribe((res) => {
+      this.allDoctors = res;
+      console.log(this.allDoctors);
+    })
   }
 }

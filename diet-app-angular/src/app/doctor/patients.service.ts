@@ -27,4 +27,7 @@ export class PatientsService {
     }
     return this.http.get<Patient[]>(url).pipe(catchError(this.handleError));;;
   }
+  getAllPatients() {
+    return this.http.get<{ firstName: string, lastName: string }[]>('https://dietappeu.azurewebsites.net/api/autocomplete/patients');
+  }
 }

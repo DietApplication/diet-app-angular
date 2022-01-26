@@ -155,7 +155,8 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
       this.addMeasurementForm.value.calfcircumference,
       this.addMeasurementForm.value.waistlowercircumference).subscribe((res) => {
         console.log(res);
-        alert("Measurement successfully added!")
+        alert("Measurement successfully added!");
+        this.onGetDates();
       }, (error) => {
         this.error = error.error;
       })

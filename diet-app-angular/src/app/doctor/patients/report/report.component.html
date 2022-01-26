@@ -1,0 +1,82 @@
+<div class="container-w-background container-fluid">
+    <div class="sticky-left-background">
+    </div>
+    <div class="sticky-right">
+        <div class="content">
+            <div class="container">
+                <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
+
+                <h1>MEASUREMENTS REPORT</h1>
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr class="head">
+                            <th></th>
+                            <th *ngIf="surveyResult">Survey ({{surveyResult.date.split("T")[0]}})</th>
+                            <th *ngIf="newResults[0]">Previous ({{newResults[0].date.split("T")[0]}})
+                                <p>by {{newResults[0].whoMeasured}}</p>
+                            </th>
+                            <th *ngIf="newResults[1]">Latest ({{newResults[1].date.split("T")[0]}})
+                                <p>by {{newResults[1].whoMeasured}}</p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Weight:</th>
+                            <td *ngIf="surveyResult">{{surveyResult.weight}}</td>
+                            <td *ngIf="newResults[0]">{{newResults[0].weight}}</td>
+                            <td *ngIf="newResults[1]">{{newResults[1].weight}}</td>
+                        </tr>
+                        <tr>
+                            <th>Height:</th>
+                            <td *ngIf="surveyResult">{{surveyResult.height}}</td>
+                            <td *ngIf="newResults[0]">{{newResults[0].height}}</td>
+                            <td *ngIf="newResults[1]">{{newResults[1].height}}</td>
+
+                        </tr>
+                        <tr>
+                            <th>Waist Circumference</th>
+                            <td *ngIf="surveyResult">{{surveyResult.waistCircum}}</td>
+                            <td *ngIf="newResults[0]">{{newResults[0].waistCircum}}</td>
+                            <td *ngIf="newResults[1]">{{newResults[1].waistCircum}}</td>
+                        </tr>
+                        <tr>
+                            <th>Waist Lower Circumference</th>
+                            <td *ngIf="surveyResult">-</td>
+                            <td *ngIf="newResults[0]">{{newResults[0].waistLowerCircum}}</td>
+                            <td *ngIf="newResults[1]">{{newResults[1].waistLowerCircum}}</td>
+                        </tr>
+                        <tr>
+                            <th>Hip Circumference</th>
+                            <td *ngIf="surveyResult">{{surveyResult.hipCircum}}</td>
+                            <td *ngIf="newResults[0]">{{newResults[0].hipCircum}}</td>
+                            <td *ngIf="newResults[1]">{{newResults[1].hipCircum}}</td>
+                        </tr>
+                        <tr>
+                            <th>Biceps Circumference</th>
+                            <td *ngIf="surveyResult">-</td>
+                            <td *ngIf="newResults[0]">{{newResults[0].bicepsCircum}}</td>
+                            <td *ngIf="newResults[1]">{{newResults[1].bicepsCircum}}</td>
+                        </tr>
+                        <tr>
+                            <th>Calfcircum Circumference</th>
+                            <td *ngIf="surveyResult">-</td>
+                            <td *ngIf="newResults[0]">{{newResults[0].calfCircum}}</td>
+                            <td *ngIf="newResults[1]">{{newResults[1].calfCircum}}</td>
+                        </tr>
+                        <tr>
+                            <th>Chest Circumference</th>
+                            <td *ngIf="surveyResult">-</td>
+                            <td *ngIf="newResults[0]">{{newResults[0].chestCircum}}</td>
+                            <td *ngIf="newResults[1]">{{newResults[1].chestCircum}}</td>
+                        </tr>
+                        <tr>
+                            <th>Thigh Circumference</th>
+                            <td *ngIf="surveyResult">-</td>
+                            <td *ngIf="newResults[0]">{{newResults[0].thighCircum}}</td>
+                            <td *ngIf="newResults[1]">{{newResults[1].thighCircum}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

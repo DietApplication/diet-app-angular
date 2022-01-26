@@ -103,3 +103,11 @@ table input {
     justify-content: space-between;
     align-items: center;
 }
+
+.content-left img {
+    width: 90%;
+    margin-right: 4%;
+    margin-top: 10%;
+    border-radius: 60px;
+    vertical-align: middle;
+}

@@ -85,3 +85,12 @@ a:hover {
 .left {
     display: flex;
 }
+
+.logout {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.logout:hover {
+    transform: scale(1.1) perspective(1px);
+}

@@ -1,12 +1,7 @@
-td:nth-child(2) {
-    color: #F4A363;
-}
-
 td {
     border-bottom: 1px solid lightgrey;
     padding-top: 12px;
     padding-bottom: 12px;
-    vertical-align: middle;
 }
 
 .recs {
@@ -22,14 +17,6 @@ td {
     color: #F4A363;
 }
 
-td:nth-child(3) {
-    width: 20%;
-}
-
-td:first-child {
-    width: 20%;
-}
-
 .form-control {
     border: none;
 }
@@ -38,10 +25,40 @@ td:first-child {
     border-radius: 10px;
 }
 
-td:last-child {
-    width: 6%;
+.name {
+    font-weight: 600;
+}
+
+textarea {
+    padding-left: 0;
+}
+
+.desc {
+    color: #F4A363;
+    font-weight: 600;
+}
+
+.rec {
+    font-weight: 500;
 }
 
 input {
     padding-left: 0;
+}
+
+.name-col {
+    width: 18%;
+}
+
+.edit-col {
+    float: right;
+    border: none;
+}
+
+.desc-col {
+    width: 28%;
+}
+
+.rec-col {
+    width: 45%;
 }

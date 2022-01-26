@@ -1,6 +1,9 @@
-<td> <input type="text" class="form-control" name="name" ngDefaultControl [(ngModel)]="name">
+<td class="name-col"> <input type="text" class="form-control name" name="name" ngDefaultControl [(ngModel)]="name">
 </td>
-<td> <input type="text" class="form-control" name="description" ngDefaultControl [(ngModel)]="description"></td>
-<td name="recommendation"><button class="btn recs" (click)="onOpenRecs()">Show Recommendations</button></td>
-<td><button class="btn btn-warning" (click)="onEdit()">Edit</button></td>
-<app-recommendations [recommendation]="recommendation" (close)="onHandleRec()" *ngIf="isDisplayed" [id]="idDisease"></app-recommendations>
+<td class="desc-col"> <textarea class="form-control desc" name="description" ngDefaultControl [(ngModel)]="description" autosize>{{description}}</textarea></td>
+<td class="rec-col"><textarea class="form-control rec" name="name" ngDefaultControl [(ngModel)]="recommendation" autosize>{{recommendation}}</textarea></td>
+<td class="edit-col"><button class="btn btn-warning" (click)="onEdit()">Edit</button></td>
+
+<!-- <td name="recommendation"><button class="btn recs" (click)="onOpenRecs()">Show Recommendations</button></td> -->
+
+<!-- <app-recommendations [recommendation]="recommendation" (close)="onHandleRec()" *ngIf="isDisplayed" [id]="idDisease"></app-recommendations> -->

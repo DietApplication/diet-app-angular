@@ -76,6 +76,10 @@ label {
     margin-top: 5%;
 }
 
+.add:hover {
+    transform: scale(1.1) perspective(1px);
+}
+
 .results li {
     width: 92%;
     padding-top: 1.5%;

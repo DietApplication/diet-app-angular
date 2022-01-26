@@ -12,3 +12,11 @@
 .sticky-right {
     overflow-y: scroll;
 }
+
+.content-left img {
+    width: 90%;
+    margin-right: 4%;
+    margin-top: 10%;
+    border-radius: 60px;
+    vertical-align: middle;
+}

@@ -1,23 +1,6 @@
-.dis-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-}
-
 textarea {
     border-color: #0A7B79;
-}
-
-.dis-name {
-    width: 18%;
-}
-
-.dis-desc {
-    width: 30%;
-}
-
-.dis-rec {
-    width: 41%;
+    width: 100%;
 }
 
 label {
@@ -28,14 +11,25 @@ label {
 }
 
 .btn {
+    margin-top: 1%;
     color: #D3F2E9;
     background-color: #0A7B79;
     font-size: 20px;
     font-weight: bold;
     padding: 4.5px 16px;
+    float: right;
 }
 
 .sup-error {
     margin-top: 50px;
     text-align: center;
+}
+
+.dis-container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.dis {
+    margin-bottom: 1%;
 }

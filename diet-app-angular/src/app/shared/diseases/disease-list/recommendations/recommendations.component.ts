@@ -21,6 +21,6 @@ export class RecommendationsComponent implements OnInit {
     this.diseaseService.editDisease(i, null, null, this.recommendation).subscribe((res) => {
       console.log(res);
     })
-    window.location.reload();
+
   }
 }

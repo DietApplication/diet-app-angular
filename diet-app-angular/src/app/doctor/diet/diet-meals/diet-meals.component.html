@@ -134,7 +134,7 @@
                         <input type="text" class="form-control" disabled value="{{meal.description}}">
                     </div>
                     <div *ngIf="meal" style="margin-top: 4%;">
-                        <h4><a class="link-success" href="{{meal.cookingURL}}">Cooking URL</a></h4>
+                        <h4 style="margin-top: 0;"><a class="link-success" href="{{meal.cookingURL}}">Cooking URL</a></h4>
                     </div>
                     <div *ngIf="products.length>0" class="ingredients">
                         <div *ngIf="isLoading" style="text-align: center;">

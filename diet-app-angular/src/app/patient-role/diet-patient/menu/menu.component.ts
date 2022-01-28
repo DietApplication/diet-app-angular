@@ -67,8 +67,8 @@ export class MenuComponent implements OnInit {
 
   setDay(day: number) {
     this.currentDay = day;
-    this.initPageMealReports()
     this.mealFeedback.clear();
+    this.initPageMealReports()
 
     console.log(this.mealFeedback);
 

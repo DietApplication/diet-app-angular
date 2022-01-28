@@ -1,8 +1,12 @@
 <div class="container-w-background container-fluid">
     <div class="sticky-left-background">
-        <div *ngIf="info" class="content-left" id="content-left">
+
+
+        <div class="content-left" id="content-left">
+
             <h4>Patient's Info</h4>
-            <div class="info-patient">
+            <h1 *ngIf="error" style="color: #e45604; background-color: white;">{{error}}</h1>
+            <div class="info-patient" *ngIf="info">
                 <div class="def">
                     <label class="form-label">Full Name, Age</label>
                     <input type="text" class="form-control" disabled value="{{info.firstName}} {{info.lastName}}, {{info.age}}">
@@ -31,7 +35,7 @@
                     </li>
 
                 </ul>
-                <h1 *ngIf="daysFilled===0" style="color: #e45604;">{{errorDiet}}</h1>
+
                 <h1 *ngIf="errorDiet" style="color: #e45604;">{{errorDiet}}</h1>
 
                 <h3 style="color: #FEAD54;">Days: {{daysFilled}}/{{days}}</h3>
@@ -75,7 +79,7 @@
                     </tbody>
                 </table>
             </div>
-            <div *ngIf="!errorDiet">
+            <div *ngIf="!errorDiet && !error">
                 <label for="rep" class="form-label">Patient's Feedback</label>
                 <textarea id="rep" class="form-control" disabled autosize>{{dayReport.get(currentDay)}}</textarea>
             </div>

@@ -91,7 +91,7 @@ textarea[disabled] {
 
 .manage-buttons {
     float: right;
-    width: 19%;
+    width: 11%;
 }
 
 .disease-header {
@@ -240,31 +240,8 @@ label {
     align-items: flex-end;
 }
 
-.add-meal,
-.add-day,
 .btn-danger {
-    font-weight: 500;
-    border-radius: 10px;
-    width: 20%;
-}
-
-.add-meal {
-    background-color: #0A7B79;
-    color: #D3F2E9;
-    padding: 10px 20px;
-}
-
-.add-day {
-    margin-top: 4%;
-    background-color: #FEAD54;
-    color: #0A7B79;
-    margin-left: 2%;
-    padding: 10px 20px
-}
-
-.add-meal:hover,
-.add-day:hover {
-    transform: scale(1.1) perspective(1px);
+    font-weight: 600;
 }
 
 .pag {

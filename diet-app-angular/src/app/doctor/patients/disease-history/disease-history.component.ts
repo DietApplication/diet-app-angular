@@ -47,6 +47,12 @@ export class DiseaseHistoryComponent implements OnInit {
   }
 
   onAssignDisease() {
+    if (this.assignDiseaseForm.value.dateOfCure === "") {
+      this.assignDiseaseForm.value.dateOfCure = null;
+    }
+    if (this.assignDiseaseForm.value.date === "") {
+      this.assignDiseaseForm.value.date = null;
+    }
     if (this.assignDiseaseForm.value.dateOfCure === null) {
       this.diseaseHistoryService.assignDisease(this.idPatient, this.idDisease, this.assignDiseaseForm.value.date).subscribe((res) => {
         this.afterAssign();
@@ -80,7 +86,7 @@ export class DiseaseHistoryComponent implements OnInit {
     this.editDiseaseForm = new FormGroup({
       date: new FormControl(null),
       dateOfCure: new FormControl(null)
-    }, { validators: [this.confirmDate.bind(this), this.confirmDate2.bind(this), this.confirmDateOfCure2.bind(this)] });
+    }, { validators: [this.confirmDateEdit.bind(this), this.confirmDate2Edit.bind(this), this.confirmDateOfCure2.bind(this)] });
   }
   confirmDate(formGroup: FormGroup) {
     const { value: date } = formGroup.get('date');
@@ -98,9 +104,27 @@ export class DiseaseHistoryComponent implements OnInit {
     actual.setHours(now.getHours());
     actual.setMinutes(now.getMinutes());
     actual.setSeconds(now.getSeconds());
-    return actual <= now ? null : { date2Invalid: true };
+    return (actual <= now) || !date ? null : { date2Invalid: true };
   }
 
+  confirmDateEdit(formGroup: FormGroup) {
+    const { value: date } = formGroup.get('date');
+    const now = new Date();
+    const actual = new Date(date);
+    actual.setHours(now.getHours());
+    actual.setMinutes(now.getMinutes());
+    actual.setSeconds(now.getSeconds());
+    return (actual <= now) || !date ? null : { dateInvalid: true };
+  }
+  confirmDate2Edit(formGroup: FormGroup) {
+    const { value: date } = formGroup.get('dateOfCure');
+    const now = new Date();
+    const actual = new Date(date);
+    actual.setHours(now.getHours());
+    actual.setMinutes(now.getMinutes());
+    actual.setSeconds(now.getSeconds());
+    return (actual <= now) || !date ? null : { date2Invalid: true };
+  }
   confirmDateOfCure(formGroup: FormGroup) {
     const { value: dateOfCure } = formGroup.get('dateOfCure');
     const { value: dateOfDiagnosis } = formGroup.get('date');
@@ -165,12 +189,22 @@ export class DiseaseHistoryComponent implements OnInit {
     this.isEditEnabled = !this.isEditEnabled;
   }
   onEditDisease(i: number) {
-
-    this.diseaseHistoryService.editDisease(this.diseases[i].idPatientDisease, this.editDiseaseForm.value.date, this.editDiseaseForm.value.dateOfCure)
-      .subscribe((res) => {
-        console.log(res);
-        this.onGetDiseases();
-      })
+    if (this.editDiseaseForm.value.dateOfCure === "") {
+      this.editDiseaseForm.value.dateOfCure = null;
+    }
+    if (this.editDiseaseForm.value.date === "") {
+      this.editDiseaseForm.value.date = null;
+    }
+    if (this.editDiseaseForm.value.dateOfCure < this.diseases[i].dateOfDiagnosis || this.editDiseaseForm.value.date > this.diseases[i].dateOfCure) {
+      this.error = 'Invalid date range!';
+    }
+    else {
+      this.diseaseHistoryService.editDisease(this.diseases[i].idPatientDisease, this.editDiseaseForm.value.date, this.editDiseaseForm.value.dateOfCure)
+        .subscribe((res) => {
+          console.log(res);
+          this.onGetDiseases();
+        })
+    }
   }
   onGetAllDiseases() {
     this.diseaseService.getAllDiseases().subscribe((res) => {

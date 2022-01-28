@@ -102,6 +102,66 @@ td {
     margin-bottom: 0;
 }
 
+.content-left h4 {
+    font-size: 30px;
+    margin-top: 12%;
+    color: #D3F2E9;
+}
+
+.info-patient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #D3F2E9;
+    width: 80%;
+    margin-top: 2%;
+    margin-right: 4%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+}
+
+.content-left input[disabled],
+textarea[disabled] {
+    background-color: white;
+}
+
+.content-left {
+    padding-bottom: 5%;
+}
+
+.content-left textarea {
+    border-radius: 20px;
+    border: none;
+    border-bottom: 1px solid #D0D1D5;
+    padding-right: 10px;
+    padding-left: 18px;
+    font-weight: 500;
+}
+
+.content-left label {
+    color: #0A7B79;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.def {
+    text-align: center;
+    width: 70%;
+    margin-top: 2%;
+}
+
+.def input {
+    font-weight: 500;
+    text-align: center;
+    border: none;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 20px;
+    height: 46px;
+    border-bottom: 1px solid #D0D1D5;
+}
+
 
 /* tr th:first-child {
     width: 32%;

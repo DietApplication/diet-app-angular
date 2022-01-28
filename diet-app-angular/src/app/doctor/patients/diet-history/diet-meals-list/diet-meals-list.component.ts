@@ -1,4 +1,4 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { AfterContentChecked, Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DietService } from 'src/app/doctor/diet/diet.service';
 import { BaseInfo, InformationService, PreDietInfo } from 'src/app/shared/information.service';
@@ -9,7 +9,7 @@ import { DietHistoryService, DietMealsInfo } from '../diet-history.service';
   templateUrl: './diet-meals-list.component.html',
   styleUrls: ['./diet-meals-list.component.css']
 })
-export class DietMealsListComponent implements OnInit {
+export class DietMealsListComponent implements OnInit, AfterContentChecked {
   routeSub: any;
   idDiet: number;
   idPatient: number;
@@ -31,8 +31,17 @@ export class DietMealsListComponent implements OnInit {
   dayMeals = new Map();
   dayReport = new Map();
   info: BaseInfo;
+  errorEmptyDays: string;
 
   constructor(private route: ActivatedRoute, private dietHistoryService: DietHistoryService, private dietService: DietService, private infoService: InformationService) { }
+  ngAfterContentChecked(): void {
+    if (this.error) {
+      this.dayMeals.clear();
+      this.daysToShow = null;
+      this.daysFilled = null;
+      this.days = null;
+    }
+  }
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe((params) => {
@@ -47,27 +56,28 @@ export class DietMealsListComponent implements OnInit {
   }
 
   onGetDaysAndMeals() {
-    if (this.idDiet === undefined) {
-      return;
-    }
-    this.dietService.getNumberOfDaysAndMeals(this.idDiet).subscribe((res) => {
-      this.days = res.days;
-      this.totalMeals.length = res.totalMeals;
-      this.proteins = res.proteins;
-      this.daysFilled = res.daysFilled;
-      this.daysLeft = this.days - this.daysFilled;
-      this.daysNumberFilled = res.daysNumberFilled;
-      this.daysToShow = this.daysNumberFilled.slice(0, this.step);
-      if (this.days === this.daysFilled) {
-        this.isFinished = true;
+    if (!this.errorDiet) {
+      if (this.idDiet === undefined) {
+        return;
       }
+      this.dietService.getNumberOfDaysAndMeals(this.idDiet).subscribe((res) => {
+        this.days = res.days;
+        this.totalMeals.length = res.totalMeals;
+        this.proteins = res.proteins;
+        this.daysFilled = res.daysFilled;
+        this.daysLeft = this.days - this.daysFilled;
+        this.daysNumberFilled = res.daysNumberFilled;
+        this.daysToShow = this.daysNumberFilled.slice(0, this.step);
+        if (this.days === this.daysFilled) {
+          this.isFinished = true;
+        }
+        console.log(res);
+      }, (error) => {
+        this.errorDiet = error.error;
 
-      console.log(res);
-    }, (error) => {
-      this.errorDiet = 'Diet not found';
-    });
+      });
+    }
   }
-
   setDay(day: number) {
     this.currentDay = day;
     console.log(this.currentDay);
@@ -84,7 +94,9 @@ export class DietMealsListComponent implements OnInit {
 
     }, (err) => {
       this.errorDiet = err.error;
+      console.log(this.errorDiet);
     })
+
   }
   setUpDays() {
     console.log(this.daysNumberFilled.slice(0, this.step));
@@ -107,9 +119,12 @@ export class DietMealsListComponent implements OnInit {
     console.log("back ", this.daysToShow)
   }
   onGetBaseInfo(idPatient: number, idDiet: number) {
-    this.infoService.getBasenfo(this.idPatient, this.idDiet).subscribe((res) => {
+    this.infoService.getBasenfo(idPatient, idDiet).subscribe((res) => {
       this.info = res;
       console.log(this.info);
+    }, (err) => {
+      this.error = err.error;
+      console.log(this.error);
     })
   }
 }

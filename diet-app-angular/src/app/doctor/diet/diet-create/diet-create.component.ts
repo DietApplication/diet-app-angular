@@ -36,6 +36,7 @@ export class DietCreateComponent implements OnInit {
   allPatients: any[] = [];
   info: PreDietInfo;
   @Input() patients: Patient[];
+  allSupplements: any[] = [];
   constructor(private infoService: InformationService, private patientsService: PatientsService, private dietService: DietService, private supplService: SupplementsService, private router: Router, private tokenService: TokenService) { }
 
 
@@ -46,6 +47,7 @@ export class DietCreateComponent implements OnInit {
     this.initInstrForm();
     this.onGetPatients(this.currentPage);
     this.onGetAllPatients();
+    this.onGetAllSupplements();
 
   }
   setIdUser(i: number) {
@@ -211,6 +213,12 @@ export class DietCreateComponent implements OnInit {
       console.log(this.info);
     }, (err) => {
       this.error = err.error;
+    })
+  }
+  onGetAllSupplements() {
+    this.supplService.getAllSupplements().subscribe((res) => {
+      this.allSupplements = res;
+      console.log(this.allSupplements);
     })
   }
 }

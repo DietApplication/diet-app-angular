@@ -236,7 +236,7 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
     return this.dates.filter(e => e.date === date).length > 0 ? null : { dateDoNotMatch: true };
   }
   onGetBaseInfo(idPatient: number) {
-    this.infoService.getBasenfo(this.idPatient).subscribe((res) => {
+    this.infoService.getBasenfo(idPatient).subscribe((res) => {
       this.info = res;
       console.log(this.info);
     })

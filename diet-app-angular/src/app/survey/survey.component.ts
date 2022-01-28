@@ -36,7 +36,7 @@ export class SurveyComponent implements OnInit {
       otherDiseases: new FormControl(null, [Validators.minLength(2), Validators.maxLength(150)]),
       medications: new FormControl(null, [Validators.minLength(2), Validators.maxLength(150)]),
       supplements: new FormControl(null, [Validators.minLength(2), Validators.maxLength(150)]),
-      avgSleep: new FormControl(null, [Validators.required, Validators.min(1), Validators.maxLength(150)]),
+      avgSleep: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(24)]),
       usuallyWakeUp: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(20)]),
       usuallyGoToSleep: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(20)]),
       regularWalk: new FormControl(false),

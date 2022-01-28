@@ -16,8 +16,8 @@
                     </li>
 
                 </ul>
-                <h1 *ngIf="daysFilled===0" style="color: #e45604;">{{errorDiet}}</h1>
-                <h1 *ngIf="errorDiet" style="color: #e45604;">{{errorDiet}}</h1>
+                <h1 *ngIf="daysFilled===0" style="color: #e45604;">Diet is not filled yet!</h1>
+                <h1 *ngIf="daysFilled!==0 && errorDiet" style="color: #e45604;">{{errorDiet}}</h1>
 
                 <h3 style="color: #FEAD54;">Days: {{daysFilled}}/{{days}}</h3>
             </div>
@@ -69,7 +69,7 @@
                     <span class="form-text" *ngIf="dietFeedbackForm.get('patientReport').touched && patientReportDisabled">You've already filled the feedback for this day!</span>
 
                 </div>
-                <button class="btn btn-feedback" [disabled]="!dietFeedbackForm.valid">Send Feedback</button>
+                <button *ngIf="daysFilled!==0 && !errorDiet" class="btn btn-feedback" [disabled]="!dietFeedbackForm.valid">Send Feedback</button>
             </form>
         </div>
     </div>

@@ -151,7 +151,10 @@
 
                 <form class="search-sup" [formGroup]="searchSupForm" (ngSubmit)="onSearchSup()">
                     <label for="desc" class="form-label">Supplements</label>
-                    <div class="search-sup-post"> <input type="text" class="form-control" placeholder="Search to add supplement" formControlName="supName">
+                    <div class="search-sup-post"> <input class="form-control" list="allsupps" name="allsupps" id="supautocomplete" autocomplete="off" placeholder="Type to search..." formControlName="supName">
+                        <datalist id="allsupps">
+                         <option *ngFor="let s of allSupplements" style="width:100%">{{s.supplementName}}</option>
+                    </datalist>
                         <button [disabled]="!isAllowed" class="btn">
                             +
                            </button>

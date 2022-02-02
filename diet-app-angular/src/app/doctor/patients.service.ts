@@ -14,7 +14,6 @@ export class PatientsService {
     return this.http.get<Patient[]>('https://dietappeu.azurewebsites.net/api/doctor/patients?page=' + page);
   }
   handleError(error: HttpErrorResponse) {
-    console.log(error);
     return throwError(error);
   }
   searchPatients(firstName: string, lastName: string) {

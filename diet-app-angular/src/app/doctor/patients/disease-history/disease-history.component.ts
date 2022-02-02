@@ -73,7 +73,7 @@ export class DiseaseHistoryComponent implements OnInit {
 
       this.dataArr = res;
       this.diseases = this.dataArr;
-      console.log(this.diseases);
+
     })
   }
   private initAssignDiseaseForm() {
@@ -143,7 +143,7 @@ export class DiseaseHistoryComponent implements OnInit {
       this.data = res;
       this.disease = this.data[0];
       this.idDisease = this.disease.idDisease
-      console.log(this.disease);
+
       this.isToAdd = true;
     },
       (error) => {
@@ -166,7 +166,7 @@ export class DiseaseHistoryComponent implements OnInit {
   onDeleteDisease(disease: any) {
     if (confirm('Are you sure you want to delete ' + disease.name + ' disease?')) {
       this.diseaseHistoryService.deleteDisease(disease.idPatientDisease).subscribe((res) => {
-        console.log(res);
+
         this.onGetDiseases();
       });
 
@@ -201,7 +201,7 @@ export class DiseaseHistoryComponent implements OnInit {
     else {
       this.diseaseHistoryService.editDisease(this.diseases[i].idPatientDisease, this.editDiseaseForm.value.date, this.editDiseaseForm.value.dateOfCure)
         .subscribe((res) => {
-          console.log(res);
+
           this.onGetDiseases();
         })
     }
@@ -209,13 +209,13 @@ export class DiseaseHistoryComponent implements OnInit {
   onGetAllDiseases() {
     this.diseaseService.getAllDiseases().subscribe((res) => {
       this.allDiseases = res;
-      console.log(this.allDiseases);
+
     })
   }
   onGetDiseaseInfo(idPatient: number) {
     this.infoService.getDiseaseIncludedInfo(this.idPatient).subscribe((res) => {
       this.info = res;
-      console.log(this.info);
+
     })
   }
 }

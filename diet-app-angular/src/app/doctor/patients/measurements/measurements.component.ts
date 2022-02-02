@@ -60,7 +60,7 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
         });
         this.dates = [...new Map(res.map(item =>
           [item['date'], item])).values()];
-        //   console.log(this.dates);
+
       }
     )
 
@@ -68,7 +68,7 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
   onGetNewestMeasurement() {
     this.measurementService.getNewestMeasurements(this.idPatient).subscribe(
       (res) => {
-        console.log(res);
+
         this.initMeasurements(res);
         this.setAddFormDefaultValues(res);
       }
@@ -81,7 +81,7 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
       (res) => {
         this.initMeasurements(res);
         this.setAddFormDefaultValues(res);
-        console.log(res);
+
       },
       (error) => {
         this.error = 'Please, choose different role for this date';
@@ -95,7 +95,7 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
     }, { validators: this.checkDates.bind(this) })
   }
   private initAddForm() {
-    console.log(this.weight);
+
     this.addMeasurementForm = new FormGroup({
       bicepscircumference: new FormControl(this.bicepscircumference, [Validators.required, Validators.min(1), Validators.max(100)]),
       calfcircumference: new FormControl(this.calfcircumference, [Validators.required, Validators.min(1), Validators.max(300)]),
@@ -154,7 +154,7 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
       this.addMeasurementForm.value.thighcircumference,
       this.addMeasurementForm.value.calfcircumference,
       this.addMeasurementForm.value.waistlowercircumference).subscribe((res) => {
-        console.log(res);
+
         alert("Measurement successfully added!");
         this.onGetDates();
       }, (error) => {
@@ -238,7 +238,7 @@ export class MeasurementsComponent implements OnInit, AfterContentChecked {
   onGetBaseInfo(idPatient: number) {
     this.infoService.getBasenfo(idPatient).subscribe((res) => {
       this.info = res;
-      console.log(this.info);
+
     })
   }
 }

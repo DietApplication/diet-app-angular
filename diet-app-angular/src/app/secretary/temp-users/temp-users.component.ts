@@ -31,11 +31,11 @@ export class TempUsersComponent implements OnInit {
   onAssignSurvey() {
     let fullName: string = this.assignSurveyForm.value.firstName + " " + this.assignSurveyForm.value.lastName;
     this.tempUserService.createTempUser(fullName, this.assignSurveyForm.value.email).subscribe((res) => {
-      console.log("in res");
+
       alert("Survey for email: " + this.assignSurveyForm.value.email + " successfully assigned!");
       this.assignSurveyForm.reset();
     }, (err) => {
-      console.log("in error");
+
       this.error = err.error;
     })
   }

@@ -18,7 +18,7 @@ export class SupplementAddComponent implements OnInit {
   }
   onSubmit() {
     this.supplService.addSupplement(this.addSupplForm.value.name, this.addSupplForm.value.description).subscribe((response) => {
-      console.log(response);
+
       alert("Supplement " + this.addSupplForm.value.name + " successfully added");
       window.location.reload();
     },

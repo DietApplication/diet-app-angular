@@ -87,18 +87,15 @@ export class DietMealsComponent implements OnInit {
         this.isFinished = true;
       }
 
-      console.log(res);
     }, (error) => {
       this.errorDiet = 'Diet not found';
     });
   }
   setDay(day: number) {
     this.currentDay = day;
-    console.log(this.currentDay);
   }
   setMeal(meal: number) {
     this.currentMeal = meal;
-    console.log(this.currentMeal);
   }
   onHandleError() {
     this.error = null;
@@ -122,7 +119,7 @@ export class DietMealsComponent implements OnInit {
       this.products = res.recipes;
       this.mealAdded = true;
       this.searchEnabled = false;
-      console.log(this.meal);
+
     }, (err) => {
       this.error = err.error;
     })
@@ -131,7 +128,7 @@ export class DietMealsComponent implements OnInit {
   onAssignMeals() {
     this.dietService.assignMeals(this.idDiet, this.currentDay, this.meals).subscribe((res) => {
       this.isAddDay = false;
-      console.log("added ", res);
+
       alert("Meals for day " + this.currentDay + " were assigned");
       this.meals = [];
       this.products = [];
@@ -143,17 +140,16 @@ export class DietMealsComponent implements OnInit {
   onAddMeal() {
     if (this.currentMeal < this.totalMeals.length) {
       this.currentMeal = this.currentMeal + 1;
-      console.log(this.meal.description);
+
     } else {
       this.isAddDay = true;
       this.searchEnabled = false;
-      console.log("else ", this.isAddDay);
+
     }
     this.meals.push({ idMeal: this.meal.idMeal, time: this.addDayForm.value.time, proportion: this.meal.proportion });
     this.onRemoveMeal();
     this.addDayForm.reset();
     this.searchMealForm.reset();
-    console.log(this.meals);
 
   }
   onRemoveMeal() {
@@ -171,9 +167,8 @@ export class DietMealsComponent implements OnInit {
     this.currentPage = page;
     this.mealsService.getMeals(page).subscribe((res) => {
       this.dataMeal = res;
-      console.log(this.dataMeal);
+
       this.mealsInfo = this.dataMeal.meals;
-      console.log(this.mealsInfo);
       this.pages.length = Math.floor(this.dataMeal.totalRows / this.dataMeal.pageSize);
     })
   }
@@ -185,7 +180,7 @@ export class DietMealsComponent implements OnInit {
       this.mealsService.searchMeals(name).subscribe((res) => {
         this.dataMeal = res;
         this.mealsInfo = this.dataMeal;
-        console.log(this.mealsInfo);
+
         this.searchMealsInfo.reset();
       },
         (error) => {
@@ -199,13 +194,11 @@ export class DietMealsComponent implements OnInit {
   onGetAllMeals() {
     this.mealsService.getAllMeals().subscribe((res) => {
       this.allMeals = res;
-      console.log(this.allMeals);
     })
   }
   onGetPatientDietIformation(idPatient: number, idDiet: number) {
     this.infoService.getPreDietCreationInfo(idPatient, idDiet).subscribe((res) => {
       this.info = res;
-      console.log(this.info);
     }, (err) => {
       this.errorDiet = err.error;
     })

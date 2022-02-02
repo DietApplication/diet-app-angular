@@ -22,7 +22,7 @@ export class SupplementItemComponent implements OnInit {
   onEdit() {
     this.supplementService.editSupplement(this.idSupplement, this.name, this.description)
       .subscribe((res) => {
-        console.log("on update ", res);
+        console.log(res);
       });
     setTimeout(() => {
       window.location.reload();

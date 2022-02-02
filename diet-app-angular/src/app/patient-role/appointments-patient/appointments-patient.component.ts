@@ -34,17 +34,16 @@ export class AppointmentsPatientComponent implements OnInit {
       this.errorDate = null;
       this.appointments = res;
       this.chosenDate = this.appointments[0].date.split("T")[0];
-      console.log(this.appointments);
     }, (err) => {
       this.errorDate = err.error;
     })
-    console.log("error " + this.errorDate);
+
   }
 
 
   onGetDetails(appt: AppointmentPatient) {
     this.appointmentService.getDetails(appt.idVisit).subscribe((res) => {
-      console.log(res);
+
       this.details = res;
     })
     this.scrollHelper.scrollToFirst("details");

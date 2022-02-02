@@ -39,7 +39,7 @@ export class ProductAddComponent implements OnInit {
 
   onAddParameter() {
     this.productService.addParameter(this.addParameterForm.value.parameterName, this.addParameterForm.value.measureUnit).subscribe((res) => {
-      console.log(res);
+
       this.onGetParameters();
       this.addParameterError = null;
     }, (err) => {
@@ -73,7 +73,7 @@ export class ProductAddComponent implements OnInit {
   private onGetParameters() {
     this.productService.getParameters().subscribe((res) => {
       this.parameters = res;
-      console.log(this.parameters);
+
       //  this.parameters.splice(this.parameters[this.parameters.map(e => e.name.toUpperCase()).indexOf('calories'.toUpperCase())].idParameter, 1);
       // this.parameters.splice(this.parameters[this.parameters.map(e => e.name.toUpperCase()).indexOf('proteins'.toUpperCase())].idParameter, 1);
       this.parametersWithoutDefs = this.parameters.map((x) => x);;
@@ -85,13 +85,10 @@ export class ProductAddComponent implements OnInit {
     this.isToAdd = true;
     if (this.selectParamForm.value.param !== null && this.selectParamForm.value.size !== null) {
       this.chosenLength = this.addedParams.length;
-      console.log(this.chosenLength);
+
       this.chosenParameters.push({ idParameter: this.parameters[this.parameters.map(e => e.name).indexOf(this.selectParamForm.value.param)].idParameter, amount: this.selectParamForm.value.size });
       this.addedParams.push({ name: this.selectParamForm.value.param, size: this.selectParamForm.value.size, measureUnit: this.parameters[this.parameters.map(e => e.name).indexOf(this.selectParamForm.value.param)].measureUnit });
 
-      console.log("addedParams ", this.addedParams);
-
-      console.log("chosenParameters ", this.chosenParameters);
       this.selectParamForm.reset();
     }
   }
@@ -105,9 +102,9 @@ export class ProductAddComponent implements OnInit {
   }
   onDelete(param: ParameterResult) {
     this.addedParams.splice(this.addedParams.indexOf(param), 1);
-    console.log("new addedparams " + this.addedParams)
+
     this.chosenParameters.splice(this.chosenParameters.map(e => e.idParameter).indexOf(this.parameters[this.parameters.map(e => e.name).indexOf(param.name)].idParameter), 1);
-    console.log("new chosenparams " + this.chosenParameters)
+
   }
   onAddProduct() {
     this.chosenParameters.push({ idParameter: this.parameters[this.parameters.map(e => e.name.toUpperCase()).indexOf('proteins'.toUpperCase())].idParameter, amount: this.addProductForm.value.proteins });
@@ -120,14 +117,14 @@ export class ProductAddComponent implements OnInit {
       this.addProductForm.value.homeMeasureValue,
       this.chosenParameters)
       .subscribe((res) => {
-        console.log(res);
+
         alert("Product was successfully added!")
         window.location.reload();
       },
         (error) => {
           this.error = error.error;
         });
-    console.log(this.chosenParameters);
+
   }
   onHandleError() {
     this.error = null;

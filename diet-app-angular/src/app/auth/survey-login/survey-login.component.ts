@@ -54,7 +54,6 @@ export class SurveyLoginComponent implements OnInit {
     };
     this.surveyLoginService.accessSurvey(surveyLoginModel).subscribe((response) => {
       this.storageService.storeEmail(response);
-      console.log("survey accessed: ", response.email);
       this.router.navigate(['../survey']);
     },
       (error) => {

@@ -19,10 +19,10 @@ export class NotesPatientComponent implements OnInit, AfterViewChecked {
   }
   onGetNotes() {
     this.notesService.getNotes(parseInt(this.tokenService.getUserId())).subscribe((res) => {
-      console.log("note ", res);
+
       this.dataNotes = res;
       this.notes = this.dataNotes;
-      console.log(this.notes);
+
       this.scrollToBottomNotes();
     })
   }

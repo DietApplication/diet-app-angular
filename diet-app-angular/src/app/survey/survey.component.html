@@ -8,8 +8,8 @@
         <div class="content">
             <h1>Survey</h1>
             <form class="surveyForm" [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
-                <app-alert-survey [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert-survey>
-                <app-success-survey [message]="surveyCompletedOk" (close)="onHandleError()" *ngIf="surveyCompletedOk"></app-success-survey>
+                <app-alert [message]="error" (close)="onHandleError()" *ngIf="error"></app-alert>
+                <!-- <app-success-survey [message]="surveyCompletedOk" (close)="onHandleError()" *ngIf="surveyCompletedOk"></app-success-survey> -->
                 <div class="getting-started">
                     <h2>Getting Started</h2>
                     <div class="names">
@@ -440,7 +440,7 @@
                     water for 2-3 hours before the test 2. Please don't eat for 2-3 hours before the test 3. Please do not drink coffee or alcohol at least 24 hours, preferably 48 hours before the examination 4. The last strenuous physical effort should
                     be completed at least 6 hours before the test, it is permissible
                 </p>
-                <button type="submit" class="btn btn-survey btn" [disabled]="!surveyForm.valid">Submit</button>
+                <button type="submit" class="btn btn-survey" [disabled]="!surveyForm.valid">Submit</button>
             </form>
 
         </div>

@@ -30,7 +30,7 @@ export class AppointmentsComponent implements OnInit, AfterViewChecked {
   onGetDates() {
     this.appointmentService.getDates().subscribe(
       (res) => {
-        console.log(res);
+
         this.data = res;
         this.dates = this.data;
       }
@@ -40,7 +40,7 @@ export class AppointmentsComponent implements OnInit, AfterViewChecked {
     this.appointmentService.getAppointmentsByDate(date).subscribe((res) => {
       this.appointments = res;
       this.chosenDate = this.appointments[0].date.split("T")[0];
-      console.log(this.appointments);
+
     }, (err) => {
       this.errorDate = "No upcoming appointments available. Select the date to see history";
     })
@@ -60,19 +60,19 @@ export class AppointmentsComponent implements OnInit, AfterViewChecked {
   onDelete(appt: Appointment) {
     if (confirm('Are you sure you want to delete this appointment?')) {
       this.appointmentService.cancelAppt(appt.idVisit).subscribe((res) => {
-        console.log(res);
+
         this.onGetDates();
         this.onGetApptByDate();
       }, (err) => {
         this.error = err.error;
       });
     } else {
-      console.log('not deleted');
+
     }
   }
   onGetDetails(appt: Appointment) {
     this.appointmentService.getDetails(appt.idVisit).subscribe((res) => {
-      console.log(res);
+
       this.details = res;
     })
 

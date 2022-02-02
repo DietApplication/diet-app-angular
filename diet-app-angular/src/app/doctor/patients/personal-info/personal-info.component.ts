@@ -88,7 +88,7 @@ export class PersonalInfoComponent implements OnInit {
 
   onGetInfo() {
     this.infoService.getPersonalInfo(this.idPatient).subscribe((info) => {
-      console.log(info);
+
       this.fillReport(info);
     });
   }

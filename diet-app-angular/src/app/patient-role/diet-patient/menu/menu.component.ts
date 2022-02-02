@@ -59,7 +59,7 @@ export class MenuComponent implements OnInit {
       this.daysNumberFilled = res.daysNumberFilled;
       this.daysToShow = this.daysNumberFilled.slice(0, this.step);
 
-      console.log(res);
+
     }, (error) => {
       this.errorDiet = 'Diet not found';
     });
@@ -70,14 +70,11 @@ export class MenuComponent implements OnInit {
     this.mealFeedback.clear();
     this.initPageMealReports()
 
-    console.log(this.mealFeedback);
-
-    console.log(this.currentDay);
   }
   onGetMeals() {
     this.dietHistoryService.getMeals(this.idDiet).subscribe((res) => {
       this.dietMeals = res;
-      console.log(this.dietMeals);
+
       this.dietMeals.map((m) => {
         this.dayMeals.set(m.dayNumber, m.meals);
         this.dayReport.set(m.dayNumber, m.patientReport);
@@ -85,18 +82,12 @@ export class MenuComponent implements OnInit {
       });
 
       this.initPageMealReports()
-      console.log(this.dayMeals);
-      console.log(this.mealFeedback);
-
-
 
     }, (err) => {
       this.errorDiet = err.error;
     })
   }
-  setUpDays() {
-    console.log(this.daysNumberFilled.slice(0, this.step));
-  }
+
   goForward() {
     if (((this.page + 1) * this.step) - this.step > this.daysNumberFilled.length) {
       return;

@@ -31,7 +31,7 @@ export class AppointmentsDoctorComponent implements OnInit {
   onGetDates() {
     this.appointmentService.getDates().subscribe(
       (res) => {
-        console.log(res);
+
         this.data = res;
         this.dates = this.data;
       }
@@ -42,11 +42,9 @@ export class AppointmentsDoctorComponent implements OnInit {
       this.errorDate = null;
       this.appointments = res;
       this.chosenDate = this.appointments[0].date.split("T")[0];
-      console.log(this.appointments);
     }, (err) => {
       this.errorDate = err.error;
     })
-    console.log("error " + this.errorDate);
   }
   onGetApptByDate() {
     this.getApptByDate(this.datesForm.value.date);
@@ -63,7 +61,6 @@ export class AppointmentsDoctorComponent implements OnInit {
 
   onGetDetails(appt: AppointmentDoctor) {
     this.appointmentService.getDetails(appt.idVisit).subscribe((res) => {
-      console.log(res);
       this.details = res;
     })
 

@@ -52,11 +52,11 @@ export class ProductDetailsComponent implements OnInit {
   private onGetParameters() {
     this.productService.getParameters().subscribe((res) => {
       this.existingParameters = res;
-      console.log('existing params ', this.existingParameters);
+
       this.parametersWithoutDefs = this.existingParameters.map((x) => x);
       this.parametersWithoutDefs.splice(this.parametersWithoutDefs.map(e => e.idParameter).indexOf(this.parametersWithoutDefs[this.parametersWithoutDefs.map(e => e.name.toUpperCase()).indexOf('calories'.toUpperCase())].idParameter), 1);
       this.parametersWithoutDefs.splice(this.parametersWithoutDefs.map(e => e.idParameter).indexOf(this.parametersWithoutDefs[this.parametersWithoutDefs.map(e => e.name.toUpperCase()).indexOf('proteins'.toUpperCase())].idParameter), 1);
-      console.log('no defs params ', this.parametersWithoutDefs);
+
       this.proteinGrams = this.parameters[this.parameters.map(e => e.name.toUpperCase()).indexOf('proteins'.toUpperCase())].amount;
       this.calorieGrams = this.parameters[this.parameters.map(e => e.name.toUpperCase()).indexOf('calories'.toUpperCase())].amount;
       this.parameters.forEach(param => {
@@ -79,21 +79,17 @@ export class ProductDetailsComponent implements OnInit {
   }
   onDelete(param: ParameterResult) {
     this.addedParams.splice(this.addedParams.indexOf(param), 1);
-    console.log("new addedparams " + this.addedParams)
+
     this.chosenParameters.splice(this.chosenParameters.map(e => e.idParameter).indexOf(this.existingParameters[this.parameters.map(e => e.name).indexOf(param.name)].idParameter), 1);
-    console.log("new chosenparams " + this.chosenParameters)
+
   }
   onAdd() {
     this.isToAdd = true;
     if (this.selectParamForm.value.param !== null && this.selectParamForm.value.size !== null) {
       this.chosenLength = this.addedParams.length;
-      console.log(this.chosenLength);
+
       this.chosenParameters.push({ idParameter: this.existingParameters[this.existingParameters.map(e => e.name).indexOf(this.selectParamForm.value.param)].idParameter, amount: this.selectParamForm.value.size });
       this.addedParams.push({ name: this.selectParamForm.value.param, size: this.selectParamForm.value.size, measureUnit: this.existingParameters[this.existingParameters.map(e => e.name).indexOf(this.selectParamForm.value.param)].measureUnit });
-
-      console.log("addedParams ", this.addedParams);
-
-      console.log("chosenParameters ", this.chosenParameters);
       this.selectParamForm.reset();
     }
   }
@@ -122,18 +118,18 @@ export class ProductDetailsComponent implements OnInit {
       this.product.homeMeasureSize,
       this.chosenParameters)
       .subscribe((res) => {
-        console.log(res);
+
         alert("Product was successfully updated!")
         window.location.reload();
       },
         (error) => {
           this.error = error.error;
-          console.log(error);
+
           if (this.proteinGrams === null || this.calorieGrams === null) {
             this.error = "Default parameters calories and proteins CANNOT be empty!";
           }
         });
-    console.log(this.chosenParameters);
+
   }
   onHandleError() {
     this.error = null;

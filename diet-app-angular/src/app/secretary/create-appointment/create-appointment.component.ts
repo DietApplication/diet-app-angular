@@ -55,7 +55,7 @@ export class CreateAppointmentComponent implements OnInit {
       this.appointmentService.searchPatients(firstName, lastName).subscribe((res) => {
         this.dataPatient = res;
         this.patients = this.dataPatient;
-        console.log(this.patients);
+
       },
         (error) => {
           this.error = error.error;
@@ -80,7 +80,7 @@ export class CreateAppointmentComponent implements OnInit {
       this.appointmentService.searchDoctors(firstName, lastName).subscribe((res) => {
         this.dataDoctor = res;
         this.doctors = this.dataDoctor;
-        console.log(this.doctors);
+
       },
         (error) => {
           this.error = error.error;
@@ -115,20 +115,19 @@ export class CreateAppointmentComponent implements OnInit {
     this.clickedP = i;
     this.idPatient = this.patients[i].idUser;
     this.patientSelected = true;
-    console.log("patientId ", this.idPatient);
-    console.log("patient ", this.patients[i]);
+
   }
   setIdDoctor(i: number) {
     this.clickedD = i;
     this.idDoctor = this.doctors[i].idUser;
-    console.log("dcotroId ", this.idDoctor);
+
     this.doctorSelected = true;
-    console.log("doctor ", this.doctors[i]);
+
   }
   onCreateAppointment() {
     let date = this.datesForm.value.date + "T" + this.datesForm.value.time;
     this.appointmentService.createAppointment(this.idDoctor, this.idPatient, date, this.descForm.value.desc).subscribe((res) => {
-      console.log("res");
+
       alert("appointment created!");
       this.descForm.reset();
       this.datesForm.reset();
@@ -163,13 +162,13 @@ export class CreateAppointmentComponent implements OnInit {
   onGetAllPatients() {
     this.patientService.getAllPatients().subscribe((res) => {
       this.allPatients = res;
-      console.log(this.allPatients);
+
     })
   }
   onGetAllDoctors() {
     this.appointmentService.getAllDoctors().subscribe((res) => {
       this.allDoctors = res;
-      console.log(this.allDoctors);
+
     })
   }
 }

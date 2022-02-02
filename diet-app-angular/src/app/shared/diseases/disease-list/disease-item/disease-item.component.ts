@@ -28,7 +28,7 @@ export class DiseaseItemComponent implements OnInit {
   }
   onOpenRecs() {
     this.isDisplayed = true;
-    console.log(this.recommendation);
+
   }
   onEdit() {
     this.diseaseService.editDisease(this.idDisease, this.name, this.description, this.recommendation).subscribe((res) => {

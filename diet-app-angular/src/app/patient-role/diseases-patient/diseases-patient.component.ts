@@ -21,7 +21,7 @@ export class DiseasesPatientComponent implements OnInit {
     this.diseaseHistoryService.getDiseases(parseInt(this.tokenService.getUserId())).subscribe((res) => {
       this.dataArr = res;
       this.diseases = this.dataArr;
-      console.log(this.diseases);
+
     })
   }
 }

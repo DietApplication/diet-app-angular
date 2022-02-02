@@ -54,18 +54,13 @@ export class DietCreateComponent implements OnInit {
     this.clicked = i;
     this.idPatient = this.patients[i].idPatient;
     this.onGetPatientDietIformation(this.idPatient);
-    console.log("patientId ", this.idPatient);
-    console.log("patient ", this.patients[i]);
-
   }
 
   onGetPatients(page?: number) {
     this.currentPage = page;
     this.patientsService.getPatients(page).subscribe((response) => {
       this.data = response;
-      console.log(this.data);
       this.patients = this.data.patients;
-      console.log(this.patients);
       this.pages.length = Math.ceil(this.data.totalRows / this.data.pageSize);
     })
   }
@@ -95,7 +90,6 @@ export class DietCreateComponent implements OnInit {
     this.patientsService.searchPatients(firstName, lastName).subscribe((res) => {
       this.data = res;
       this.patients = this.data;
-      console.log(this.patients);
     },
       (error) => {
         this.error = error.error;
@@ -109,7 +103,6 @@ export class DietCreateComponent implements OnInit {
     this.supplService.searchSupplements(name).subscribe((res) => {
       this.dataSup = res;
       this.supplement = this.dataSup;
-      console.log(this.supplement);
       if (this.supplements.filter((e => e.idSupplement === this.supplement[0].idSupplement)).length === 0) {
         this.supplements.push(this.supplement[0]);
         this.isToAdd = true;
@@ -118,7 +111,7 @@ export class DietCreateComponent implements OnInit {
 
       else {
         this.error = "You have already added such supplement!"
-        console.log(this.error);
+
       }
       this.searchSupForm.reset();
 
@@ -162,12 +155,9 @@ export class DietCreateComponent implements OnInit {
   }
 
   onDelete(index: number) {
-    console.log(this.supplements[index]);
     this.supplements.splice(index, 1);
     this.supplementDiet.splice(index, 1);
     this.supInstructions.splice(index, 1);
-    console.log("new sups " + this.supplements);
-
   }
   onCreateDiet() {
 
@@ -181,7 +171,7 @@ export class DietCreateComponent implements OnInit {
       this.createDietForm.value.proteins,
       this.supplementDiet
     ).subscribe((res) => {
-      console.log(res);
+
       alert("Diet was successfully created");
       this.router.navigate(['doctor/diet/' + this.idPatient + '/' + res.idDiet + '/assign-meals'])
     },
@@ -197,20 +187,20 @@ export class DietCreateComponent implements OnInit {
     this.supplementDiet.push({ idSupplement: supplement.idSupplement, dietSupplDescription: this.instrForm.value.instr });
     this.supInstructions.push(this.instrForm.value.instr);
     this.instrForm.reset();
-    console.log(this.supplementDiet);
+
     this.isToAdd = false;
     this.isAllowed = true;
   }
   onGetAllPatients() {
     this.patientsService.getAllPatients().subscribe((res) => {
       this.allPatients = res;
-      console.log(this.allPatients);
+
     })
   }
   onGetPatientDietIformation(idPatient: number) {
     this.infoService.getPreDietCreationInfo(idPatient).subscribe((res) => {
       this.info = res;
-      console.log(this.info);
+
     }, (err) => {
       this.error = err.error;
     })
@@ -218,7 +208,7 @@ export class DietCreateComponent implements OnInit {
   onGetAllSupplements() {
     this.supplService.getAllSupplements().subscribe((res) => {
       this.allSupplements = res;
-      console.log(this.allSupplements);
+
     })
   }
 }

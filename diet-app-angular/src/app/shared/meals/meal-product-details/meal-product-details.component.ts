@@ -25,7 +25,7 @@ export class MealProductDetailsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.idProduct);
+
     this.idProduct = this.product.idProduct;
     this.name = this.product.name;
     this.unit = this.product.unit;

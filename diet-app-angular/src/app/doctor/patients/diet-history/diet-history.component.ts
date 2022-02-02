@@ -27,7 +27,7 @@ export class DietHistoryComponent implements OnInit {
   onGetDiets() {
     this.dietHistoryService.getDiets(this.idPatient).subscribe((res) => {
       this.diets = res;
-      console.log(res);
+
     }, (err) => {
       this.errorDiet = err.error;
     });
@@ -35,7 +35,7 @@ export class DietHistoryComponent implements OnInit {
   onGetBaseInfo(idPatient: number) {
     this.infoService.getBasenfo(idPatient).subscribe((res) => {
       this.info = res;
-      console.log(this.info);
+
     })
   }
 }

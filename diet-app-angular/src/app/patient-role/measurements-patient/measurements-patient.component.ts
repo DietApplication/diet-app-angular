@@ -49,36 +49,36 @@ export class MeasurementsPatientComponent implements OnInit {
   onGetDates() {
     this.measurementService.getDates(this.idPatient).subscribe(
       (res) => {
-        console.log(res);
+
         res.forEach((key) => {
           key.date = key.date.split("T")[0];
         });
         this.dates = [...new Map(res.map(item =>
           [item['date'], item])).values()];
-        console.log(this.dates);
+
       }
     )
 
   }
   onGetNewestMeasurement() {
-    console.log("on get newest measurements method");
+
     this.measurementService.getNewestMeasurements(this.idPatient).subscribe(
       (res) => {
-        console.log("on get newest measurements " + res);
+
         this.initMeasurements(res);
         this.setAddFormDefaultValues(res);
       }
     );
   }
   onGetMeasurementByRequest() {
-    console.log("on get measurements by request method");
+
     let reqDate: string = this.filterMeasurementForm.value.date;
     let reqRole: string = this.filterMeasurementForm.value.role;
     this.measurementService.getMeasurementByDateAndRole(this.idPatient, reqDate.toUpperCase(), reqRole.toUpperCase()).subscribe(
       (res) => {
         this.initMeasurements(res);
         this.setAddFormDefaultValues(res);
-        console.log("on get measurements by request ", res);
+
       },
       (error) => {
         this.error = 'Please, choose different role for this date';
@@ -92,7 +92,7 @@ export class MeasurementsPatientComponent implements OnInit {
     }, { validators: this.checkDates.bind(this) })
   }
   private initAddForm() {
-    console.log(this.weight);
+
     this.addMeasurementForm = new FormGroup({
       bicepscircumference: new FormControl(this.bicepscircumference, [Validators.required, Validators.min(1), Validators.max(100)]),
       calfcircumference: new FormControl(this.calfcircumference, [Validators.required, Validators.min(1), Validators.max(300)]),
@@ -151,7 +151,7 @@ export class MeasurementsPatientComponent implements OnInit {
       this.addMeasurementForm.value.thighcircumference,
       this.addMeasurementForm.value.calfcircumference,
       this.addMeasurementForm.value.waistlowercircumference).subscribe((res) => {
-        console.log(res);
+
         alert("Measurement successfully added!");
         this.onGetNewestMeasurement();
         this.onGetDates();

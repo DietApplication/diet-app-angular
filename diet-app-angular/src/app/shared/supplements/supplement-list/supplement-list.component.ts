@@ -29,7 +29,7 @@ export class SupplementListComponent implements OnInit {
     this.supplService.getSupplements(page).subscribe((res) => {
       this.data = res;
       this.supplements = this.data.supplements;
-      console.log(this.supplements);
+
       this.pages.length = Math.ceil(this.data.totalRows / this.data.pageSize);
     })
   }
@@ -38,7 +38,7 @@ export class SupplementListComponent implements OnInit {
     this.supplService.searchSupplements(name).subscribe((res) => {
       this.data = res;
       this.supplements = this.data;
-      console.log(this.supplements);
+
     },
       (error) => {
         this.error = error.error;
@@ -55,7 +55,7 @@ export class SupplementListComponent implements OnInit {
   onGetAllSupplements() {
     this.supplService.getAllSupplements().subscribe((res) => {
       this.allSupplements = res;
-      console.log(this.allSupplements);
+
     })
   }
 }

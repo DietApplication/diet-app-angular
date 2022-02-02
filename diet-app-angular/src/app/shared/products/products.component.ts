@@ -30,7 +30,7 @@ export class ProductsComponent implements OnInit {
     this.productsService.searchProduct(name).subscribe((res) => {
       this.data = res;
       this.products = this.data;
-      console.log(this.products);
+
     },
       (error) => {
         this.error = error.error;
@@ -40,9 +40,9 @@ export class ProductsComponent implements OnInit {
     this.currentPage = page;
     this.productsService.getProducts(page).subscribe((response) => {
       this.data = response;
-      console.log(this.data);
+
       this.products = this.data.products;
-      console.log(this.products);
+
       this.pages.length = Math.ceil(this.data.totalRows / this.data.pageSize);
     })
   }
@@ -57,7 +57,7 @@ export class ProductsComponent implements OnInit {
   onGetAllProducts() {
     this.productsService.getAllProducts().subscribe((res) => {
       this.allProducts = res;
-      console.log(this.allProducts);
+
     })
   }
 

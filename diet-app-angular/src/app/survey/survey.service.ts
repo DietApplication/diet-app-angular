@@ -132,7 +132,7 @@ export class SurveyService {
       .pipe(catchError(this.handleError));
   }
   handleError(error: HttpErrorResponse) {
-    console.log(error);
+
     return throwError(error);
   }
 }

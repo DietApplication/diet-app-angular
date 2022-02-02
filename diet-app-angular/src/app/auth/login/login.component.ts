@@ -54,25 +54,20 @@ export class LoginComponent implements OnInit {
         this.tokenService.storeToken(response);
         this.tokenService.saveRefreshToken(response);
         if (this.tokenService.getRole() === 'DOCTOR') {
-          console.log("doctor");
           this.router.navigate(['/doctor/pendingList'])
         }
         if (this.tokenService.getRole() === 'PATIENT') {
-          console.log("patient");
           this.router.navigate(['/patient/notes'])
         }
         if (this.tokenService.getRole() === 'ADMIN') {
-          console.log("admin");
           this.router.navigate(['/admin/create-employee'])
         }
         if (this.tokenService.getRole() === 'SECRETARY') {
-          console.log("secretary");
           this.router.navigate(['/secretary/assign-survey'])
         }
       },
       (error) => {
         this.error = error.error;
-        console.log(error)
         this.loginForm.get('password').reset();
       }
     );

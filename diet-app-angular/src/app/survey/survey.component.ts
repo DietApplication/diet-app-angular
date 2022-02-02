@@ -116,23 +116,15 @@ export class SurveyComponent implements OnInit {
       { mealNumber: 4, atTime: this.surveyForm.value.timeFour, foodToEat: this.surveyForm.value.foodToEatFour },
       { mealNumber: 5, atTime: this.surveyForm.value.timeFive, foodToEat: this.surveyForm.value.foodToEatFive }
     ]
-    // meals.forEach(element => {
-    //   for (var key in element) {
-    //     if (!element[key]) {
-    //       meals.splice(meals.indexOf(element), 1)
-    //     }
-    //     console.log(meals);
-    //   }
-    // });
+
     let filtered = meals.filter(function (element) {
-      if (element.atTime === null || element.foodToEat === null) {
+      if ((element.atTime === null || element.atTime === "") || (element.foodToEat === null || element.foodToEat === "")) {
         return false;
       }
       return true;
     }
     );
-    //fix meals
-    console.log(filtered);
+
 
     this.surveyService.storeSurvey(
       this.storageService.getEmail(),
@@ -192,7 +184,7 @@ export class SurveyComponent implements OnInit {
         alert("Survey successfully sent!")
         console.log("success message " + this.surveyCompletedOk);
         this.storageService.removeEmail();
-        this.router.navigate(['/auth'])
+        this.router.navigate(['/auth/login'])
       },
         (error) => {
           this.error = error.error;

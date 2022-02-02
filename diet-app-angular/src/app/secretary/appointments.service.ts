@@ -61,7 +61,7 @@ export class AppointmentsService {
     return this.http.get<DoctorSearch[]>(url).pipe(catchError(this.handleError));
   }
   handleError(error: HttpErrorResponse) {
-    console.log(error);
+
     return throwError(error);
   }
   createAppointment(idDoctor: number, idPatient: number, appointmentDate: string, description) {

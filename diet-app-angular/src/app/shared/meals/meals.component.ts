@@ -27,9 +27,9 @@ export class MealsComponent implements OnInit {
     this.currentPage = page;
     this.mealsService.getMeals(page).subscribe((res) => {
       this.data = res;
-      console.log(this.data);
+
       this.meals = this.data.meals;
-      console.log(this.meals);
+
       this.pages.length = Math.floor(this.data.totalRows / this.data.pageSize);
 
     })
@@ -47,7 +47,7 @@ export class MealsComponent implements OnInit {
     this.mealsService.searchMeals(name).subscribe((res) => {
       this.data = res;
       this.meals = this.data;
-      console.log("search res", this.meals);
+
     },
       (error) => {
         this.error = error.error;
@@ -56,7 +56,7 @@ export class MealsComponent implements OnInit {
   onGetAllMeals() {
     this.mealsService.getAllMeals().subscribe((res) => {
       this.allMeals = res;
-      console.log(this.allMeals);
+
     })
   }
 

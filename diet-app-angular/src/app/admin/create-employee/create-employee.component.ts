@@ -71,7 +71,6 @@ export class CreateEmployeeComponent implements OnInit {
       this.createEmployeeForm.value.password,
       office,
       this.createEmployeeForm.value.role).subscribe((res) => {
-        console.log(res);
         alert(this.createEmployeeForm.value.role + " was successfully created!");
         this.createEmployeeForm.reset();
       }, (err) => {

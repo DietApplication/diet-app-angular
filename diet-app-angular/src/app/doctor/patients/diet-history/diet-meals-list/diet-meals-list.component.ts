@@ -71,7 +71,7 @@ export class DietMealsListComponent implements OnInit, AfterContentChecked {
         if (this.days === this.daysFilled) {
           this.isFinished = true;
         }
-        console.log(res);
+
       }, (error) => {
         this.errorDiet = error.error;
 
@@ -80,34 +80,31 @@ export class DietMealsListComponent implements OnInit, AfterContentChecked {
   }
   setDay(day: number) {
     this.currentDay = day;
-    console.log(this.currentDay);
+
   }
   onGetMeals() {
     this.dietHistoryService.getMeals(this.idDiet).subscribe((res) => {
       this.dietMeals = res;
-      console.log(this.dietMeals);
+
       this.dietMeals.map((m) => {
         this.dayMeals.set(m.dayNumber, m.meals);
         this.dayReport.set(m.dayNumber, m.patientReport);
       });
-      console.log(this.dayMeals);
 
     }, (err) => {
       this.errorDiet = err.error;
-      console.log(this.errorDiet);
+
     })
 
   }
-  setUpDays() {
-    console.log(this.daysNumberFilled.slice(0, this.step));
-  }
+
   goForward() {
     if (((this.page + 1) * this.step) - this.step > this.daysNumberFilled.length) {
       return;
     }
     this.page += 1;
     this.daysToShow = this.daysNumberFilled.slice((this.page * this.step) - this.step, this.step * this.page);
-    console.log("fwd ", this.daysToShow);
+
 
   }
   goBack() {
@@ -116,15 +113,15 @@ export class DietMealsListComponent implements OnInit, AfterContentChecked {
     }
     this.page -= 1;
     this.daysToShow = this.daysNumberFilled.slice((this.page * this.step) - this.step, this.step * this.page);
-    console.log("back ", this.daysToShow)
+
   }
   onGetBaseInfo(idPatient: number, idDiet: number) {
     this.infoService.getBasenfo(idPatient, idDiet).subscribe((res) => {
       this.info = res;
-      console.log(this.info);
+
     }, (err) => {
       this.error = err.error;
-      console.log(this.error);
+
     })
   }
 }

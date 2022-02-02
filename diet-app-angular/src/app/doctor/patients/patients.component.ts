@@ -38,7 +38,7 @@ export class PatientsComponent implements OnInit {
     this.patientsService.searchPatients(firstName, lastName).subscribe((res) => {
       this.data = res;
       this.patients = this.data;
-      console.log(this.patients);
+
     },
       (error) => {
         this.error = error.error;
@@ -50,9 +50,9 @@ export class PatientsComponent implements OnInit {
     this.currentPage = page;
     this.patientsService.getPatients(page).subscribe((response) => {
       this.data = response;
-      console.log(this.data);
+
       this.patients = this.data.patients;
-      console.log(this.patients);
+
       this.pages.length = Math.ceil(this.data.totalRows / this.data.pageSize);
     })
   }
@@ -67,7 +67,7 @@ export class PatientsComponent implements OnInit {
   onGetAllPatients() {
     this.patientsService.getAllPatients().subscribe((res) => {
       this.allPatients = res;
-      console.log(this.allPatients);
+
     })
   }
 }

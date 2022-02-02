@@ -41,14 +41,14 @@ export class MealDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe((params) => {
       this.nameOfMeal = params['nameOfMeal'];
-      console.log(this.nameOfMeal);
+
     });
     this.initMeal();
 
   }
   initMeal() {
     this.mealService.searchMeals(this.nameOfMeal).subscribe((res) => {
-      console.log(res[0]);
+
       this.idMeal = res[0].idMeal;
       this.description = res[0].description;
       this.cookingURL = res[0].cookingURL;
@@ -69,12 +69,12 @@ export class MealDetailsComponent implements OnInit {
       this.data = res[0];
       this.parameters = this.data.parameters;
       this.allParams.push(this.parameters);
-      console.log(this.allParams);
+
     })
   }
   onEdit() {
     this.mealService.editMeal(this.idMeal, this.description, this.cookingURL, this.nameOfMeal).subscribe((res) => {
-      console.log(res);
+
       this.router.navigate(['/doctor/meals/' + this.nameOfMeal + '/details']);
       this.initMeal();
     });
@@ -82,10 +82,10 @@ export class MealDetailsComponent implements OnInit {
 
   }
   checkIfValidUrl(newValue) {
-    console.log(newValue)
+
     let regex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
     let urlRegex = new RegExp(regex);
-    console.log(urlRegex.test(newValue));
+
     if (urlRegex.test(newValue)) {
       this.invalid = false;
     }

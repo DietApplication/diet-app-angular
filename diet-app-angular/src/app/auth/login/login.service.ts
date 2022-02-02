@@ -24,12 +24,10 @@ export class LoginService {
     }).pipe(catchError(this.handleError));;
   }
   handleError(error: HttpErrorResponse) {
-    console.log(error);
     return throwError(error);
   }
 
   refreshToken(token: string) {
-    console.log('refresh token method works');
     return this.http.post('https://dietappeu.azurewebsites.net/api/auth/refresh', {
       refreshToken: token
     })

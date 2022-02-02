@@ -30,8 +30,7 @@ export class ReportComponent implements OnInit {
     this.reportService.getReport(this.idPatient).subscribe((res) => {
       this.surveyResult = res.initialReport;
       this.newResults = res.newReports;
-      console.log(this.surveyResult);
-      console.log(this.newResults);
+
     }, (err) => {
       this.error = err.error;
     })
@@ -42,7 +41,7 @@ export class ReportComponent implements OnInit {
   onGetBaseInfo(idPatient: number) {
     this.infoService.getBasenfo(idPatient).subscribe((res) => {
       this.info = res;
-      console.log(this.info);
+
     })
   }
 }

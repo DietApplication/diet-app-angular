@@ -29,9 +29,7 @@ export class AllEmployeesComponent implements OnInit {
     this.currentPage = page;
     this.adminServuce.getEmployees(page).subscribe((response) => {
       this.data = response;
-      console.log(this.data);
       this.users = this.data.employees;
-      console.log(this.users);
       this.pages.length = Math.ceil(this.data.totalRows / this.data.pageSize);
     })
   }
@@ -57,7 +55,6 @@ export class AllEmployeesComponent implements OnInit {
       this.adminServuce.searchUsers(firstName, lastName).subscribe((res) => {
         this.data = res;
         this.users = this.data;
-        console.log(this.users);
         this.searchUsersForm.reset();
 
       },
@@ -76,7 +73,6 @@ export class AllEmployeesComponent implements OnInit {
   onGetAllUsers() {
     this.adminServuce.getAllUsers().subscribe((res) => {
       this.allUsers = res;
-      console.log(this.allUsers);
     })
   }
 }

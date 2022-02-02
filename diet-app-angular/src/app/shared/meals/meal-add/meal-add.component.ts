@@ -41,13 +41,13 @@ export class MealAddComponent implements OnInit {
     this.productService.searchProduct(name).subscribe((res) => {
       this.data = res;
       this.product = this.data;
-      console.log(this.product);
+
       if (this.products.filter((e => e.idProduct === this.product[0].idProduct)).length === 0) {
         this.products.push(this.product[0]);
       }
       else {
         this.error = "You have already added such product!"
-        console.log(this.error);
+
       }
       this.searchProductForm.reset();
     },
@@ -75,7 +75,7 @@ export class MealAddComponent implements OnInit {
   }
   onDelete(product: Product) {
     this.products.splice(this.products.indexOf(product), 1);
-    console.log("new products " + this.products);
+
   }
   onAddMeal() {
     if (this.products.length === 0) {
@@ -89,11 +89,11 @@ export class MealAddComponent implements OnInit {
     {
       this.products.forEach((pr) => {
         this.productsToAdd.push({ idProduct: this.products[this.products.indexOf(pr)].idProduct, amount: this.products[this.products.indexOf(pr)].size });
-        console.log("products to add ", this.productsToAdd);
+
       });
 
       this.mealsService.addMeal(this.addMealForm.value.productName, this.addMealForm.value.desc, this.addMealForm.value.url, this.productsToAdd).subscribe((res) => {
-        console.log(res);
+
       })
       window.location.reload();
     }
@@ -106,15 +106,15 @@ export class MealAddComponent implements OnInit {
   }
   onOpenDetails() {
     this.isDisplayed = true;
-    console.log("opened", this.product);
+
   }
   onGetProducts(page: number) {
     this.currentPage = page;
     this.productService.getProducts(page).subscribe((response) => {
       this.dataProduct = response;
-      console.log(this.dataProduct);
+
       this.productsInfo = this.dataProduct.products;
-      console.log(this.productsInfo);
+
       this.pages.length = Math.ceil(this.dataProduct.totalRows / this.dataProduct.pageSize);
     })
   }
@@ -123,7 +123,7 @@ export class MealAddComponent implements OnInit {
     this.productService.searchProduct(name).subscribe((res) => {
       this.dataProduct = res;
       this.productsInfo = this.dataProduct;
-      console.log(this.productsInfo);
+
     },
       (error) => {
         this.error = "No such product";
@@ -132,7 +132,7 @@ export class MealAddComponent implements OnInit {
   onGetAllProducts() {
     this.productService.getAllProducts().subscribe((res) => {
       this.allProducts = res;
-      console.log(this.allProducts);
+
     })
   }
 }

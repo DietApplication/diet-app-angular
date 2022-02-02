@@ -19,8 +19,6 @@ export class TokenService {
   }
   storeToken(response: LoginResponse) {
     const decoded: { [key: string]: string } = jwt_decode(response.accessToken);
-    console.log(response.accessToken);
-    console.log(decoded);
     localStorage.setItem('access_token', response.accessToken);
     localStorage.setItem('userId', decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]);
     localStorage.setItem('role', decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
@@ -38,7 +36,6 @@ export class TokenService {
     return localStorage.getItem('exp');
   }
   saveRefreshToken(response: LoginResponse) {
-    console.log(response.refreshToken);
     localStorage.setItem('refresh_token', response.refreshToken);
   }
   getRefreshToken() {

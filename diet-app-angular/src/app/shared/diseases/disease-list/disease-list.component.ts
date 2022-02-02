@@ -28,7 +28,7 @@ export class DiseaseListComponent implements OnInit {
     this.diseasesService.getDiseases(page).subscribe((res) => {
       this.data = res;
       this.diseases = this.data.diseases;
-      console.log(res);
+
       this.pages.length = Math.ceil(this.data.totalRows / this.data.pageSize);
     })
   }
@@ -37,7 +37,7 @@ export class DiseaseListComponent implements OnInit {
     this.diseasesService.searchDiseases(name).subscribe((res) => {
       this.data = res;
       this.diseases = this.data;
-      console.log(this.diseases);
+
     },
       (error) => {
         this.error = error.error;
@@ -54,7 +54,7 @@ export class DiseaseListComponent implements OnInit {
   onGetAllDiseases() {
     this.diseasesService.getAllDiseases().subscribe((res) => {
       this.allDiseases = res;
-      console.log(this.allDiseases);
+
     })
   }
 }

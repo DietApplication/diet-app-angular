@@ -47,7 +47,7 @@ export class ProductItemComponent implements OnInit {
   }
   onOpenDetails() {
     this.isDisplayed = true;
-    console.log(this.product);
+
   }
 
 }

@@ -88,18 +88,17 @@ export class PendingListComponent implements OnInit, AfterContentChecked {
 
   onGetUsers() {
     this.pendingService.getPendiingUsers().subscribe((users) => {
-      console.log(users);
+
       this.pendingUsers = users;
     })
   }
   setIdUser(i: number) {
     this.clicked = i;
     this.idPatient = this.pendingUsers[i].idUser;
-    console.log("patientId ", this.idPatient);
-    console.log("patient ", this.pendingUsers[i]);
+
     this.pendingService.getDietitianReport(this.idPatient)
       .subscribe((response) => {
-        console.log(response);
+
         this.fillReport(response);
       });
 
@@ -207,9 +206,7 @@ export class PendingListComponent implements OnInit, AfterContentChecked {
   }
   onSubmit() {
     let pal = this.submitUserForm.value.pal
-    console.log("pal ", pal);
     this.pendingService.submitPatient(this.idPatient, this.cpm, pal, this.submitUserForm.value.correctedValue).subscribe((response) => {
-      console.log("response ", response);
       this.onGetUsers();
       this.idPatient = null;
       this.submitUserForm.reset();

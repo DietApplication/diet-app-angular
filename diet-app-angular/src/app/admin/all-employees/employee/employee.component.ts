@@ -38,21 +38,17 @@ export class EmployeeComponent implements OnInit {
   onDeactivate() {
     if (confirm('Are you sure you want to deactivate this user?')) {
       this.adminService.deactivateUser(this.idUser).subscribe((res) => {
-        console.log(res);
+
         window.location.reload();
       })
-    } else {
-      console.log("not deactivated")
     }
   }
   onActivate() {
     if (confirm('Are you sure you want to reactivate this user?')) {
       this.adminService.activateUser(this.idUser).subscribe((res) => {
-        console.log(res);
+
         window.location.reload();
       })
-    } else {
-      console.log("not activated")
     }
   }
 }

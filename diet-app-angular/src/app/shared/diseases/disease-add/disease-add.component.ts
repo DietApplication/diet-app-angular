@@ -16,7 +16,7 @@ export class DiseaseAddComponent implements OnInit {
   }
   onSubmit() {
     this.diseasesService.addDisease(this.addDiseaseForm.value.name, this.addDiseaseForm.value.description, this.addDiseaseForm.value.recommendations).subscribe((response) => {
-      console.log(response);
+
       alert("Disease " + this.addDiseaseForm.value.name + " successfully added");
       window.location.reload();
     }, (error) => {

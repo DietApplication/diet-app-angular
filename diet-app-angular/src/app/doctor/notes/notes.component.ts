@@ -44,8 +44,7 @@ export class NotesComponent implements OnInit, AfterViewChecked {
   setIdUser(i: number) {
     this.clicked = i;
     this.idPatient = this.patients[i].idPatient;
-    console.log("patientId ", this.idPatient);
-    console.log("patient ", this.patients[i]);
+
     this.onGetNotes();
     this.onGetBaseInfo(this.idPatient);
   }
@@ -54,9 +53,9 @@ export class NotesComponent implements OnInit, AfterViewChecked {
     this.currentPage = page;
     this.patientsService.getPatients(page).subscribe((response) => {
       this.data = response;
-      console.log(this.data);
+
       this.patients = this.data.patients;
-      console.log(this.patients);
+
       this.pages.length = Math.ceil(this.data.totalRows / this.data.pageSize);
 
 
@@ -87,7 +86,6 @@ export class NotesComponent implements OnInit, AfterViewChecked {
     this.patientsService.searchPatients(firstName, lastName).subscribe((res) => {
       this.data = res;
       this.patients = this.data;
-      console.log(this.patients);
     },
       (error) => {
         this.error = error.error;
@@ -96,7 +94,7 @@ export class NotesComponent implements OnInit, AfterViewChecked {
   onPostNote() {
     let doctorId = parseInt(this.tokenService.getUserId());
     this.notesService.postNote(this.idPatient, doctorId, this.sendNoteForm.value.note).subscribe((res) => {
-      console.log("notes res ", res);
+
       this.onGetNotes();
     });
     this.sendNoteForm.reset();
@@ -106,7 +104,7 @@ export class NotesComponent implements OnInit, AfterViewChecked {
   }
   onGetNotes() {
     this.notesService.getNotes(this.idPatient).subscribe((res) => {
-      console.log("note ", res);
+
       this.dataNotes = res;
       this.notes = this.dataNotes;
       this.scrollToBottomNotes();
@@ -124,13 +122,13 @@ export class NotesComponent implements OnInit, AfterViewChecked {
   onGetAllPatients() {
     this.patientsService.getAllPatients().subscribe((res) => {
       this.allPatients = res;
-      console.log(this.allPatients);
+
     })
   }
   onGetBaseInfo(idPatient: number) {
     this.infoService.getBasenfo(this.idPatient).subscribe((res) => {
       this.info = res;
-      console.log(this.info);
+
     })
   }
 }

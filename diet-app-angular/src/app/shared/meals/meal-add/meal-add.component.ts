@@ -69,7 +69,7 @@ export class MealAddComponent implements OnInit {
     this.addMealForm = new FormGroup({
       productName: new FormControl(null, [Validators.required, Validators.maxLength(50), Validators.minLength(2)]),
       desc: new FormControl(null, [Validators.required, Validators.maxLength(15000), Validators.minLength(2)]),
-      url: new FormControl(null, [Validators.required, Validators.pattern('https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$')]),
+      url: new FormControl(null, [Validators.required, Validators.pattern('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$')]),
 
     })
   }

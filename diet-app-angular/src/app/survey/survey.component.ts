@@ -180,15 +180,15 @@ export class SurveyComponent implements OnInit {
       this.surveyForm.value.allergieProducts,
       this.surveyForm.value.betweenMealsFood,
       filtered).subscribe((response) => {
-        console.log("post done:", response);
+
         alert("Survey successfully sent!")
-        console.log("success message " + this.surveyCompletedOk);
+
         this.storageService.removeEmail();
         this.router.navigate(['/auth/login'])
       },
         (error) => {
           this.error = error.error;
-          console.log(this.error)
+
         });
   }
   onHandleError() {

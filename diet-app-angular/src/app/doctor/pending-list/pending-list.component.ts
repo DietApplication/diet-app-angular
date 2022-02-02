@@ -199,9 +199,6 @@ export class PendingListComponent implements OnInit, AfterContentChecked {
         console.log(response);
       });
       this.onGetUsers();
-      console.log('rejected');
-    } else {
-      console.log('not rejected');
     }
   }
   onSubmit() {

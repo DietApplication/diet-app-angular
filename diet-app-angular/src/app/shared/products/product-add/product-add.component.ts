@@ -3,10 +3,10 @@ export interface ParameterResult {
   size: number;
   measureUnit: string;
 }
-import { ThrowStmt } from '@angular/compiler';
+
 import { AfterContentChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { max } from 'rxjs/operators';
+
 import { Parameter, ParameterAdd, ProductsService } from '../products.service';
 
 

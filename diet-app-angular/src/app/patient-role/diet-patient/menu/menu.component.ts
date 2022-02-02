@@ -94,7 +94,6 @@ export class MenuComponent implements OnInit {
     }
     this.page += 1;
     this.daysToShow = this.daysNumberFilled.slice((this.page * this.step) - this.step, this.step * this.page);
-    console.log("fwd ", this.daysToShow);
 
   }
   goBack() {
@@ -103,7 +102,7 @@ export class MenuComponent implements OnInit {
     }
     this.page -= 1;
     this.daysToShow = this.daysNumberFilled.slice((this.page * this.step) - this.step, this.step * this.page);
-    console.log("back ", this.daysToShow)
+
   }
   initFeedbackForm() {
     this.dietFeedbackForm = new FormGroup({
@@ -112,13 +111,13 @@ export class MenuComponent implements OnInit {
   }
   fillMealReport(meal: any, isFollowed: boolean) {
     this.mealFeedback.set(meal.idMealTake, isFollowed);
-    console.log(this.mealFeedback);
+
   }
   onSendFeedback() {
     let idDay = this.dietMeals[this.dietMeals.map(e => e.dayNumber).indexOf(this.currentDay)].idDay;
     let mealsReport = Array.from(this.mealFeedback, ([name, value]) => ({ idMealTake: name, isFollowed: value }));
     this.menuService.sendFeedback(idDay, this.dietFeedbackForm.value.patientReport, mealsReport).subscribe((res) => {
-      console.log(res);
+
       this.dietFeedbackForm.reset();
       this.onGetMeals();
     }, (err) => {
@@ -129,7 +128,7 @@ export class MenuComponent implements OnInit {
     this.error = null;
   }
   initPageMealReports() {
-    console.log(this.dayReport.get(this.currentDay))
+
     if (this.dayReport.get(this.currentDay) !== null) {
       this.patientReportDisabled = true;
     }

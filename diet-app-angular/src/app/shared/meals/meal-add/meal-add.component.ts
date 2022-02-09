@@ -95,7 +95,10 @@ export class MealAddComponent implements OnInit {
       this.mealsService.addMeal(this.addMealForm.value.productName, this.addMealForm.value.desc, this.addMealForm.value.url, this.productsToAdd).subscribe((res) => {
 
       })
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+
     }
   }
   onHandleError() {

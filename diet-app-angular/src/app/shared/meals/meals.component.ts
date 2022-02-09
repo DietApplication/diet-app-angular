@@ -30,7 +30,7 @@ export class MealsComponent implements OnInit {
 
       this.meals = this.data.meals;
 
-      this.pages.length = Math.floor(this.data.totalRows / this.data.pageSize);
+      this.pages.length = Math.ceil(this.data.totalRows / this.data.pageSize);
 
     })
   }

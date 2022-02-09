@@ -131,7 +131,7 @@
                     </form>
                     <div *ngIf="meal" style="margin-top: 4%;">
                         <label for="desc" class="form-label">Description</label>
-                        <input type="text" class="form-control" disabled value="{{meal.description}}">
+                        <textarea type="text" class="form-control" disabled value="{{meal.description}}" autosize></textarea>
                     </div>
                     <div *ngIf="meal" style="margin-top: 4%;">
                         <h4 style="margin-top: 0;"><a class="link-success" href="{{meal.cookingURL}}">Cooking URL</a></h4>

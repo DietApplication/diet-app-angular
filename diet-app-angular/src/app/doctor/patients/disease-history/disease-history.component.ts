@@ -56,6 +56,7 @@ export class DiseaseHistoryComponent implements OnInit {
     if (this.assignDiseaseForm.value.dateOfCure === null) {
       this.diseaseHistoryService.assignDisease(this.idPatient, this.idDisease, this.assignDiseaseForm.value.date).subscribe((res) => {
         this.afterAssign();
+        console.log("in if")
       }, (err) => {
         this.afterAssignError(err);
       });
@@ -63,6 +64,7 @@ export class DiseaseHistoryComponent implements OnInit {
     else {
       this.diseaseHistoryService.assignDisease(this.idPatient, this.idDisease, this.assignDiseaseForm.value.date, this.assignDiseaseForm.value.dateOfCure).subscribe((res) => {
         this.afterAssign();
+        console.log("in else")
       }, (err) => {
         this.afterAssignError(err);
       });
